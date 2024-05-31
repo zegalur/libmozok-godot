@@ -2,7 +2,7 @@
 
 ![LibMozok Godot DEMO Banner](docs/imgs/godot-demo-banner.png)
 
-**LibMozok** is a universal, dynamic, nondeterministic quest engine. This library implements a system heavily inspired by ["Hierarchical generation of dynamic and nondeterministic quests in games"](https://www.researchgate.net/publication/286454232_Hierarchical_Generation_of_Dynamic_and_Nondeterministic_Quests_in_Games).
+**LibMozok** is a universal quest engine for games. This library implements a system heavily inspired by ["Hierarchical generation of dynamic and nondeterministic quests in games"](https://www.researchgate.net/publication/286454232_Hierarchical_Generation_of_Dynamic_and_Nondeterministic_Quests_in_Games).
 
 This demo illustrates how LibMozok can be integrated with Godot. 
 The game and its art style are inspired by the 2D Legend of Zelda games.
@@ -38,7 +38,7 @@ The game and its art style are inspired by the 2D Legend of Zelda games.
     4. Install the project:<br /> 
     `cmake --install . --config Release`
 
-    5. You should now have the non-empty `lib/` and `include/libmozok/` directories inside the inside the `install` directory.
+    5. You should now have the non-empty `lib/` and `include/libmozok/` directories inside the `install` directory.
 5. Build and install the `libmozok-godot` GDExtension:
     1. Navigate to the repository:<br /> 
     `cd [WorkDir]/libmozok-godot`
