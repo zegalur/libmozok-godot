@@ -1,0 +1,145 @@
+[gd_scene load_steps=9 format=3 uid="uid://dtriolaeom25o"]
+
+[ext_resource type="Texture2D" uid="uid://dl3hncv4xcoi2" path="res://assets/gui/imgs/heart-red.png" id="1_6qic7"]
+[ext_resource type="Script" path="res://assets/gui/game_gui.gd" id="1_ejoor"]
+[ext_resource type="Texture2D" uid="uid://tw3iufq5atlh" path="res://assets/gui/imgs/heart-half.png" id="2_lc456"]
+[ext_resource type="Theme" uid="uid://cqnnwflfspwe1" path="res://assets/gui/quest_book_theme.tres" id="2_vawgs"]
+[ext_resource type="Texture2D" uid="uid://brhg0rlyo1xi0" path="res://assets/gui/imgs/heart-gray.png" id="3_3q5m1"]
+[ext_resource type="SystemFont" uid="uid://1u2x028wj1ph" path="res://assets/gui/fonts.tres" id="3_h7eun"]
+[ext_resource type="Texture2D" uid="uid://c7lyhlkrcvc3n" path="res://assets/items/keys/imgs/dungeon-key.png" id="7_00w14"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pia5y"]
+font = ExtResource("3_h7eun")
+font_size = 13
+font_color = Color(0.679688, 0.590645, 0.565059, 1)
+outline_size = 1
+outline_color = Color(0.6, 0.3885, 0.33, 1)
+
+[node name="GameGui" type="Control"]
+custom_minimum_size = Vector2(1152, 648)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 800.0
+offset_bottom = 500.0
+script = ExtResource("1_ejoor")
+
+[node name="QuestBook" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Base" type="ColorRect" parent="QuestBook"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0.0852, 0.12, 0.12, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="QuestBook/Base"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Space" type="Control" parent="QuestBook/Base/HBoxContainer"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="QuestBook/Base/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_vawgs")
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="QuestBook/Base/HBoxContainer/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Space" type="Control" parent="QuestBook/Base/HBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="TitleOpen" type="Label" parent="QuestBook/Base/HBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "OPEN:"
+label_settings = SubResource("LabelSettings_pia5y")
+horizontal_alignment = 1
+
+[node name="OpenQuests" type="VBoxContainer" parent="QuestBook/Base/HBoxContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Space2" type="Control" parent="QuestBook/Base/HBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="TitleDone" type="Label" parent="QuestBook/Base/HBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "DONE:"
+label_settings = SubResource("LabelSettings_pia5y")
+horizontal_alignment = 1
+
+[node name="DoneQuests" type="VBoxContainer" parent="QuestBook/Base/HBoxContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Space3" type="Control" parent="QuestBook/Base/HBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="TitleFailed" type="Label" parent="QuestBook/Base/HBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "FAILED:"
+label_settings = SubResource("LabelSettings_pia5y")
+horizontal_alignment = 1
+
+[node name="FailedQuests" type="VBoxContainer" parent="QuestBook/Base/HBoxContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Space4" type="Control" parent="QuestBook/Base/HBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="Hearts" type="HBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 26.0
+offset_top = 25.0
+offset_right = 127.0
+offset_bottom = 53.0
+
+[node name="Red" type="TextureRect" parent="Hearts"]
+layout_mode = 2
+texture = ExtResource("1_6qic7")
+
+[node name="Half" type="TextureRect" parent="Hearts"]
+layout_mode = 2
+texture = ExtResource("2_lc456")
+
+[node name="Gray" type="TextureRect" parent="Hearts"]
+layout_mode = 2
+texture = ExtResource("3_3q5m1")
+
+[node name="Keys" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 65.0
+offset_right = 69.0
+offset_bottom = 127.0
+scale = Vector2(0.7, 0.7)
+
+[node name="DungeonKeyIcon" type="TextureRect" parent="Keys"]
+layout_mode = 2
+texture = ExtResource("7_00w14")
+stretch_mode = 2

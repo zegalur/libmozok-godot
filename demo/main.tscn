@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://cck1pnhry51uy"]
+
+[ext_resource type="PackedScene" uid="uid://8bhrc565a12u" path="res://assets/maps/world/world.tscn" id="1_4bkb0"]
+[ext_resource type="Script" path="res://main.gd" id="1_83sc1"]
+[ext_resource type="PackedScene" uid="uid://dtriolaeom25o" path="res://assets/gui/game_gui.tscn" id="3_kb5ts"]
+[ext_resource type="PackedScene" uid="uid://deaxyyt1n43i2" path="res://assets/player/player.tscn" id="3_mi51r"]
+
+[node name="Main" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_83sc1")
+
+[node name="LibMozokServer" type="LibMozokServer" parent="."]
+
+[node name="GameGui" parent="." instance=ExtResource("3_kb5ts")]
+top_level = true
+
+[node name="Map" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="World" parent="Map" instance=ExtResource("1_4bkb0")]
+
+[node name="Player" parent="." instance=ExtResource("3_mi51r")]
+y_sort_enabled = true
+position = Vector2(290, 759)
+
+[connection signal="action_error" from="LibMozokServer" to="." method="_on_lib_mozok_server_action_error"]
+[connection signal="new_main_quest" from="LibMozokServer" to="GameGui" method="new_main_quest"]
+[connection signal="new_quest_plan" from="LibMozokServer" to="GameGui" method="new_quest_plan"]
+[connection signal="new_quest_state" from="LibMozokServer" to="GameGui" method="_on_new_quest_state"]
+[connection signal="new_quest_status" from="LibMozokServer" to="GameGui" method="_on_new_quest_status"]
+[connection signal="new_sub_quest" from="LibMozokServer" to="GameGui" method="new_sub_quest"]
+[connection signal="hearts_changed" from="Player" to="GameGui" method="update_hearts"]
+[connection signal="keys_changed" from="Player" to="GameGui" method="update_keys"]

@@ -1,0 +1,47 @@
+keys,en
+,
+TITLE_FinishAllTutorials,Complete all the tutorials
+DESC_FinishAllTutorials,"Throughout your journey, you'll come across various tutorials. Complete each one of them to fulfill this quest."
+ACTION_ApplyTutorialAction,{0}.
+ACTION_FinishTutorial_2,Finish the tutorial.
+ACTION_FinishTutorial_3,Finish the tutorial.
+ACTION_FinishTutorial_5,Finish the tutorial.
+,
+TITLE_ControlsTutorial,Master the character controls
+DESC_ControlsTutorial,"To play this game, you must first master the basic character controls, including movement, hiding, and attacking."
+OBJ_movementAction,Move in all directions for a few seconds
+OBJ_attackAction,Attack in all directions for a few seconds
+OBJ_hideAction,Move in all directions while hiding behind the shield for a few seconds
+ACTION_ControlsTutorial,Finish the controls tutorial.
+,
+TITLE_FightingTutorial,Master the fighting techniques
+DESC_FightingTutorial,"Now, you must master fighting techniques such as blocking attacks and defeating enemies. You also need to experience taking hits and facing death. Additionally, you must collect the hearts to recover your health."
+OBJ_killEnemyAction,Kill the enemy
+OBJ_blockAttackAction,Block three enemy attacks using the shield
+OBJ_takeHeartAction,Take a heart to recover your health
+OBJ_dieAction,Die from the enemy hits
+OBJ_takeHitAction,Take a hit from the enemy
+ACTION_FightingTutorial,Finish the fighting tutorial.
+,
+TITLE_KeyTutorial,Pick up the key and unlock the closed door
+DESC_KeyTutorial,"Most closed doors in the game can be unlocked with a corresponding key. Once you use a key to open a door, it will disappear from your inventory. Hint: You can pick up items using your sword."
+OBJ_pickUpKeyAction,Pick up the key to unlock the closed door
+OBJ_openDoorAction,Open the closed door
+ACTION_KeyTutorial,Finish the key tutorial.
+,
+TITLE_PuzzleTutorial,Try to solve the heart puzzle
+DESC_PuzzleTutorial,"Throughout the game, you will encounter various puzzles. Be careful, as your actions could make a puzzle unsolvable."
+TITLE_PuzzleTutorial_GetHeart,Pick up the big heart
+DESC_PuzzleTutorial_GetHeart,"The path to the big heart is blocked by large boulders. Luckily, they are movable. Move them using the action key."
+ACTION_PTut_MoveLeft,Move to the left.
+ACTION_PTut_MoveRight,Move to the right.
+ACTION_PTut_MoveUp,Move up.
+ACTION_PTut_MoveDown,Move down.
+ACTION_PTut_PushLeft,Push the block to the left.
+ACTION_PTut_PushRight,Push the block to the right.
+ACTION_PTut_PushUp,Push the block upwards.
+ACTION_PTut_PushDown,Push the block downward.
+ACTION_PTut_Finish,Pick up the big heart.
+ACTION_PuzzleTutorial,Finish the puzzle tutorial.
+ACTION_PuzzleTutorial_GetHeart,Try to pick up the big heart
+ACTION_PTut_Cancel,Cancel the puzzle tutorial

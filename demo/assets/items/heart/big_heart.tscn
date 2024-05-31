@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://b47pbiuf1am70"]
+
+[ext_resource type="Script" path="res://assets/items/heart/big_heart.gd" id="1_uakym"]
+[ext_resource type="Texture2D" uid="uid://t7k8lvxheop5" path="res://assets/items/heart/imgs/big-heart.png" id="2_cv4vw"]
+[ext_resource type="Texture2D" uid="uid://b7jhworjujpjk" path="res://assets/items/imgs/item-shadow.png" id="2_ts3sd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1u3l2"]
+radius = 19.0263
+
+[sub_resource type="Animation" id="Animation_tvc6p"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Big-heart:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 1.2), Vector2(0.8, 0.8), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yhaq3"]
+_data = {
+"idle": SubResource("Animation_tvc6p")
+}
+
+[node name="BigHeart" type="Area2D"]
+script = ExtResource("1_uakym")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(0, 3.26721)
+texture = ExtResource("2_ts3sd")
+
+[node name="Big-heart" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+scale = Vector2(1.00059, 1.00059)
+texture = ExtResource("2_cv4vw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -17)
+shape = SubResource("CircleShape2D_1u3l2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_yhaq3")
+}
+autoplay = "idle"

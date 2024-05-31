@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0tq7u3gb5uay"]
+
+[ext_resource type="Script" path="res://assets/items/keys/key.gd" id="1_etiik"]
+[ext_resource type="Texture2D" uid="uid://c7lyhlkrcvc3n" path="res://assets/items/keys/imgs/dungeon-key.png" id="2_icl6n"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uygvt"]
+radius = 11.0
+height = 38.0
+
+[node name="DungeonKey" type="Area2D"]
+script = ExtResource("1_etiik")
+
+[node name="KeyIcon" type="TextureRect" parent="."]
+offset_left = -22.0
+offset_top = -14.0
+offset_right = 23.0
+offset_bottom = 15.0
+texture = ExtResource("2_icl6n")
+stretch_mode = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_uygvt")
