@@ -9,6 +9,17 @@ The game and its art style are inspired by the 2D Legend of Zelda games.
 
 *Mozok, derived from the Ukrainian word "мозок" meaning "brain."*
 
+# Showcase
+
+LibMozok generates a plan for a quest in real-time and detects when the quest becomes unsolvable:<br />
+![DEMO-Gif-01](docs/imgs/demo-01.gif)
+
+<details>
+    <summary>More...</summary>
+    The same quest, but successfully solved this time:<br />
+    <img src="docs/imgs/demo-02.gif" alt="DEMO-Gif-02" />
+</details>
+
 
 # How to Run the DEMO Project
 
