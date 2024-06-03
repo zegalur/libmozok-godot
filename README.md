@@ -34,8 +34,8 @@ LibMozok generates a plan for a quest in real-time and detects when the quest be
 ## Installation
 
 1. Create a working folder (this folder will be referred as `[WorkDir]`).
-2. Download the **libmozok** repository into `[WorkDir]/libmozok`.
-3. Download the **libmozok-godot** repository into `[WorkDir]`.
+2. Download the **libmozok** [repository](https://github.com/zegalur/libmozok) into `[WorkDir]/libmozok`.
+3. Download the **libmozok-godot** [repository](https://github.com/zegalur/libmozok-godot) into `[WorkDir]`.
 4. Build and install **libmozok**:
     1. Navigate to the build directory:<br /> 
     `cd [WorkDir]/libmozok/build`
