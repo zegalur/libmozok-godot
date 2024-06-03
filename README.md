@@ -14,6 +14,8 @@ The game and its art style are inspired by the 2D Legend of Zelda games.
 LibMozok generates a plan for a quest in real-time and detects when the quest becomes unsolvable:<br />
 ![DEMO-Gif-01](docs/imgs/demo-01.gif)
 
+[YouTube](https://www.youtube.com/watch?v=jnJrhRDZnHo)
+
 <details>
     <summary>More...</summary>
     The same quest, but successfully solved this time:<br />
