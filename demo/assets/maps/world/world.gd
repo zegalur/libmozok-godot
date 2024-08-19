@@ -135,7 +135,7 @@ func _apply_fighting_tut(tut_action_obj : String):
 		args.append_array(PLAYER_FIGHTING_TUTS.values())
 		args.append_array(ENEMY_FIGHTING_TUTS.values())
 		_quest_server.pushAction(name, "FinishTutorial_" + str(_fighting_tut_done), args)
-		$"Env/Flying Island/TileMap/FightingTutDoor".open()
+		$"Env/Flying Island/TileLayer/FightingTutDoor".open()
 
 
 func _apply_key_tut(tut_action_obj : String):

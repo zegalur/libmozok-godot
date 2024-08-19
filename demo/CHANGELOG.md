@@ -4,7 +4,12 @@ All significant modifications to this demo will be recorded in this file. The st
 
 ## [Unreleased]
 
+## [0.1.1] - 2024-08-19
 
+### Changed
+
+- Move to Godot 4.3.
+- Convert deprecated TileMaps into TileLayers.
 
 ## [0.1.0] - 2024-05-31
 
@@ -12,4 +17,3 @@ All significant modifications to this demo will be recorded in this file. The st
 
 - LibMozok integration.
 - Demo game with a tutorial.
-

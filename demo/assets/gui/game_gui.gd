@@ -110,4 +110,3 @@ func _on_new_quest_status(_worldName, questName, questStatus):
 	if questStatus == LibMozokServer.QUEST_STATUS_UNREACHABLE:
 		_open_quests.remove_child(_quests[questName])
 		_failed_quests.add_child(_quests[questName])
-
