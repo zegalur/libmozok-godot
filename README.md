@@ -59,7 +59,7 @@ LibMozok generates a plan for a quest in real-time and detects when the quest be
     2. (Initialize a Git repository if needed: `git init`)
 
     3. (Add the Godot C++ bindings as a submodule if needed:<br /> 
-    `git submodule add -b 4.3 https://github.com/godotengine/godot-cpp`)
+    `git submodule add -b 4.4 https://github.com/godotengine/godot-cpp`)
 
     4. Navigate to the Godot C++ bindings directory:<br /> 
     `cd godot-cpp`
