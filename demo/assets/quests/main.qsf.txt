@@ -1,0 +1,27 @@
+# Main QSF sript.
+# Loads the whole game.
+
+version 1 0
+script main
+
+worlds:
+	tut # A special quest world just for tutorials.
+	game # Quest world where the mainstory quests took place.
+
+projects:
+	# Totorials
+	[tut] tutorials/utils.quest.txt
+	[tut] tutorials/controls.quest.txt
+	[tut] tutorials/fighting.quest.txt
+	[tut] tutorials/key.quest.txt
+	[tut] tutorials/puzzle.quest.txt
+	[tut] tutorials/main.quest.txt
+	
+	# Game
+	[game] game/game.quest.txt
+
+init:
+	[tut] InitTutorials()
+
+debug:
+	tutorials/debug.qsf.txt

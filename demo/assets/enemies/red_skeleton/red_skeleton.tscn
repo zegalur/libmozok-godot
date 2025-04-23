@@ -1,7 +1,7 @@
 [gd_scene load_steps=26 format=3 uid="uid://cdawg40awoovw"]
 
 [ext_resource type="Texture2D" uid="uid://cytf1squqpcy8" path="res://assets/enemies/red_skeleton/imgs/enemy-01-sheet.png" id="1_i3xkj"]
-[ext_resource type="Script" path="res://assets/enemies/red_skeleton/red_skeleton.gd" id="1_u6geh"]
+[ext_resource type="Script" uid="uid://cn6c31fxocs8g" path="res://assets/enemies/red_skeleton/red_skeleton.gd" id="1_u6geh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cl583"]
 

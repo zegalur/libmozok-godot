@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://013k056kqci8"]
 
-[ext_resource type="Script" path="res://assets/respawn_area/respawn_area.gd" id="1_vsba2"]
+[ext_resource type="Script" uid="uid://ckujupgyrdmh0" path="res://assets/respawn_area/respawn_area.gd" id="1_vsba2"]
 
 [node name="RespawnArea" type="Area2D"]
 collision_layer = 0

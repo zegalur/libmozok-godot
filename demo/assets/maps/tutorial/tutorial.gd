@@ -1,7 +1,10 @@
-## Demo-level.
+## Tutorial demo level.
 
-class_name GameWorldMap
+class_name TutorialMap
 extends Map
+
+# The name of the tutorial quest world.
+const W_TUT = "tut"
 
 # Controls Tutorial
 var _controls_tut_done = 0
@@ -91,26 +94,26 @@ func _update_puzzle_tutorial():
 		var get_cell = func (row, col): return "pt_cell_" + str(row) + str(col)
 		if nc < pc:
 			_player_cell_col = nc
-			_quest_server.pushAction(name, "PTut_MoveLeft", 
-					[get_cell.call(pr, pc), get_cell.call(pr, nc)])
+			_quest_server.pushAction(W_TUT, "PTut_MoveLeft", 
+					[get_cell.call(pr, pc), get_cell.call(pr, nc)], 0)
 		elif nc > pc:
 			_player_cell_col = nc
-			_quest_server.pushAction(name, "PTut_MoveRight",
-					[get_cell.call(pr, pc), get_cell.call(pr, nc)])
+			_quest_server.pushAction(W_TUT, "PTut_MoveRight",
+					[get_cell.call(pr, pc), get_cell.call(pr, nc)], 0)
 		elif nr > pr:
 			_player_cell_row = nr
-			_quest_server.pushAction(name, "PTut_MoveDown",
-					[get_cell.call(pr, pc), get_cell.call(nr, pc)])
+			_quest_server.pushAction(W_TUT, "PTut_MoveDown",
+					[get_cell.call(pr, pc), get_cell.call(nr, pc)], 0)
 		elif nr < pr:
 			_player_cell_row = nr
-			_quest_server.pushAction(name, "PTut_MoveUp",
-					[get_cell.call(pr, pc), get_cell.call(nr, pc)])
+			_quest_server.pushAction(W_TUT, "PTut_MoveUp",
+					[get_cell.call(pr, pc), get_cell.call(nr, pc)], 0)
 	else:
 		_is_player_in_puzzle_area = false
 
 
 func _apply_tut_action(tut_action_obj : String):
-	_quest_server.pushAction(name, "ApplyTutorialAction", [tut_action_obj])
+	_quest_server.pushAction(W_TUT, "ApplyTutorialAction", [tut_action_obj], 0)
 
 
 func _apply_controls_tut(tut_action_obj : String):
@@ -119,7 +122,7 @@ func _apply_controls_tut(tut_action_obj : String):
 	if _controls_tut_done == CONTROL_TUTS.size():
 		var args = ["controlsTutorial"]
 		args.append_array(CONTROL_TUTS.values())
-		_quest_server.pushAction(name, "FinishTutorial_" + str(_controls_tut_done), args)
+		_quest_server.pushAction(W_TUT, "FinishTutorial_" + str(_controls_tut_done), args, 0)
 		$"Env/Initial Island/ControlsTutDoor".open()
 
 
@@ -134,7 +137,7 @@ func _apply_fighting_tut(tut_action_obj : String):
 		var args = ["fightingTutorial"]
 		args.append_array(PLAYER_FIGHTING_TUTS.values())
 		args.append_array(ENEMY_FIGHTING_TUTS.values())
-		_quest_server.pushAction(name, "FinishTutorial_" + str(_fighting_tut_done), args)
+		_quest_server.pushAction(W_TUT, "FinishTutorial_" + str(_fighting_tut_done), args, 0)
 		$"Env/Flying Island/TileLayer/FightingTutDoor".open()
 
 
@@ -144,7 +147,7 @@ func _apply_key_tut(tut_action_obj : String):
 	if _key_tut_done == KEY_TUTS.size():
 		var args = ["keyTutorial"]
 		args.append_array(KEY_TUTS.values())
-		_quest_server.pushAction(name, "FinishTutorial_" + str(_key_tut_done), args)
+		_quest_server.pushAction(W_TUT, "FinishTutorial_" + str(_key_tut_done), args, 0)
 
 
 ## Called when player's `use` action was activated.
@@ -196,10 +199,10 @@ func _puzzle_tutorial_react_to_use_action():
 			_blocks[block_indx].translate(move_vec)
 			_block_cells[block_indx] = f
 			var get_cell = func (row, col): return "pt_cell_" + str(row) + str(col)
-			_quest_server.pushAction(name, action_name,
+			_quest_server.pushAction(W_TUT, action_name,
 					[ get_cell.call(p.x, p.y), 
 					get_cell.call(b.x, b.y), 
-					get_cell.call(f.x, f.y) ])
+					get_cell.call(f.x, f.y) ], 0)
 
 
 ## (row, column)
@@ -212,8 +215,8 @@ func _get_cell(global_pos : Vector2) -> Vector2i:
 
 ## Finish the puzzle tutorial.
 func _on_big_heart_tut_done():
-	_quest_server.pushAction(name, "PTut_Finish", 
-			["pt_cell_00", "puzzleTutorial", "puzzleTutorial_GetHeart"])
+	_quest_server.pushAction(W_TUT, "PTut_Finish", 
+			["pt_cell_00", "puzzleTutorial", "puzzleTutorial_GetHeart"], 0)
 
 
 ## React to new quest status event.
@@ -226,5 +229,5 @@ func _on_new_quest_status(_worldName, questName : String, status : int):
 			# failed quest to appear in the quest book. Normally, you should not 
 			# do it this way. Instead, create one quest with multiple goals. 
 			# This method is used here for illustrative purposes only.
-			_quest_server.pushAction(name, "PTut_Cancel", 
-					["pt_cell_00", "puzzleTutorial", "puzzleTutorial_GetHeart"])
+			_quest_server.pushAction(W_TUT, "PTut_Cancel", 
+					["pt_cell_00", "puzzleTutorial", "puzzleTutorial_GetHeart"], 0)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cortlhwvruty6"]
 
-[ext_resource type="Script" path="res://assets/items/heart/heart.gd" id="1_cxofl"]
+[ext_resource type="Script" uid="uid://c50h1gojp7px4" path="res://assets/items/heart/heart.gd" id="1_cxofl"]
 [ext_resource type="Texture2D" uid="uid://b7jhworjujpjk" path="res://assets/items/imgs/item-shadow.png" id="2_l54fu"]
 [ext_resource type="Texture2D" uid="uid://dl3hncv4xcoi2" path="res://assets/gui/imgs/heart-red.png" id="3_dvabc"]
 
@@ -22,7 +22,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cqcik"]
 _data = {
-"idle": SubResource("Animation_qu2ee")
+&"idle": SubResource("Animation_qu2ee")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ey1lm"]

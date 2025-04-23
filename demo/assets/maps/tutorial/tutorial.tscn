@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=4 uid="uid://8bhrc565a12u"]
 
 [ext_resource type="TileSet" uid="uid://che8k5m1oc3hk" path="res://assets/dungeon_and_grass_tiles_01/dungeon_and_grass_01.tres" id="1_p5wdm"]
-[ext_resource type="Script" path="res://assets/maps/world/world.gd" id="1_pyj42"]
+[ext_resource type="Script" uid="uid://rftj3dfsle6e" path="res://assets/maps/tutorial/tutorial.gd" id="1_pyj42"]
 [ext_resource type="PackedScene" uid="uid://cdawg40awoovw" path="res://assets/enemies/red_skeleton/red_skeleton.tscn" id="2_7maf6"]
 [ext_resource type="PackedScene" uid="uid://drt3orgm278cj" path="res://assets/dungeon_and_grass_tiles_01/dungeon_door.tscn" id="3_nybb2"]
 [ext_resource type="PackedScene" uid="uid://cortlhwvruty6" path="res://assets/items/heart/heart.tscn" id="3_x1x0j"]
@@ -27,11 +27,9 @@ size = Vector2(192, 128)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q7au5"]
 size = Vector2(72, 72)
 
-[node name="World" type="Node2D"]
+[node name="Tutorial" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_pyj42")
-quest_file_paths = PackedStringArray("res://assets/maps/world/world.quest.txt", "res://assets/maps/world/tutorial.quest.txt")
-init_actions = PackedStringArray("InitTutorials")
 
 [node name="Env" type="Node2D" parent="."]
 y_sort_enabled = true

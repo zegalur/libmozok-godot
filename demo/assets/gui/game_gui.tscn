@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dtriolaeom25o"]
 
 [ext_resource type="Texture2D" uid="uid://dl3hncv4xcoi2" path="res://assets/gui/imgs/heart-red.png" id="1_6qic7"]
-[ext_resource type="Script" path="res://assets/gui/game_gui.gd" id="1_ejoor"]
+[ext_resource type="Script" uid="uid://b82a10tjumqn4" path="res://assets/gui/game_gui.gd" id="1_ejoor"]
 [ext_resource type="Texture2D" uid="uid://tw3iufq5atlh" path="res://assets/gui/imgs/heart-half.png" id="2_lc456"]
 [ext_resource type="Theme" uid="uid://cqnnwflfspwe1" path="res://assets/gui/quest_book_theme.tres" id="2_vawgs"]
 [ext_resource type="Texture2D" uid="uid://brhg0rlyo1xi0" path="res://assets/gui/imgs/heart-gray.png" id="3_3q5m1"]

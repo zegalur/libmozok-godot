@@ -1,7 +1,0 @@
-# [Under Construction]
-# Interesting non-linear quests will be added here.
-
-version 1 0
-project world
-
-# ...

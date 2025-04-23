@@ -7,6 +7,10 @@ The game and its art style are inspired by the 2D Legend of Zelda games.
 
 Please read the README.md file in the parent directory.
 
+# Export
+
+Make sure you export the `.txt` resources.
+
 # License
 
 LibMozok is subject to the MIT license. 

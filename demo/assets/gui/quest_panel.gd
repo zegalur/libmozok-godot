@@ -98,4 +98,3 @@ func _update_text():
 
 func _on_toggle_details_pressed():
 	_details.visible = not _details.visible
-

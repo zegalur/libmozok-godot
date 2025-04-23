@@ -7,7 +7,6 @@ extends Node2D
 @onready var _gui : GameGUI = get_node("GameGui")
 @onready var _player : Player = get_node("Player")
 
-
 ## Initialize the quest server, game map, and quest world.
 func _ready():
 	# Set player camera offset.
@@ -17,27 +16,17 @@ func _ready():
 	_map.set_player(_player)
 	_map.set_server(_quest_server)
 	
-	# Create a quest world with the map name.
-	_quest_server.createWorld(_map.name)
-	
-	# Add map quest projects to the quest server.
-	for proj_file in _map.quest_file_paths:
-		var map_project_file = FileAccess.open(proj_file, FileAccess.READ)
-		var project_str = map_project_file.get_as_text()
-		_quest_server.addProject(_map.name, proj_file.get_file(), project_str)
-	
-	# Push init actions.
-	for init_action in _map.init_actions:
-		_quest_server.pushAction(_map.name, init_action, [])
+	# Load the main QSF.
+	var main_qsf = FileAccess.open(
+			"res://assets/quests/main.qsf.txt", FileAccess.READ)
+	_quest_server.loadQuestScriptFile(
+			"res://assets/quests/", "main.qsf.txt", 
+			main_qsf.get_as_text(true), true)
 	
 	# Start the worker thread.
 	_quest_server.startWorkerThread()
 	
-	# Check the server status.
-	if _quest_server.getServerStatus() != OK:
-		printerr("Oops! Error had been occured during the server initialization:")
-		printerr(_quest_server.getServerStatusDescription())
-		get_tree().quit()
+	check_server_status()
 
 
 ## Process the in-game and quest related messages.
@@ -48,6 +37,7 @@ func _process(_delta):
 	# Process all quest server messages.
 	while _quest_server.processNextMessage():
 		pass
+	check_server_status()
 	
 	# Update GUI position
 	var gui_glob_pos = _player.get_screen_center_position() - _gui.size * 0.5
@@ -57,7 +47,14 @@ func _process(_delta):
 	_gui.position = gui_glob_pos
 
 
+func check_server_status():
+	if _quest_server.getServerStatus() != OK:
+		printerr("Oops! Error had been occured:")
+		printerr(_quest_server.getServerStatusDescription())
+		get_tree().quit()
+
+
 ## Called when quest action error occurs.
 func _on_lib_mozok_server_action_error(
-		_worldName, _actionName, _actionArguments, errorResult):
+		_worldName, _actionName, _actionArguments, errorResult, actionError):
 	printerr("Oops! Action error! " + errorResult)

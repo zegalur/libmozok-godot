@@ -12,12 +12,16 @@ config_version=5
 
 config/name="libmozok-demo"
 run/main_scene="res://main.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
 
 window/size/resizable=false
+
+[filesystem]
+
+import/force_visible_extensions=["qsf", "quest"]
 
 [input]
 
@@ -72,7 +76,7 @@ use={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://assets/maps/world/quest_text.en.translation")
+locale/translations=PackedStringArray("res://assets/quests/tutorials/tutorial_text.en.translation")
 
 [layer_names]
 
@@ -91,3 +95,8 @@ locale/translations=PackedStringArray("res://assets/maps/world/quest_text.en.tra
 environment/defaults/default_clear_color=Color(0.0666667, 0.0941176, 0.0941176, 1)
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/snap/snap_2d_vertices_to_pixel=true
+
+[resource]
+
+custom_resource_extensions/qsf="TextFile"
+custom_resource_extensions/quest="TextFile"

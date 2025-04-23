@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://drt3orgm278cj"]
 
-[ext_resource type="Script" path="res://assets/common/door.gd" id="1_ltnnd"]
+[ext_resource type="Script" uid="uid://kau474wrhbwu" path="res://assets/common/door.gd" id="1_ltnnd"]
 [ext_resource type="Texture2D" uid="uid://cltiheb6nxb06" path="res://assets/dungeon_and_grass_tiles_01/dungeon_and_grass_tiles_01.png" id="1_rpduo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ujh70"]

@@ -3,12 +3,6 @@
 class_name Map
 extends Node2D
 
-## Quest project files that need to be loaded.
-@export var quest_file_paths : PackedStringArray
-
-## Initialization functions for quests that need to be called.
-@export var init_actions : PackedStringArray
-
 var _player_node : Player
 var _quest_server : LibMozokServer
 

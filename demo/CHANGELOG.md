@@ -4,6 +4,14 @@ All significant modifications to this demo will be recorded in this file. The st
 
 ## [Unreleased]
 
+## [1.0.0] - 2025-04-23
+
+## Changed
+
+- Move to Godot 4.4.1
+- Move to LibMozok v1.0.0
+- Reorganize using QSF
+
 ## [0.1.1] - 2024-08-19
 
 ### Changed

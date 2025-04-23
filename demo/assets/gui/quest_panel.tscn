@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bpn8msqwjqemh"]
 
 [ext_resource type="Theme" uid="uid://cqnnwflfspwe1" path="res://assets/gui/quest_book_theme.tres" id="1_ee5m8"]
-[ext_resource type="Script" path="res://assets/gui/quest_panel.gd" id="1_gkq0r"]
+[ext_resource type="Script" uid="uid://dim6qcg6ory7i" path="res://assets/gui/quest_panel.gd" id="1_gkq0r"]
 [ext_resource type="Texture2D" uid="uid://c3i4cxv7yfgwo" path="res://assets/gui/imgs/quest-icon-open.png" id="3_ygcli"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aao3r"]
@@ -34,7 +34,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r20f5"]
 _data = {
-"active": SubResource("Animation_34yi3")
+&"active": SubResource("Animation_34yi3")
 }
 
 [node name="QuestPanel" type="PanelContainer"]
@@ -153,7 +153,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_aao3r")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_r20f5")
+&"": SubResource("AnimationLibrary_r20f5")
 }
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ToggleDetails" to="." method="_on_toggle_details_pressed"]

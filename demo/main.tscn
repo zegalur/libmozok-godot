@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cck1pnhry51uy"]
 
-[ext_resource type="PackedScene" uid="uid://8bhrc565a12u" path="res://assets/maps/world/world.tscn" id="1_4bkb0"]
-[ext_resource type="Script" path="res://main.gd" id="1_83sc1"]
+[ext_resource type="PackedScene" uid="uid://8bhrc565a12u" path="res://assets/maps/tutorial/tutorial.tscn" id="1_4bkb0"]
+[ext_resource type="Script" uid="uid://c72bapv1431q3" path="res://main.gd" id="1_83sc1"]
 [ext_resource type="PackedScene" uid="uid://dtriolaeom25o" path="res://assets/gui/game_gui.tscn" id="3_kb5ts"]
 [ext_resource type="PackedScene" uid="uid://deaxyyt1n43i2" path="res://assets/player/player.tscn" id="3_mi51r"]
 
@@ -17,7 +17,7 @@ top_level = true
 [node name="Map" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="World" parent="Map" instance=ExtResource("1_4bkb0")]
+[node name="Tutorial" parent="Map" instance=ExtResource("1_4bkb0")]
 
 [node name="Player" parent="." instance=ExtResource("3_mi51r")]
 y_sort_enabled = true

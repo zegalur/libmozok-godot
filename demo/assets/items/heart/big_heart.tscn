@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://b47pbiuf1am70"]
 
-[ext_resource type="Script" path="res://assets/items/heart/big_heart.gd" id="1_uakym"]
+[ext_resource type="Script" uid="uid://cxamrygacmdmy" path="res://assets/items/heart/big_heart.gd" id="1_uakym"]
 [ext_resource type="Texture2D" uid="uid://t7k8lvxheop5" path="res://assets/items/heart/imgs/big-heart.png" id="2_cv4vw"]
 [ext_resource type="Texture2D" uid="uid://b7jhworjujpjk" path="res://assets/items/imgs/item-shadow.png" id="2_ts3sd"]
 
@@ -25,7 +25,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yhaq3"]
 _data = {
-"idle": SubResource("Animation_tvc6p")
+&"idle": SubResource("Animation_tvc6p")
 }
 
 [node name="BigHeart" type="Area2D"]
