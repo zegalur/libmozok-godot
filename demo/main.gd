@@ -56,5 +56,5 @@ func check_server_status():
 
 ## Called when quest action error occurs.
 func _on_lib_mozok_server_action_error(
-		_worldName, _actionName, _actionArguments, errorResult, actionError):
+		_worldName, _actionName, _actionArguments, errorResult, _actionError):
 	printerr("Oops! Action error! " + errorResult)

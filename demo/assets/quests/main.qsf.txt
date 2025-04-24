@@ -15,6 +15,7 @@ projects:
 	[tut] tutorials/fighting.quest.txt
 	[tut] tutorials/key.quest.txt
 	[tut] tutorials/puzzle.quest.txt
+	[tut] tutorials/portal.quest.txt
 	[tut] tutorials/main.quest.txt
 	
 	# Game

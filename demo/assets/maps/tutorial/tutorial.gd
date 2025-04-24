@@ -44,6 +44,8 @@ const _AREA_SIZE = 4.0 # 4x4 cells
 @onready var _blocks = [_block_01, _block_02, _block_03, _block_04, _block_05]
 var _block_cells : Array = []
 
+# Portal Tutorial
+@onready var _portal = $"Env/Puzzle Island/PortalArea"
 
 func set_player(player : Player):
 	super(player)
@@ -77,6 +79,7 @@ func set_player(player : Player):
 func set_server(server : LibMozokServer):
 	super(server)
 	_quest_server.connect("new_quest_status", _on_new_quest_status)
+	_quest_server.connect("new_sub_quest", _on_new_subquest)
 
 
 func _process(_delta):
@@ -231,3 +234,20 @@ func _on_new_quest_status(_worldName, questName : String, status : int):
 			# This method is used here for illustrative purposes only.
 			_quest_server.pushAction(W_TUT, "PTut_Cancel", 
 					["pt_cell_00", "puzzleTutorial", "puzzleTutorial_GetHeart"], 0)
+
+
+## React to new subquest event.
+func _on_new_subquest(
+		_worldName : String, 
+		questName : String, 
+		_parentQuestName : String,
+		_goal : int ):
+	if(questName == "PortalTutorial"):
+		_portal.show()
+
+
+func _on_portal_area_2d_body_entered(body: Node2D) -> void:
+	if _portal.visible:
+		if body is Player:
+			_quest_server.pushAction(W_TUT, "MoveToPortal", 
+					["pt_cell_33", "portalTutorial"], 0)
