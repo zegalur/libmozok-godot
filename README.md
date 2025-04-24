@@ -35,24 +35,16 @@ LibMozok generates a plan for a quest in real-time and detects when the quest be
 
 ## Installation
 
-1. Create a working folder (this folder will be referred as `[WorkDir]`).
-2. Download the **libmozok** [repository](https://github.com/zegalur/libmozok) into `[WorkDir]/libmozok`.
-3. Download the **libmozok-godot** [repository](https://github.com/zegalur/libmozok-godot) into `[WorkDir]`.
+1. Create and go into a working dir (this folder will be referred as `[WorkDir]`).
+2. Download the **libmozok** [repository](https://github.com/zegalur/libmozok) into `[WorkDir]/libmozok`:<br />
+`git clone https://github.com/zegalur/libmozok.git`
+3. Download the **libmozok-godot** [repository](https://github.com/zegalur/libmozok-godot) into `[WorkDir]`:<br />
+`git clone https://github.com/zegalur/libmozok-godot.git`
 4. Build and install **libmozok**:
-    1. Navigate to the build directory:<br /> 
-    `cd [WorkDir]/libmozok/build`
-
-    2. Run CMake to configure the project:<br /> 
-    `cmake ../src`
-
-    3. Build the project:<br /> 
-    `cmake --build . --config Release`
-
-    4. Install the project:<br /> 
-    `cmake --install . --config Release`
-
-    5. You should now have the non-empty `lib/` and `include/libmozok/` directories inside the `install` directory.
-5. Build and install the `libmozok-godot` GDExtension:
+    1. Follow the libmozok installation instructions:<br />
+    [https://github.com/zegalur/libmozok?tab=readme-ov-file#installation](https://github.com/zegalur/libmozok?tab=readme-ov-file#installation)
+    2. You should now have the non-empty `lib/` and `include/libmozok/` directories inside the `install` directory.
+6. Build and install the `libmozok-godot` GDExtension:
     1. Navigate to the repository:<br /> 
     `cd [WorkDir]/libmozok-godot`
 
@@ -82,9 +74,9 @@ LibMozok generates a plan for a quest in real-time and detects when the quest be
     10. You should now have the `libgdmozok` library files in `[WorkDir]/libmozok-godot/demo/bin`
     
     11. Open the `gdmozok.gdextension` file in the `demo/bin` directory and ensure that the library file names match.
-6. Open the DEMO project from `[WorkDir]/libmozok-godot/demo` in Godot. 
-7. If you encounter **"Load Errors"** messages, close the editor and reopen the project. Normally, there should be no errors after reloading the editor.
-8. Run the DEMO.
+7. Open the DEMO project from `[WorkDir]/libmozok-godot/demo` in Godot. 
+8. If you encounter **"Load Errors"** messages, close the editor and reopen the project. Normally, there should be no errors after reloading the editor.
+9. Run the DEMO.
 
 # References
 
