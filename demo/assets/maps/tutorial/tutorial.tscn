@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://8bhrc565a12u"]
+[gd_scene load_steps=19 format=4 uid="uid://8bhrc565a12u"]
 
 [ext_resource type="TileSet" uid="uid://che8k5m1oc3hk" path="res://assets/dungeon_and_grass_tiles_01/dungeon_and_grass_01.tres" id="1_p5wdm"]
 [ext_resource type="Script" uid="uid://rftj3dfsle6e" path="res://assets/maps/tutorial/tutorial.gd" id="1_pyj42"]
@@ -26,6 +26,94 @@ size = Vector2(192, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q7au5"]
 size = Vector2(72, 72)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_40682"]
+size = Vector2(46, 44)
+
+[sub_resource type="Animation" id="Animation_84nlf"]
+resource_name = "PortalPulse"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.266667), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.6, 0.6)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect2:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.6, 0.6), Vector2(0.1, 0.1)]
+}
+
+[sub_resource type="Animation" id="Animation_qnwau"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect2:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.625731, 0.625731)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cbkvs"]
+_data = {
+&"PortalPulse": SubResource("Animation_84nlf"),
+&"RESET": SubResource("Animation_qnwau")
+}
 
 [node name="Tutorial" type="Node2D"]
 y_sort_enabled = true
@@ -207,3 +295,63 @@ offset_bottom = 64.0
 
 [node name="BigHeart" parent="Env/Puzzle Island" instance=ExtResource("9_s6f1u")]
 position = Vector2(-415, 350)
+
+[node name="PortalArea" type="ColorRect" parent="Env/Puzzle Island"]
+visible = false
+clip_contents = true
+offset_left = 205.0
+offset_top = -309.0
+offset_right = 245.0
+offset_bottom = -269.0
+color = Color(0.83, 0, 0.148198, 1)
+
+[node name="ColorRect" type="ColorRect" parent="Env/Puzzle Island/PortalArea"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.882
+offset_top = -17.882
+offset_right = 22.118
+offset_bottom = 22.118
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(20, 20)
+color = Color(0.414063, 0.0461973, 0.192486, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Env/Puzzle Island/PortalArea"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.8821
+offset_top = -15.8818
+offset_right = 24.1179
+offset_bottom = 24.1182
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.625731, 0.625731)
+pivot_offset = Vector2(20, 20)
+color = Color(0.238281, 0.0265852, 0.11077, 1)
+
+[node name="PortalArea2D" type="Area2D" parent="Env/Puzzle Island/PortalArea"]
+visible = false
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Env/Puzzle Island/PortalArea/PortalArea2D"]
+position = Vector2(20, 21)
+shape = SubResource("RectangleShape2D_40682")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Env/Puzzle Island/PortalArea"]
+libraries = {
+&"": SubResource("AnimationLibrary_cbkvs")
+}
+autoplay = "PortalPulse"
+
+[connection signal="body_entered" from="Env/Puzzle Island/PortalArea/PortalArea2D" to="." method="_on_portal_area_2d_body_entered"]

@@ -45,3 +45,8 @@ ACTION_PTut_Finish,Pick up the big heart.
 ACTION_PuzzleTutorial,Finish the puzzle tutorial.
 ACTION_PuzzleTutorial_GetHeart,Try to pick up the big heart
 ACTION_PTut_Cancel,Cancel the puzzle tutorial
+,
+TITLE_PortalTutorial,Go to the red portal
+DESC_PortalTutorial,"Finish the tutorial by entering into the red portal. Be careful not to block the way out."
+ACTION_MoveToPortal,Move into the portal.
+ACTION_PortalTutorial,Finish the portal tutorial.
