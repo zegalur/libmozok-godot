@@ -13,8 +13,7 @@ func _ready():
 	_player.set_camera_offset(Vector2(150.0, 0.0)) # 150, 50
 	
 	# Setup the map.
-	_map.set_player(_player)
-	_map.set_server(_quest_server)
+	_map.setup(_quest_server, _player)
 	
 	# Load the main QSF.
 	var main_qsf = FileAccess.open(
