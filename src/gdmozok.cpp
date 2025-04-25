@@ -17,6 +17,7 @@ using namespace godot;
 namespace {
 
 const auto ON_ACTION_ERROR_SIGNAL = "action_error";
+const auto ON_ACTION_PUSHED_SIGNAL = "action_pushed";
 const auto ON_NEW_MAIN_QUEST_SIGNAL = "new_main_quest";
 const auto ON_NEW_SUB_QUEST_SIGNAL = "new_sub_quest";
 const auto ON_NEW_QUEST_STATE_SIGNAL = "new_quest_state";
@@ -44,7 +45,6 @@ const auto ACTION_ERROR_TYPE_ERROR = mozok::ActionError::MOZOK_AE_TYPE_ERROR;
 const auto ACTION_ERROR_PRECONDITIONS_ERROR = mozok::ActionError::MOZOK_AE_PRECONDITIONS_ERROR;
 const auto ACTION_ERROR_NA_ACTION = mozok::ActionError::MOZOK_AE_NA_ACTION;
 const auto ACTION_ERROR_OTHER_ERROR = mozok::ActionError::MOZOK_OTHER_ERROR;
-
 
 }
 
@@ -156,6 +156,13 @@ void LibMozokServer::_bind_methods() {
             PropertyInfo(Variant::STRING, "errorResult"),
             PropertyInfo(Variant::INT, "actionError"),
             PropertyInfo(Variant::INT, "data")));
+
+    ADD_SIGNAL(MethodInfo(ON_ACTION_PUSHED_SIGNAL, 
+            PropertyInfo(Variant::STRING, "worldName"), 
+            PropertyInfo(Variant::STRING, "actionName"),
+            PropertyInfo(Variant::PACKED_STRING_ARRAY, "actionArguments"),
+            PropertyInfo(Variant::INT, "data"),
+            PropertyInfo(Variant::INT, "pushStatus")));
 
     ADD_SIGNAL(MethodInfo(ON_NEW_MAIN_QUEST_SIGNAL, 
             PropertyInfo(Variant::STRING, "worldName"), 
@@ -403,6 +410,13 @@ Error LibMozokServer::pushAction(
     mozok::Result res = _server->pushAction(
         toStr(worldName), toStr(actionName), toStrVec(actionArguments), data);
     _status <<= res;
+    emit_signal(ON_ACTION_PUSHED_SIGNAL, 
+        worldName, 
+        actionName,
+        actionArguments,
+        data,
+        resToErr(res)
+        );
     return resToErr(res);
 }
 
