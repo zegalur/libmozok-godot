@@ -9,12 +9,10 @@ var _quest_server : LibMozokServer
 func _ready():
 	pass
 
-func set_player(player : Player):
+func setup(server : LibMozokServer, player : Player):
+	_quest_server = server
 	_player_node = player
 	var children = find_children("*", "Enemy")
 	for node in children:
 		var enemy = node as Enemy
 		enemy.set_player(_player_node)
-
-func set_server(server : LibMozokServer):
-	_quest_server = server

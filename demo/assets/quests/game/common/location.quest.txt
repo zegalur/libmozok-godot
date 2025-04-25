@@ -1,0 +1,13 @@
+# Locations and places.
+
+version 1 0
+project location
+
+type Location # Locations, like rooms, areas etc.
+type Locatable # Things that can be at some location.
+
+# A thing X is currently at the location Y.
+rel At(Locatable, Location)
+
+# A path (road, passage, corridor etc.) exists between X and Y.
+rel Path(Location, Location)

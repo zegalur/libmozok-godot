@@ -1,0 +1,8 @@
+# ...
+
+version 1 0
+project player
+
+type Player : Locatable
+
+object player_ : Player

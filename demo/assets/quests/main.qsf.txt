@@ -9,7 +9,7 @@ worlds:
 	game # Quest world where the mainstory quests took place.
 
 projects:
-	# Totorials
+	# Tutorials
 	[tut] tutorials/utils.quest.txt
 	[tut] tutorials/controls.quest.txt
 	[tut] tutorials/fighting.quest.txt
@@ -19,6 +19,8 @@ projects:
 	[tut] tutorials/main.quest.txt
 	
 	# Game
+	[game] game/common/location.quest.txt
+	[game] game/common/player.quest.txt
 	[game] game/game.quest.txt
 
 init:
