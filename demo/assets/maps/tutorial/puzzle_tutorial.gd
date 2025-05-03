@@ -1,7 +1,6 @@
 class_name PuzzleTutorial
 extends NullTutorial
 
-# Puzzle Tutorial
 var _is_player_in_puzzle_area = false
 var _player_cell_col : int = 3
 var _player_cell_row : int = 3
@@ -9,6 +8,7 @@ const _AREA_SIZE = 4.0 # 4x4 cells
 var _blocks : Array[StaticBody2D]
 var _block_cells : Array = []
 var _puzzle_rect : Rect2
+
 
 func _init(
 		server : LibMozokServer,

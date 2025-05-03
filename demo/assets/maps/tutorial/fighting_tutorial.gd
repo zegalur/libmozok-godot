@@ -20,6 +20,7 @@ const ENEMY_FIGHTING_TUTS : Dictionary[String, T.tut.ApplyTutorialAction_1_tutor
 
 var _is_enemy_killed_tut_done = false
 
+
 func _init(
 		server : LibMozokServer,
 		worldName : StringName,
@@ -37,11 +38,13 @@ func _init(
 			ENEMY_FIGHTING_TUTS.keys().front(), 
 			_apply_fighting_tut.bind(ENEMY_FIGHTING_TUTS.values().front()))
 
+
 func  _on_dead():
 	if _die_tut_done == false:
 		_die_tut_done = true
 		_apply_fighting_tut(
 				T.tut.ApplyTutorialAction_1_tutorialAction.dieAction)
+
 
 func _on_hearts_added(_count : int):
 	if _take_heart_tut_done == false:
@@ -49,16 +52,19 @@ func _on_hearts_added(_count : int):
 		_apply_fighting_tut(
 				T.tut.ApplyTutorialAction_1_tutorialAction.takeHeartAction)
 
+
 func _on_hit_taken(_from : Vector2, _damage : float):
 	if _take_hit_tut_done == false:
 		_take_hit_tut_done = true
 		_apply_fighting_tut(PLAYER_FIGHTING_TUTS["take_hit_tut_done"])
+
 
 func _on_hit_blocked(_from : Vector2):
 	_block_count += 1
 	if _block_tut_done == false and _block_count >= 3:
 		_block_tut_done = true
 		_apply_fighting_tut(PLAYER_FIGHTING_TUTS["block_tut_done"])
+
 
 func _apply_fighting_tut(tut_action : T.tut.ApplyTutorialAction_1_tutorialAction):
 	if tut_action == ENEMY_FIGHTING_TUTS.values().front():

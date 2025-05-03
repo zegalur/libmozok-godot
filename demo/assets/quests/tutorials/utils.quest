@@ -3,7 +3,6 @@
 # good playground to test various features.
 
 # ============================== Tutorial Utils ============================== #
-
 # Various elements that are common and useful to all tutorials.
 
 version 1 0
@@ -34,6 +33,7 @@ action ApplyTutorialAction:
 	rem # none
 	add TutorialActionApplied(tutorialAction)
 
+
 # Finish a tutorial with 2 objectives.
 action FinishTutorial_2:
 	tutorial : Tutorial
@@ -43,6 +43,7 @@ action FinishTutorial_2:
 		TutorialActionApplied(action2)
 	rem # none
 	add TutorialFinished(tutorial)
+
 
 # Finish a tutorial with 3 objectives.
 action FinishTutorial_3:
@@ -55,6 +56,7 @@ action FinishTutorial_3:
 		TutorialActionApplied(action3)
 	rem # none
 	add TutorialFinished(tutorial)
+
 
 # Finish a tutorial with 5 objectives.
 action FinishTutorial_5:

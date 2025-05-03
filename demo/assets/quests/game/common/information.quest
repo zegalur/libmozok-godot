@@ -1,3 +1,9 @@
+# This file is a part of the LibMozok DEMO project, intended to demonstrate 
+# how the library can be integrated into a popular game engine. Also, it is a
+# good playground to test various features.
+
+# ========================== Information Exchange ============================ #
+
 version 1 0
 project information
 

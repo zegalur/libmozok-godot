@@ -1,9 +1,9 @@
-## Hearts restore the player's health points.
-
 class_name HeartItem
 extends PickUpItem
+## Hearts restore the player's health points.
 
 @onready var _hidden = false
+
 
 ## Pick up the heart and restore the player's health point.
 func pick_up(player : Player):

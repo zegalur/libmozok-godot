@@ -1,8 +1,7 @@
-## Red skeletons are the simplest enemies in the game. 
-## They are slow, attack only at close range, and lack any special abilities.
-
 class_name RedSkeleton
 extends Enemy
+## Red skeletons are the simplest enemies in the game. 
+## They are slow, attack only at close range, and lack any special abilities.
 
 ## Movement speed in pixels per second.
 @export var movement_speed = 100.0

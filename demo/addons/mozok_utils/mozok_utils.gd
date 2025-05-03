@@ -1,5 +1,12 @@
 @tool
 extends EditorPlugin
+## Provides various LibMozok-related features.
+##
+## Features:
+## - Automatically adds `.qsf` and `.quest` to "docks/filesystem/textfile_extensions".
+## - Adds syntax highlighters for `.qsf` and `.quest`.
+## - Adds a `LibMozok` panel to the editor (at the top):
+##     - Allows generating GDScript file that reflects QSF structure.
 
 const MainPanel = preload("res://addons/mozok_utils/utils_screen.tscn")
 var main_panel_instance : Control
@@ -9,10 +16,11 @@ const QSFHighlighter = preload("res://addons/mozok_utils/qsf_highlighter.gd")
 var quest_highlighter : EditorSyntaxHighlighter
 var qsf_highlighter : EditorSyntaxHighlighter
 
+
 func _enter_tree() -> void:
 	_set_editor_settings()
 	
-	# Setting-uo the main panel.
+	# Setting-up the main panel.
 	main_panel_instance = MainPanel.instantiate()
 	EditorInterface.get_editor_main_screen().add_child(main_panel_instance)
 	_make_visible(false)
@@ -23,6 +31,7 @@ func _enter_tree() -> void:
 	var script_editor = EditorInterface.get_script_editor()
 	script_editor.register_syntax_highlighter(quest_highlighter)
 	script_editor.register_syntax_highlighter(qsf_highlighter)
+
 
 func _exit_tree() -> void:
 	# Remove syntax highlighters.
@@ -38,18 +47,23 @@ func _exit_tree() -> void:
 	if is_instance_valid(main_panel_instance):
 		main_panel_instance.queue_free()
 
+
 func _has_main_screen():
 	return true
+
 
 func _make_visible(visible):
 	if main_panel_instance:
 		main_panel_instance.visible = visible
 
+
 func _get_plugin_name():
 	return "LibMozok"
 
+
 func _get_plugin_icon():
 	return load("res://addons/mozok_utils/imgs/gdmozok-icon.svg") as Texture2D
+
 
 func _set_editor_settings() -> void:
 	var editor_settings = EditorInterface.get_editor_settings()

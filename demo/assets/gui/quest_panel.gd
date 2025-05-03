@@ -1,8 +1,7 @@
-## Quest panel from the in-game GUI.
-## Shows quest title, description, current status and current quest plan.
-
 class_name QuestPanel
 extends PanelContainer
+## Quest panel from the in-game GUI.
+## Shows quest title, description, current status and current quest plan.
 
 @onready var _title = $VBoxContainer/HBoxContainer/Title
 @onready var _details = $VBoxContainer/Details

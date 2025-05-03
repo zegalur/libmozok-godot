@@ -1,6 +1,6 @@
-# Auxilary class for the controls tutorial.
 class_name ControlTut
 extends NullTutorial
+## Auxilary class for the controls tutorial.
 
 var _timers = {
 	Player.PlayerDir.UP : 0.0, 
@@ -12,6 +12,7 @@ var _done = false
 var _state : Player.PlayerState
 var _amount : float
 var action = T.tut.ApplyTutorialAction_1_tutorialAction.movementAction
+
 
 func _init(
 		server : LibMozokServer,
@@ -29,7 +30,8 @@ func _init(
 	_world = world_name
 	action = tut_action
 
-# Returns `true` only once, when tutorial is done.
+
+## Returns `true` only once, when tutorial is done.
 func process_tutorial(delta : float) -> bool:
 	if _done == true:
 		return false

@@ -1,4 +1,8 @@
-# ...
+# This file is a part of the LibMozok DEMO project, intended to demonstrate 
+# how the library can be integrated into a popular game engine. Also, it is a
+# good playground to test various features.
+
+# ========================== Dwelling Place Map ============================== #
 
 version 1 0
 project dwelling_place
@@ -6,7 +10,7 @@ project dwelling_place
 type DwellingPlace : Map
 object dwelling_place_ : DwellingPlace
 
-# =================================== Init =================================== #
+# ----------------------------------- Init ----------------------------------- #
 
 rlist InitDwellingPlace:
 	# none

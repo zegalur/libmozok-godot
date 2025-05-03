@@ -1,7 +1,6 @@
-## In-game enemy class.
-
 class_name Enemy
 extends CharacterBody2D
+## In-game enemy class.
 
 ## Player's node.
 @export var _player : Player
@@ -15,4 +14,3 @@ func set_player(player : Player):
 ## Take a hit from the specified direction with the specified damage.
 func take_hit(_from : Vector2, _damage : float):
 	pass
-

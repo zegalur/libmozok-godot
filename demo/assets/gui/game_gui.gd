@@ -1,7 +1,6 @@
-## In-game GUI.
-
 class_name GameGUI
 extends Control
+## In-game GUI (quest panel, health, keys, dialogues etc).
 
 signal dialogue_ended()
 
@@ -38,6 +37,7 @@ const NEXT_ANSWER = "[next]"
 @onready var _map_name_player = %MapNamePlayer
 var _state : GameState
 
+
 func _ready():
 	custom_minimum_size = get_viewport_rect().size
 	for heart_node in _hearts_box.get_children():
@@ -47,8 +47,10 @@ func _ready():
 	_dialogue_box.hide()
 	_answers.active = false
 
+
 func save_state(state : GameState) -> void:
 	pass
+
 
 func load_state(state : GameState) -> void:
 	_state = state
@@ -58,11 +60,13 @@ func _process(_delta):
 	pass
 
 
+## Displays an animated map name at the top-center of the screen.
 func show_map_name(map_name : String) -> void:
 	_map_name.text = tr(map_name)
 	_map_name_player.play("ShowMapName")
 
 
+## Updates the hearts indicator at the top-left of the screen.
 func update_hearts(hearts : int, max_hearts : int):
 	# Remove previous hearts.
 	var prev_hearts = _hearts_box.get_children()
@@ -88,6 +92,7 @@ func update_hearts(hearts : int, max_hearts : int):
 		_hearts_box.add_child(_heart_gray.duplicate())
 
 
+## Updates the keys icons at the top-left of the screen.
 func update_keys(keys : Array):
 	# Remove previous keys.
 	var prev_keys = _keys_box.get_children()
@@ -99,9 +104,10 @@ func update_keys(keys : Array):
 		_keys_box.add_child(_dungeon_key_icon.duplicate())
 
 
+# ================================= QUESTS =================================== #
+
 func new_main_quest(_worldName : String, questName : String):
 	_new_quest(questName)
-	#print("new_main_quest %s %s" % [_worldName, questName])
 
 
 func new_sub_quest(
@@ -110,15 +116,6 @@ func new_sub_quest(
 		_parentQuestName : String,
 		_goal : int ):
 	_new_quest(questName)
-	#print("new_sub_quest %s %s" % [_worldName, questName])
-
-
-func start_dialogue(npc : NPC, dnode : DialogueNode) -> void:
-	_dialogue_box.show()
-	_answers.active = true
-	_npc_portrait.texture = npc.portrait if npc.portrait else _empty_portrait
-	_npc_name.text = npc.npc_name
-	_activate_dnode(dnode)
 
 
 func _new_quest(questName : String):
@@ -131,7 +128,6 @@ func _new_quest(questName : String):
 
 func _on_new_quest_state(_worldName, questName):
 	(_quests[questName] as QuestPanel).on_new_quest_state()
-	#print("_on_new_quest_state %s %s" % [_worldName, questName])
 
 
 func new_quest_plan(
@@ -141,7 +137,6 @@ func new_quest_plan(
 		actionArgsList : Array):
 	(_quests[questName] as QuestPanel).set_quest_plan(
 			actionList, actionArgsList)
-	#print("new_quest_plan %s %s" % [_worldName, questName])
 
 
 func _on_new_quest_status(_worldName, questName, questStatus):
@@ -152,7 +147,17 @@ func _on_new_quest_status(_worldName, questName, questStatus):
 	if questStatus == LibMozokServer.QUEST_STATUS_UNREACHABLE:
 		_open_quests.remove_child(_quests[questName])
 		_failed_quests.add_child(_quests[questName])
-	#print("_on_new_quest_status %s %s %s" % [_worldName, questName, questStatus])
+
+
+# ================================ DIALOGUE ================================== #
+
+## Starts a new dialogue with the given NPC from the specified dialogue node.
+func start_dialogue(npc : NPC, dnode : DialogueNode) -> void:
+	_dialogue_box.show()
+	_answers.active = true
+	_npc_portrait.texture = npc.portrait if npc.portrait else _empty_portrait
+	_npc_name.text = npc.npc_name
+	_activate_dnode(dnode)
 
 
 func _activate_dnode(dnode : DialogueNode) -> void:

@@ -15,10 +15,6 @@ run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
-[autoload]
-
-GG="*res://assets/maps/game/game_globals.gd"
-
 [display]
 
 window/size/resizable=false

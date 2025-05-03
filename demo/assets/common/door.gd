@@ -1,7 +1,6 @@
-## Door that can be opened by a key.
-
 class_name Door
 extends StaticBody2D
+## Door that can be opened by a key.
 
 ## Is this door can be opened by a key.
 @export var open_by_key = true

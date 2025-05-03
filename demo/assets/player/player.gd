@@ -1,7 +1,6 @@
-## Playable character.
-
 class_name Player
 extends CharacterBody2D
+## Playable character.
 
 signal dead()
 signal hearts_changed(hearts : int, max_hearts : int)
@@ -103,10 +102,12 @@ var _usable_body_indx : int = 0
 func _ready():
 	_respawn_point = global_position
 
+
 func save_state(state : GameState) -> void:
 	state.write(KEY_PRE + "_hearts", _hearts)
 	state.write(KEY_PRE + "_max_hearts", _max_hearts)
 	_game_state = state
+
 
 func load_state(state : GameState) -> void:
 	_game_state = state
@@ -127,6 +128,7 @@ func _to_dir(dir : Vector2) -> PlayerDir:
 		return PlayerDir.UP
 	return PlayerDir.DOWN
 
+
 func _dir_to_str(dir : PlayerDir) -> String:
 	if dir == PlayerDir.UP:
 		return "up"
@@ -137,6 +139,7 @@ func _dir_to_str(dir : PlayerDir) -> String:
 	elif dir == PlayerDir.RIGHT:
 		return "right"
 	return "unknown"
+
 
 ## Take a hit from the given point and with the given damage.
 func take_hit(from : Vector2, damage : float):
@@ -167,10 +170,12 @@ func take_hit(from : Vector2, damage : float):
 	if _hearts == 0.0:
 		_dead()
 
+
 ## Returns `true` if player is dead. 
 ## Returns false` if player is alive. 
 func is_dead() -> bool:
 	return _state == PlayerState.DEAD
+
 
 ## Adds health points.
 func add_heart(count : float):
@@ -179,6 +184,7 @@ func add_heart(count : float):
 	_update_hearts()
 	emit_signal("hearts_added", _hearts - _was)
 
+
 ## Add new heart cell.
 func add_heart_cell():
 	_max_hearts += 1
@@ -186,32 +192,41 @@ func add_heart_cell():
 	_update_hearts()
 	emit_signal("big_heart_taken")
 
+
 ## Returns `true` if health points are at maximum.
 func is_max_hearts() -> bool:
 	return _hearts == _max_hearts
+
 
 ## Adds a key to the inventory.
 func add_key(key_type : Key.KeyType):
 	_keys.push_back(key_type)
 	emit_signal("keys_changed", _keys)
 
+
 func get_screen_center_position() -> Vector2:
 	return $Camera2D.get_screen_center_position()
+
 
 func get_player_direction() -> PlayerDir:
 	return _last_direction
 
+
 func get_player_state() -> PlayerState:
 	return _state
+
 
 func set_camera_offset(offset : Vector2):
 	$Camera2D.offset = offset
 
+
 func set_respawn_point(global_pos : Vector2):
 	_respawn_point = global_pos
 
+
 func is_player_waiting() -> bool:
 	return animated_sprite.is_playing() == false
+
 
 func set_camera_limits(
 		limit = Rect2(-10000000,-10000000,20000000,20000000)
@@ -221,11 +236,13 @@ func set_camera_limits(
 	_camera.limit_right = limit.end.x + _camera.offset.x
 	_camera.limit_bottom = limit.end.y - _camera.offset.y
 
+
 func start_teleporting(teleport_name : String) -> void:
 	_teleport_name = teleport_name
 	_teleport_timer = 0.0
 	_state = PlayerState.TELEPORT
 	animated_sprite.play("rotating")
+
 
 func start_dialogue(npc : NPC, dnode : DialogueNode) -> void:
 	if _state in [PlayerState.DEAD, PlayerState.TELEPORT, PlayerState.BUSY]:
@@ -233,10 +250,12 @@ func start_dialogue(npc : NPC, dnode : DialogueNode) -> void:
 	_state = PlayerState.BUSY
 	emit_signal("dialogue_started", npc, dnode)
 
+
 func end_dialogue() -> void:
 	_state = PlayerState.WAIT
 	Input.action_release("menu_select")
 	Input.action_release("use")
+
 
 func _process(_delta: float) -> void:
 	if _usable_bodies.size() == 0:
@@ -249,10 +268,12 @@ func _process(_delta: float) -> void:
 			uobj = cursor_pos_obj
 		%UsableObjCursor.global_position = uobj.global_position
 
+
 func _input(event: InputEvent) -> void:
 	if event.is_action("select_next"):
 		if _usable_bodies.size() > 0:
 			_usable_body_indx = (_usable_body_indx + 1) % _usable_bodies.size()
+
 
 func _physics_process(delta):
 	const EPS = 0.001

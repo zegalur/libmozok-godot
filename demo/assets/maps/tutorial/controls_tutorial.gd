@@ -4,6 +4,7 @@ extends NullTutorial
 var _control_tutorials : Array[ControlTut]
 var _controls_tut_done = 0
 
+
 func _init(
 		server : LibMozokServer,
 		worldName : StringName,
@@ -18,6 +19,7 @@ func _init(
 				T.tut.ApplyTutorialAction_1_tutorialAction.attackAction),
 		ControlTut.new(server, worldName, player, Player.PlayerState.HIDE, 0.1, 
 				T.tut.ApplyTutorialAction_1_tutorialAction.hideAction)]
+
 
 func process_tutorial(_delta):
 	for tut in _control_tutorials:

@@ -1,4 +1,6 @@
 extends Map
+## The player's home and the starting location of the game.
+
 
 # ----------------------------------- State ---------------------------------- #
 
@@ -10,6 +12,7 @@ func save_state(state : GameState):
 
 func load_state(state : GameState):
 	talked_to_the_guard = state.read(STATE_PRE + "talked_to_the_guard", false)
+
 
 # ----------------------------------- Other ---------------------------------- #
 

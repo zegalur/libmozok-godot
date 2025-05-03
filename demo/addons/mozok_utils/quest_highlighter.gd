@@ -1,5 +1,6 @@
 @tool
 extends EditorSyntaxHighlighter
+## QSF syntax Highlighter for Godot.
 
 const COMMENT_COLOR = Color.WEB_GRAY
 const KEYWORD_COLOR_1 = Color.CORAL
@@ -53,11 +54,14 @@ const KEYWORDS = {
 	"DFS" : [SPECIAL_COLOR, STD_COLOR],
 }
 
+
 func _get_name() -> String:
 	return "(LibMozok) .quest"
 
+
 func _get_supported_languages() -> PackedStringArray:
 	return ["TextFile"]
+
 
 func _get_line_syntax_highlighting(line: int) -> Dictionary:
 	var color_map = {}
@@ -66,7 +70,7 @@ func _get_line_syntax_highlighting(line: int) -> Dictionary:
 
 	color_map[0] = { "color": STD_COLOR }
 
-	# Quest Sections:
+	# Quest Sections (`objects:` etc).
 	var startsWith = str.strip_edges().substr(0, 1)
 	var startsWithUpper = startsWith == startsWith.to_upper()
 	if line > 0:
@@ -89,13 +93,13 @@ func _get_line_syntax_highlighting(line: int) -> Dictionary:
 					color_map[0] = { "color": QUEST_COLOR }
 			break
 
-	# Comments
+	# Comments.
 	var comment = str.find("#")
 	if comment > -1:
 		color_map[comment] = { "color": COMMENT_COLOR }
 		str = str.substr(0, comment)
 
-	# Keywords
+	# Keywords.
 	var is_object = false
 	var is_type = false
 	var is_rel = false
@@ -120,7 +124,7 @@ func _get_line_syntax_highlighting(line: int) -> Dictionary:
 		color_map[pos] = { "color": KEYWORDS[keyword][0] }
 		color_map[pos + len(keyword)] = { "color": KEYWORDS[keyword][1] }
 
-	# Special
+	# Special symbols and additional highlighting derived from them.
 	var std_col = STD_COLOR
 	if is_object or is_type or is_rel:
 		std_col = TYPE_COLOR
@@ -139,6 +143,5 @@ func _get_line_syntax_highlighting(line: int) -> Dictionary:
 			if color_map.keys().has(i+1) == false:
 				color_map[i+1] = { "color": std_col }
 
-	#print(color_map)
 	color_map.sort()
 	return color_map

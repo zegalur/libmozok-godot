@@ -1,7 +1,6 @@
-## Keys are used to open closed doors.
-
 class_name Key
 extends PickUpItem
+## Keys are used to open closed doors.
 
 ## Key type.
 enum KeyType {

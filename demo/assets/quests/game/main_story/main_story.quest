@@ -1,7 +1,12 @@
+# This file is a part of the LibMozok DEMO project, intended to demonstrate 
+# how the library can be integrated into a popular game engine. Also, it is a
+# good playground to test various features.
+
+# ============================ Main Story Line =============================== #
+
 version 1 0
 project main_story
 
-# ================================= Objects ================================== #
 
 object king_ : NPC
 object guard_philip_ : NPC
@@ -9,7 +14,8 @@ object guard_philip_ : NPC
 object king_is_waiting_ : Fact
 object cat_is_missing_ : Fact
 
-# =================================== Init =================================== #
+
+# ----------------------------------- Init ----------------------------------- #
 
 rlist InitMainStory:
 	# Player
@@ -32,7 +38,8 @@ action InitMainStory:
 	rem # none
 	add InitMainStory()
 
-# ================================== Quests ================================== #
+
+# ---------------------------------- Quests ---------------------------------- #
 
 main_quest GuardAtTheDoors:
 	preconditions:
@@ -50,6 +57,7 @@ main_quest GuardAtTheDoors:
 		Map
 	subquests:
 		# none
+
 
 main_quest KingsInvitation:
 	preconditions:

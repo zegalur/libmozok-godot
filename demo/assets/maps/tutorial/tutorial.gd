@@ -1,7 +1,6 @@
-## Tutorial demo level.
-
 class_name TutorialMap
 extends Map
+## Tutorial demo level.
 
 # The name of the tutorial quest world.
 const W_TUT = "tut"
@@ -14,6 +13,7 @@ var _puzzle_tutorial : PuzzleTutorial
 
 # Portal Tutorial
 @onready var _portal = $"Env/Puzzle Island/PortalArea"
+
 
 func setup(
 		server : LibMozokServer, 

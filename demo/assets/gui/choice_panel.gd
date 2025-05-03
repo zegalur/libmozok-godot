@@ -1,19 +1,31 @@
 @tool
 class_name SelectOptionNode
 extends PanelContainer
+## Choice panel that, when active, allows the player to choose an option 
+## from a vertical list.
 
+## Emitted when an option from the current list is selected.
 signal option_selected(indx : int)
+
+## Emitted when the selected index has changed.
 signal selection_changed(indx : int)
+
+## Emitted when `menu_back` is pressed.
+## Use this signal to change the `selected` index to the `back` item.
 signal back_pressed()
 
+## React to the input only when `active` is `true`.
 @export var active : bool = true:
 	get: return active
 	set(value): 
 		active = value
 		_set_active(value)
+
+## When `true`, loops back to the first item when attempting to jump to 
+## the next after the last item.
 @export var loop : bool = true
 
-## If `true` will makes height big enough to fit all the options.
+## Adjust the height to fit all the options.
 @export var fit_options : bool = false:
 	get: return fit_options
 	set(value):
@@ -21,6 +33,7 @@ signal back_pressed()
 		_rebuild_list()
 		_update_selection()
 
+## Options to choose from.
 @export var options : Array[String] = [ "Option #1", "Option #2" ]:
 	get: return options
 	set(value):
@@ -29,6 +42,7 @@ signal back_pressed()
 		selected = selected
 		#_update_selection()
 
+## Currently selected option (index, starting from 0).
 @export var selected : int = 0:
 	get: return selected
 	set(value): 
@@ -48,10 +62,12 @@ signal back_pressed()
 @onready var _active_theme = load(
 		"res://assets/gui/other/choice_panel_active.tres") as StyleBoxFlat
 
+
 func _ready() -> void:
 	_set_active(active)
 	_rebuild_list()
 	_update_selection()
+
 
 func _input(event: InputEvent) -> void:
 	if not active:
@@ -67,10 +83,12 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("menu_back"):
 		emit_signal("back_pressed")
 
+
 func _process(delta: float) -> void:
 	if fit_options:
 		await get_tree().process_frame
 		custom_minimum_size.y = $ScrollContainer/Options.size.y
+
 
 func _rebuild_list() -> void:
 	if not is_node_ready():
@@ -86,6 +104,7 @@ func _rebuild_list() -> void:
 		_options.add_child(option)
 	_options.add_child(_space_2)
 
+
 func _update_selection() -> void:
 	if not is_node_ready():
 		return
@@ -99,6 +118,7 @@ func _update_selection() -> void:
 	_options.move_child(_selected, 1 + indx)
 	await get_tree().process_frame
 	$ScrollContainer.ensure_control_visible(_selected)
+
 
 func _set_active(value : bool) -> void:
 	set("theme_override_styles/panel", _active_theme if value else null)

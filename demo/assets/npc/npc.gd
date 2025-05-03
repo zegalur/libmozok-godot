@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var portrait : Texture2D
 @export_multiline var npc_name : String = "[Unknown]"
 
+
 func talk(player : Player, state : GameState):
 	# Find and activate the first appropriate dialogue node.
 	for n in get_children():

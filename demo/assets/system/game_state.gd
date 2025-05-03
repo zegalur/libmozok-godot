@@ -1,10 +1,10 @@
-## Contains all (non-quest) information needed to save/load the game state.
-
 class_name GameState
 extends RefCounted
+## Contains all (non-quest) information needed to save/load the game state.
 
 const SERVER_LOAD_ACTIONS_KEY = "server_load_actions"
 const LOAD_ACTION_NAME = "Load"
+
 var _state : Dictionary
 
 

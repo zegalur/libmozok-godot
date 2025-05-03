@@ -1,5 +1,6 @@
 @tool
 extends EditorSyntaxHighlighter
+## QSF syntax Highlighter for Godot.
 
 const COMMENT_COLOR = Color.WEB_GRAY
 const KEYWORD_COLOR = Color.CORAL
@@ -50,11 +51,14 @@ const KEYWORDS = {
 	"exit" : [CMD_COLOR, STD_COLOR],
 }
 
+
 func _get_name() -> String:
 	return "(LibMozok) .qsf"
 
+
 func _get_supported_languages() -> PackedStringArray:
 	return ["TextFile"]
+
 
 func _get_line_syntax_highlighting(line: int) -> Dictionary:
 	var color_map = {}
@@ -63,20 +67,20 @@ func _get_line_syntax_highlighting(line: int) -> Dictionary:
 
 	color_map[0] = { "color": STD_COLOR }
 
-	# Comments
+	# Comments.
 	var comment = str.find("#")
 	if comment > -1:
 		color_map[comment] = { "color": COMMENT_COLOR }
 		str = str.substr(0, comment)
 
-	# Some Commands
+	# Commands that also print text.
 	for cmd in ["print ", "pause ", "exit "]:
 		if (str.strip_edges() + " ").begins_with(cmd):
 			color_map[0] = { "color": CMD_COLOR }
 			color_map[str.find(cmd) + len(cmd)] = { "color": TEXT_COLOR }
 			return color_map
 
-	# Quest Sections:
+	# Quest Sections (`worlds:` etc).
 	var startsWith = str.strip_edges().substr(0, 1)
 	var startsWithUpper = startsWith == startsWith.to_upper()
 	if line > 0:
@@ -96,7 +100,7 @@ func _get_line_syntax_highlighting(line: int) -> Dictionary:
 					color_map[0] = { "color": WORLD_COLOR }
 			break
 
-	# Keywords
+	# Keywords.
 	var need_col = ["worlds", "projects", "init", "debug"]
 	for keyword in KEYWORDS.keys():
 		var pos = str.find(keyword)
@@ -116,12 +120,12 @@ func _get_line_syntax_highlighting(line: int) -> Dictionary:
 		color_map[pos] = { "color": KEYWORDS[keyword][0] }
 		color_map[pos + len(keyword)] = { "color": KEYWORDS[keyword][1] }
 
-	# World
+	# World in square brackets.
 	if str.contains("[") and str.contains("]"):
 		color_map[str.find("[")] = { "color": WORLD_COLOR }
 		color_map[str.find("]") + 1] = { "color": STD_COLOR }
 
-	# Special
+	# Special symbols and additional highlighting derived from them.
 	var std_col = STD_COLOR
 	for i in len(str):
 		if SPECIAL.find(str[i]) >= 0:
@@ -134,6 +138,5 @@ func _get_line_syntax_highlighting(line: int) -> Dictionary:
 			if color_map.keys().has(i+1) == false:
 				color_map[i+1] = { "color": std_col }
 
-	#print(color_map)
 	color_map.sort()
 	return color_map

@@ -1,3 +1,9 @@
+# This file is a part of the LibMozok DEMO project, intended to demonstrate 
+# how the library can be integrated into a popular game engine. Also, it is a
+# good playground to test various features.
+
+# ======================== Non Playable Characters =========================== #
+
 version 1 0
 project npc
 
@@ -9,7 +15,6 @@ rel NotMet(NPC)
 # Indicates that player already spoke with an `NPC`.
 rel Met(NPC)
 
-# ============================== Common Actions ============================== #
 
 # Talk to the NPC for the first time.
 action TalkTo:
@@ -21,6 +26,7 @@ action TalkTo:
 		At(npc, place)
 	rem NotMet(npc)
 	add Met(npc)
+
 
 # Talk to the NPC and get some new fact from him.
 action GetFactFrom:

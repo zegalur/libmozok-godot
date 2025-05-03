@@ -1,10 +1,10 @@
-## Big heart increases the maximum health points.
-
 class_name BigHeartItem
 extends PickUpItem
+## Big heart increases the maximum health points.
 
 @onready var _picked_up = false
 var key : String
+
 
 func _ready() -> void:
 	super()
@@ -16,13 +16,16 @@ func _ready() -> void:
 	else:
 		key = ""
 
+
 func save_state(state : GameState) -> void:
 	state.write(key, _picked_up)
+
 
 func load_state(state : GameState) -> void:
 	_picked_up = state.read(key, false)
 	if _picked_up:
 		hide_item()
+
 
 ## Pick up the heart and restore the player's health point.
 func pick_up(player : Player):
