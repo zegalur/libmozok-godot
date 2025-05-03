@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://duu6wb1ddsaji"]
+
+[ext_resource type="Script" uid="uid://c5gcdqm6duxyk" path="res://assets/common/map_change/map_change.gd" id="1_jytkl"]
+
+[node name="MapChange" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_jytkl")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,12 @@
+# ...
+
+version 1 0
+project dwelling_place
+
+type DwellingPlace : Map
+object dwelling_place_ : DwellingPlace
+
+# =================================== Init =================================== #
+
+rlist InitDwellingPlace:
+	# none

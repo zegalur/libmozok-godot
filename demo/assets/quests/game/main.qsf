@@ -1,0 +1,31 @@
+# Main QSF sript.
+# Loads the whole game.
+
+version 1 0
+script main
+
+worlds:
+	game # Quest world where the mainstory quests took place.
+
+projects:
+	# Common
+	[game] common/location.quest
+	[game] common/information.quest
+	[game] common/player.quest
+	[game] common/npc.quest
+	
+	# Locations
+	[game] maps/dwelling_place.quest
+	[game] maps/castle.quest
+	[game] maps/world.quest
+	
+	# Main story
+	[game] main_story/main_story.quest
+
+init:
+	[game] InitPlayer()
+	[game] InitWorld()
+	[game] InitMainStory()
+
+debug:
+	# none

@@ -1,0 +1,22 @@
+# Tutorial QSF.
+
+version 1 0
+script main
+
+worlds:
+	tut # A special quest world just for tutorials.
+
+projects:
+	[tut] utils.quest
+	[tut] controls.quest
+	[tut] fighting.quest
+	[tut] key.quest
+	[tut] puzzle.quest
+	[tut] portal.quest
+	[tut] main.quest
+
+init:
+	[tut] InitTutorials()
+
+debug:
+	debug.qsf

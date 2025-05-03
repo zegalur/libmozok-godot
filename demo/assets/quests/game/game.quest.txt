@@ -1,6 +1,0 @@
-# Game quests will be here.
-
-version 1 0
-project game
-
-# ... 

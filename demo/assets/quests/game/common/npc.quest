@@ -1,0 +1,37 @@
+version 1 0
+project npc
+
+type NPC : Locatable, Mindful
+
+# Indicates that player not yet spoke with an `NPC`.
+rel NotMet(NPC)
+
+# Indicates that player already spoke with an `NPC`.
+rel Met(NPC)
+
+# ============================== Common Actions ============================== #
+
+# Talk to the NPC for the first time.
+action TalkTo:
+	place : Location
+	player : Player
+	npc : NPC
+	pre NotMet(npc)
+		At(player, place)
+		At(npc, place)
+	rem NotMet(npc)
+	add Met(npc)
+
+# Talk to the NPC and get some new fact from him.
+action GetFactFrom:
+	place : Location
+	player : Player
+	npc : NPC
+	fact : Fact
+	pre Met(npc)
+		Know(npc, fact)
+		Unaware(player, fact)
+		At(player, place)
+		At(npc, place)
+	rem Unaware(player, fact)
+	add Know(player, fact)

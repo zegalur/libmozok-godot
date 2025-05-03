@@ -67,6 +67,13 @@ public:
         const String& worldName,
         const String& objectName
         ) noexcept;
+    PackedStringArray getObjects(
+        const String& worldName
+        ) const noexcept;
+    PackedStringArray getObjectType(
+        const String& worldName,
+        const String& objectName
+        ) const noexcept;
 
     // Quests
     bool hasMainQuest(
@@ -99,6 +106,13 @@ public:
         const String& worldName,
         const String& actionName,
         const PackedStringArray& arguments
+        ) const noexcept;
+    PackedStringArray getActions(
+        const String& worldName
+        ) const noexcept;
+    Array getActionType(
+        const String& worldName,
+        const String& actionName
         ) const noexcept;
     
     // Messages

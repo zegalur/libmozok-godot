@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://ydlwp1412cs8"]
+
+[ext_resource type="Script" uid="uid://mw2sm3b4y5un" path="res://assets/gui/main_menu.gd" id="1_7j5yx"]
+[ext_resource type="Texture2D" uid="uid://cws2sw06mg6vd" path="res://assets/gui/imgs/mmenu_logo.png" id="1_xru34"]
+[ext_resource type="PackedScene" uid="uid://cpos0onod341e" path="res://assets/gui/choice_panel.tscn" id="2_g3370"]
+[ext_resource type="Theme" uid="uid://cqnnwflfspwe1" path="res://assets/gui/other/quest_book_theme.tres" id="3_5lldu"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7j5yx")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Logo" type="TextureRect" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_xru34")
+
+[node name="Space" type="Control" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Menu" parent="CenterContainer/VBoxContainer" instance=ExtResource("2_g3370")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 132)
+layout_mode = 2
+fit_options = true
+options = Array[String](["Tutorial", "New Game", "Load", "Exit"])
+selected = 1
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_5lldu")
+theme_override_colors/font_color = Color(0.415686, 0.623529, 0.376471, 1)
+text = "by zegalur"
+horizontal_alignment = 2
+
+[connection signal="back_pressed" from="CenterContainer/VBoxContainer/Menu" to="." method="_on_menu_back_pressed"]
+[connection signal="option_selected" from="CenterContainer/VBoxContainer/Menu" to="." method="_on_menu_option_selected"]

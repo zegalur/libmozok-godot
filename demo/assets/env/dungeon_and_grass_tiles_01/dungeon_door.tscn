@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://drt3orgm278cj"]
+
+[ext_resource type="Script" uid="uid://kau474wrhbwu" path="res://assets/common/door.gd" id="1_ltnnd"]
+[ext_resource type="Texture2D" uid="uid://cltiheb6nxb06" path="res://assets/env/dungeon_and_grass_tiles_01/dungeon_and_grass_tiles_01.png" id="1_rpduo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ujh70"]
+atlas = ExtResource("1_rpduo")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kgh0w"]
+atlas = ExtResource("1_rpduo")
+region = Rect2(64, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ttp4l"]
+atlas = ExtResource("1_rpduo")
+region = Rect2(128, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gm6qt"]
+atlas = ExtResource("1_rpduo")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_efj2i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ujh70")
+}],
+"loop": false,
+"name": &"closed",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kgh0w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ttp4l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gm6qt")
+}],
+"loop": false,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a63qj"]
+size = Vector2(64, 64)
+
+[node name="DungeonDoor" type="StaticBody2D" node_paths=PackedStringArray("animated_sprite")]
+collision_layer = 65
+collision_mask = 0
+script = ExtResource("1_ltnnd")
+animated_sprite = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(32, 32)
+sprite_frames = SubResource("SpriteFrames_efj2i")
+animation = &"open"
+autoplay = "closed"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(32, 32)
+shape = SubResource("RectangleShape2D_a63qj")
+
+[node name="CursorPos" type="Node2D" parent="."]
+position = Vector2(32, -14)

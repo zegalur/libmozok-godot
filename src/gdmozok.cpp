@@ -106,6 +106,10 @@ void LibMozokServer::_bind_methods() {
     // Objects
     ClassDB::bind_method(D_METHOD("hasObject", "worldName", "objectName"), 
             &LibMozokServer::hasObject);
+    ClassDB::bind_method(D_METHOD("getObjects", "worldName"),
+            &LibMozokServer::getObjects);
+    ClassDB::bind_method(D_METHOD("getObjectType", "worldName", "objectName"), 
+            &LibMozokServer::getObjectType);
 
     // Quests
     ClassDB::bind_method(D_METHOD("hasMainQuest", "worldName", "mainQuestName"), 
@@ -128,6 +132,10 @@ void LibMozokServer::_bind_methods() {
                 "checkAction", "doNotCheckPreconditions", "worldName", 
                 "actionName", "arguments"), 
             &LibMozokServer::checkAction);
+    ClassDB::bind_method(D_METHOD("getActions", "worldName"), 
+            &LibMozokServer::getActions);
+    ClassDB::bind_method(D_METHOD("getActionType", "worldName", "actionName"), 
+            &LibMozokServer::getActionType);
 
     // Messages
     ClassDB::bind_method(D_METHOD("processNextMessage"), 
@@ -369,6 +377,20 @@ bool LibMozokServer::hasObject(
     return _server->hasObject(toStr(worldName), toStr(objectName));
 }
 
+PackedStringArray LibMozokServer::getObjects(
+        const String& worldName
+        ) const noexcept {
+    return toStringArr(_server->getObjects(toStr(worldName)));
+}
+
+PackedStringArray LibMozokServer::getObjectType(
+        const String& worldName,
+        const String& objectName
+        ) const noexcept {
+    return toStringArr(
+            _server->getObjectType(toStr(worldName), toStr(objectName)));
+}
+
 // ================================ OBJECTS ================================= //
 
 bool LibMozokServer::hasMainQuest(
@@ -439,6 +461,23 @@ Error LibMozokServer::checkAction(
             toStr(actionName),
             toStrVec(arguments));
     return resToErr(res);
+}
+
+PackedStringArray LibMozokServer::getActions(
+        const String& worldName
+        ) const noexcept {
+    return toStringArr(_server->getActions(toStr(worldName)));
+}
+
+Array LibMozokServer::getActionType(
+        const String& worldName,
+        const String& actionName
+        ) const noexcept {
+    Array res;
+    const auto r = _server->getActionType(toStr(worldName), toStr(actionName));
+    for(const auto v : r)
+        res.push_back(toStringArr(v));
+    return res;
 }
 
 // ================================ MESSAGES ================================ //

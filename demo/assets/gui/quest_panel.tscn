@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bpn8msqwjqemh"]
 
-[ext_resource type="Theme" uid="uid://cqnnwflfspwe1" path="res://assets/gui/quest_book_theme.tres" id="1_ee5m8"]
+[ext_resource type="Theme" uid="uid://cqnnwflfspwe1" path="res://assets/gui/other/quest_book_theme.tres" id="1_ee5m8"]
 [ext_resource type="Script" uid="uid://dim6qcg6ory7i" path="res://assets/gui/quest_panel.gd" id="1_gkq0r"]
 [ext_resource type="Texture2D" uid="uid://c3i4cxv7yfgwo" path="res://assets/gui/imgs/quest-icon-open.png" id="3_ygcli"]
 

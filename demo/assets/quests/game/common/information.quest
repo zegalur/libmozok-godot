@@ -1,0 +1,11 @@
+version 1 0
+project information
+
+type Fact
+type Mindful
+
+# A `Mindful` object unaware about a `Fact`.
+rel Unaware(Mindful, Fact)
+
+# A `Mindful` object knows a `Fact`.
+rel Know(Mindful, Fact)

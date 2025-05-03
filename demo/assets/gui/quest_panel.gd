@@ -49,7 +49,11 @@ func set_quest_plan(
 
 func set_quest_status(new_status : int):
 	_quest_status = new_status
-	if _quest_status != LibMozokServer.QUEST_STATUS_REACHABLE:
+	var hide_details_at = [
+			LibMozokServer.QUEST_STATUS_DONE,
+			LibMozokServer.QUEST_STATUS_UNREACHABLE
+			]
+	if _quest_status in hide_details_at:
 		_details.visible = false
 	_update_text()
 	$AnimationPlayer.stop()

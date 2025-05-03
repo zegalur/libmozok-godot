@@ -1,0 +1,5 @@
+version 1 0
+project castle
+
+type Castle : Map
+object castle_ : Castle

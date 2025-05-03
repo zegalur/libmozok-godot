@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://b53353po40fcl"]
+
+[ext_resource type="Script" uid="uid://dqlvxvih0dwje" path="res://assets/common/save_point/save_point.gd" id="1_38ugm"]
+[ext_resource type="PackedScene" uid="uid://013k056kqci8" path="res://assets/common/respawn_area/respawn_area.tscn" id="1_ivbj5"]
+[ext_resource type="Texture2D" uid="uid://bsvvs6760dy5h" path="res://assets/env/dungeon_and_grass_tiles_01/block-01.png" id="2_38ugm"]
+[ext_resource type="Script" uid="uid://c53rfi7lfvhlw" path="res://assets/maps/spawn_point.gd" id="4_d1xej"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a07ih"]
+radius = 29.0689
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d1xej"]
+radius = 65.6201
+
+[node name="SavePoint" type="StaticBody2D"]
+collision_layer = 65
+collision_mask = 0
+script = ExtResource("1_38ugm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -24)
+texture = ExtResource("2_38ugm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -30)
+shape = SubResource("CircleShape2D_a07ih")
+
+[node name="CursorPos" type="Node2D" parent="."]
+
+[node name="RespawnArea" parent="." instance=ExtResource("1_ivbj5")]
+position = Vector2(0, 19)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RespawnArea"]
+position = Vector2(0, -37)
+shape = SubResource("CircleShape2D_d1xej")
+
+[node name="SpawnPoint" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 20)
+script = ExtResource("4_d1xej")
+metadata/_custom_type_script = "uid://c53rfi7lfvhlw"

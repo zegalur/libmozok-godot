@@ -7,13 +7,17 @@ var _die_tut_done = false
 var _take_heart_tut_done = false
 var _take_hit_tut_done = false
 var _fighting_tut_done = 0
-const PLAYER_FIGHTING_TUTS = {
-	"block_tut_done" : "blockAttackAction",
-	"take_hit_tut_done" : "takeHitAction",
-	"take_heart_tut_done" : "takeHeartAction",
-	"die_tut_done" : "dieAction" }
-const ENEMY_FIGHTING_TUTS = {
-	"killed" : "killEnemyAction" }
+
+var PLAYER_FIGHTING_TUTS = {
+	"block_tut_done" : T.tut.ApplyTutorialAction_1_tutorialAction.blockAttackAction,
+	"take_hit_tut_done" : T.tut.ApplyTutorialAction_1_tutorialAction.takeHitAction,
+	"take_heart_tut_done" : T.tut.ApplyTutorialAction_1_tutorialAction.takeHeartAction,
+	"die_tut_done" : T.tut.ApplyTutorialAction_1_tutorialAction.dieAction 
+	} as Dictionary[String, T.tut.ApplyTutorialAction_1_tutorialAction]
+	
+const ENEMY_FIGHTING_TUTS : Dictionary[String, T.tut.ApplyTutorialAction_1_tutorialAction] = {
+	"killed" : T.tut.ApplyTutorialAction_1_tutorialAction.killEnemyAction }
+
 var _is_enemy_killed_tut_done = false
 
 func _init(
@@ -36,12 +40,14 @@ func _init(
 func  _on_dead():
 	if _die_tut_done == false:
 		_die_tut_done = true
-		_apply_fighting_tut("dieAction")
+		_apply_fighting_tut(
+				T.tut.ApplyTutorialAction_1_tutorialAction.dieAction)
 
 func _on_hearts_added(_count : int):
 	if _take_heart_tut_done == false:
 		_take_heart_tut_done = true
-		_apply_fighting_tut("takeHeartAction")
+		_apply_fighting_tut(
+				T.tut.ApplyTutorialAction_1_tutorialAction.takeHeartAction)
 
 func _on_hit_taken(_from : Vector2, _damage : float):
 	if _take_hit_tut_done == false:
@@ -54,16 +60,20 @@ func _on_hit_blocked(_from : Vector2):
 		_block_tut_done = true
 		_apply_fighting_tut(PLAYER_FIGHTING_TUTS["block_tut_done"])
 
-func _apply_fighting_tut(tut_action_obj : String):
-	if tut_action_obj == ENEMY_FIGHTING_TUTS.values().front():
+func _apply_fighting_tut(tut_action : T.tut.ApplyTutorialAction_1_tutorialAction):
+	if tut_action == ENEMY_FIGHTING_TUTS.values().front():
 		if _is_enemy_killed_tut_done:
 			return
 		_is_enemy_killed_tut_done = true
 	_fighting_tut_done += 1
-	_apply_tut_action(tut_action_obj)
+	_apply_tut_action(tut_action)
 	if _fighting_tut_done == ENEMY_FIGHTING_TUTS.size() + PLAYER_FIGHTING_TUTS.size():
-		var args = ["fightingTutorial"]
-		args.append_array(PLAYER_FIGHTING_TUTS.values())
-		args.append_array(ENEMY_FIGHTING_TUTS.values())
-		_server.pushAction(_world, "FinishTutorial_" + str(_fighting_tut_done), args, 0)
+		T.tut.FinishTutorial_5(0, _server,
+				T.tut.FinishTutorial_5_1_tutorial.fightingTutorial,
+				T.tut.FinishTutorial_5_2_action1.blockAttackAction,
+				T.tut.FinishTutorial_5_3_action2.takeHitAction,
+				T.tut.FinishTutorial_5_4_action3.takeHeartAction,
+				T.tut.FinishTutorial_5_5_action4.dieAction,
+				T.tut.FinishTutorial_5_6_action5.killEnemyAction,
+				)
 		emit_signal("done")

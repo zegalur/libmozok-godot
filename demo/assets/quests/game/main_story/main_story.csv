@@ -1,0 +1,13 @@
+keys,en
+,
+OBJ_king_,"King"
+OBJ_guard_philip_,"Philip (Royal Guard)"
+,
+OBJ_king_is_waiting_,"King's invitation"
+OBJ_cat_is_missing_,"missing cat"
+,
+TITLE_GuardAtTheDoors,"Guard at the doors"
+DESC_GuardAtTheDoors,"An unknown royal guard has appeared in front of your house. Go and ask what he wants."
+,
+TITLE_KingsInvitation,"King's invitation"
+DESC_KingsInvitation,"The King himself invites you to his castle with a possible request. Go and find out what he wants."

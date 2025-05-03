@@ -1,0 +1,12 @@
+version 1 0
+project world
+
+rlist InitWorld:
+	InitDwellingPlace()
+	Path(dwelling_place_, castle_)
+	Path(castle_, dwelling_place_)
+
+action InitWorld:
+	pre # none
+	rem # none
+	add InitWorld()

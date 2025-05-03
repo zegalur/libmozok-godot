@@ -1,0 +1,28 @@
+# ...
+
+version 1 0
+project player
+
+type Player : Locatable, Mindful
+object player_ : Player
+
+# =================================== Init =================================== #
+
+rlist InitPlayer:
+	# none
+
+action InitPlayer:
+	pre # none
+	rem # none
+	add InitPlayer()
+
+# ============================== Player Actions ============================== #
+
+# Move from location `from` to location `to`
+action MoveTo:
+	player : Player
+	from : Location
+	to : Location
+	pre At(player, from)
+	rem At(player, from)
+	add At(player, to)

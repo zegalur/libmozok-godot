@@ -4,6 +4,19 @@ All significant modifications to this demo will be recorded in this file. The st
 
 ## [Unreleased]
 
+## [1.1.0] - ...
+
+### Added
+
+- LibMozok Utils plug-in:
+- Syntax highlight for `.quest` and `.qsf`.
+- Generate GDScript from the QSF.
+- New assets, main menu and new demo.
+
+### Changed
+
+- Improve tutorial demo using new features.
+
 ## [1.0.0] - 2025-04-23
 
 ## Changed

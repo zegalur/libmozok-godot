@@ -1,0 +1,69 @@
+version 1 0
+project main_story
+
+# ================================= Objects ================================== #
+
+object king_ : NPC
+object guard_philip_ : NPC
+
+object king_is_waiting_ : Fact
+object cat_is_missing_ : Fact
+
+# =================================== Init =================================== #
+
+rlist InitMainStory:
+	# Player
+	At(player_, dwelling_place_)
+	Unaware(player_, king_is_waiting_)
+	Unaware(player_, cat_is_missing_)
+	
+	# King
+	NotMet(king_)
+	At(king_, castle_)
+	Know(king_, cat_is_missing_)
+	
+	# Guard Philip
+	NotMet(guard_philip_)
+	At(guard_philip_, dwelling_place_)
+	Know(guard_philip_, king_is_waiting_)
+
+action InitMainStory:
+	pre # none
+	rem # none
+	add InitMainStory()
+
+# ================================== Quests ================================== #
+
+main_quest GuardAtTheDoors:
+	preconditions:
+		# none
+	goal:
+		Know(player_, king_is_waiting_)
+	actions:
+		TalkTo
+		GetFactFrom
+		MoveTo
+	objects:
+		player_
+		king_is_waiting_
+		guard_philip_
+		Map
+	subquests:
+		# none
+
+main_quest KingsInvitation:
+	preconditions:
+		Know(player_, king_is_waiting_)
+	goal:
+		Know(player_, cat_is_missing_)
+	actions:
+		MoveTo
+		TalkTo
+		GetFactFrom
+	objects:
+		player_
+		cat_is_missing_
+		king_
+		Map
+	subquests:
+		# none

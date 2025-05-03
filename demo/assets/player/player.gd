@@ -12,8 +12,14 @@ signal hit_taken(from : Vector2, damage : float)
 signal hit_blocked(from : Vector2)
 signal hearts_added(count : int)
 signal big_heart_taken()
+signal teleport(teleport_name : String)
+signal dialogue_started(npc : NPC, dnode : DialogueNode)
+signal save_game(save_point : SavePoint)
 
 @onready var animated_sprite: AnimatedSprite2D = get_node("AnimatedSprite2D")
+@onready var _camera = $Camera2D as Camera2D
+
+const KEY_PRE = "player/"
 
 ## Player's normal walking/running speed (in pixels per second).
 const RUN_SPEED = 220.0
@@ -38,12 +44,18 @@ const KICK_FORCE = 300.0
 const FORCE_DUR = 0.3
 
 # Controls the health points.
-var _hearts = 3.0
-var _max_hearts = 3.0
+const INITIAL_HEARTS = 3.0
+var _hearts : float
+var _max_hearts : float
 
 # Controls the player's death and respawn.
 var _dead_timer = 0.0
 const RESPAWN_TIME = 3.0
+
+# Controls teleportation animation.
+var _teleport_timer = 0.0
+var TELEPORT_TIME = 1.5
+var _teleport_name : String
 
 ## Damage State - the player is invincible while damaged.
 enum DamageState {
@@ -62,13 +74,20 @@ enum PlayerState {
 	HIDE,
 	ATTACK,
 	DEAD,
+	TELEPORT,
+	BUSY, # talking, shopping, etc.
 }
+
+# Player can't use surrounding objects in these states.
+const INACTIVE_STATES = [PlayerState.BUSY, PlayerState.DEAD]
+
 enum PlayerDir {
 	LEFT,
 	RIGHT,
 	UP,
 	DOWN
 }
+var _game_state : GameState
 var _state = PlayerState.WAIT
 var _last_direction : PlayerDir = PlayerDir.DOWN
 var _last_move_vec : Vector2 = Vector2.ZERO
@@ -76,9 +95,24 @@ var _respawn_point : Vector2
 var _keys = []
 
 
+# Use area logic
+var _usable_bodies : Array[Node2D]
+var _usable_body_indx : int = 0
+
+
 func _ready():
-	_update_hearts()
 	_respawn_point = global_position
+
+func save_state(state : GameState) -> void:
+	state.write(KEY_PRE + "_hearts", _hearts)
+	state.write(KEY_PRE + "_max_hearts", _max_hearts)
+	_game_state = state
+
+func load_state(state : GameState) -> void:
+	_game_state = state
+	_hearts = state.read(KEY_PRE + "_hearts", INITIAL_HEARTS)
+	_max_hearts = state.read(KEY_PRE + "_max_hearts", INITIAL_HEARTS)
+	_update_hearts()
 
 
 ## Converts a unit Vector2 to direction strings "up", left", "right" and "down".
@@ -179,6 +213,46 @@ func set_respawn_point(global_pos : Vector2):
 func is_player_waiting() -> bool:
 	return animated_sprite.is_playing() == false
 
+func set_camera_limits(
+		limit = Rect2(-10000000,-10000000,20000000,20000000)
+		) -> void:
+	_camera.limit_left = limit.position.x - _camera.offset.x
+	_camera.limit_top = limit.position.y - _camera.offset.y
+	_camera.limit_right = limit.end.x + _camera.offset.x
+	_camera.limit_bottom = limit.end.y - _camera.offset.y
+
+func start_teleporting(teleport_name : String) -> void:
+	_teleport_name = teleport_name
+	_teleport_timer = 0.0
+	_state = PlayerState.TELEPORT
+	animated_sprite.play("rotating")
+
+func start_dialogue(npc : NPC, dnode : DialogueNode) -> void:
+	if _state in [PlayerState.DEAD, PlayerState.TELEPORT, PlayerState.BUSY]:
+		return
+	_state = PlayerState.BUSY
+	emit_signal("dialogue_started", npc, dnode)
+
+func end_dialogue() -> void:
+	_state = PlayerState.WAIT
+	Input.action_release("menu_select")
+	Input.action_release("use")
+
+func _process(_delta: float) -> void:
+	if _usable_bodies.size() == 0:
+		%UsableObjCursor.hide()
+	else:
+		%UsableObjCursor.show()
+		var uobj = _usable_bodies[_usable_body_indx]
+		var cursor_pos_obj = uobj.find_child("CursorPos", false) as Node2D
+		if cursor_pos_obj:
+			uobj = cursor_pos_obj
+		%UsableObjCursor.global_position = uobj.global_position
+
+func _input(event: InputEvent) -> void:
+	if event.is_action("select_next"):
+		if _usable_bodies.size() > 0:
+			_usable_body_indx = (_usable_body_indx + 1) % _usable_bodies.size()
 
 func _physics_process(delta):
 	const EPS = 0.001
@@ -298,6 +372,11 @@ func _process_actions(delta):
 		_dead_timer += delta
 		if _dead_timer > RESPAWN_TIME:
 			_respawn()
+	
+	elif _state == PlayerState.TELEPORT:
+		_teleport_timer += delta
+		if _teleport_timer > TELEPORT_TIME:
+			_teleport_event()
 
 
 func _update_hearts():
@@ -322,6 +401,11 @@ func _respawn():
 	_damage_state_timer = 0.0
 
 
+func _teleport_event():
+	_state = PlayerState.WAIT
+	emit_signal("teleport", _teleport_name)
+
+
 func _on_pick_up_area_area_entered(area : Area2D):
 	if area is PickUpItem:
 		area.pick_up(self)
@@ -329,7 +413,9 @@ func _on_pick_up_area_area_entered(area : Area2D):
 
 func _on_use():
 	emit_signal("use_action")
-	for obj in $UseArea.get_overlapping_bodies():
+	if _usable_bodies.size() > 0:
+		var obj = _usable_bodies[_usable_body_indx]
+		
 		if obj is Door:
 			var door = (obj as Door)
 			if door.open_by_key && door.key_type in _keys:
@@ -337,3 +423,20 @@ func _on_use():
 				door.open()
 				emit_signal("key_used", door.key_type)
 				emit_signal("keys_changed", _keys)
+		
+		elif obj is NPC:
+			if _state not in INACTIVE_STATES:
+				obj.talk(self, _game_state)
+		
+		elif obj is SavePoint:
+			if _state not in INACTIVE_STATES:
+				emit_signal("save_game", obj)
+
+
+func _on_use_area_body_entered(body: Node2D) -> void:
+	_usable_bodies.push_back(body)
+
+
+func _on_use_area_body_exited(body: Node2D) -> void:
+	_usable_bodies.erase(body)
+	_usable_body_indx = min(_usable_bodies.size(), _usable_body_indx)
