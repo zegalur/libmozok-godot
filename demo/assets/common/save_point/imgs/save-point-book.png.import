@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cddfq11i3d3fc"
-path="res://.godot/imported/guard-portrait.png-c173034ad1fcdc897ad6ff9ef3c4c646.ctex"
+uid="uid://dn2tog48xi4po"
+path="res://.godot/imported/save-point-book.png-0a3b214af532bdfe48e0daf86144f3b9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/npc/guard/imgs/guard-portrait.png"
-dest_files=["res://.godot/imported/guard-portrait.png-c173034ad1fcdc897ad6ff9ef3c4c646.ctex"]
+source_file="res://assets/common/save_point/imgs/save-point-book.png"
+dest_files=["res://.godot/imported/save-point-book.png-0a3b214af532bdfe48e0daf86144f3b9.ctex"]
 
 [params]
 

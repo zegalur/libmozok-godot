@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dtriolaeom25o"]
+[gd_scene load_steps=16 format=3 uid="uid://dtriolaeom25o"]
 
 [ext_resource type="Texture2D" uid="uid://dl3hncv4xcoi2" path="res://assets/gui/imgs/heart-red.png" id="1_6qic7"]
 [ext_resource type="Script" uid="uid://b82a10tjumqn4" path="res://assets/gui/game_gui.gd" id="1_ejoor"]
@@ -8,6 +8,7 @@
 [ext_resource type="SystemFont" uid="uid://1u2x028wj1ph" path="res://assets/gui/other/fonts.tres" id="3_h7eun"]
 [ext_resource type="PackedScene" uid="uid://cpos0onod341e" path="res://assets/gui/choice_panel.tscn" id="4_nb6pd"]
 [ext_resource type="Texture2D" uid="uid://b1ji7xs7dujs6" path="res://assets/gui/imgs/empty_portrait.svg" id="4_xm88t"]
+[ext_resource type="Texture2D" uid="uid://cigrh7pfs57yc" path="res://assets/npc/guard/imgs/guard-portrait-1.png" id="5_3ieqy"]
 [ext_resource type="Texture2D" uid="uid://c7lyhlkrcvc3n" path="res://assets/items/keys/imgs/dungeon-key.png" id="7_00w14"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_31g2u"]
@@ -103,105 +104,6 @@ unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_nb6pd")
 }
-
-[node name="Space" type="Control" parent="Screen/GameScreen"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="DialogueBox" type="VBoxContainer" parent="Screen/GameScreen"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Screen/GameScreen/DialogueBox"]
-layout_mode = 2
-
-[node name="Space" type="Control" parent="Screen/GameScreen/DialogueBox/HBoxContainer"]
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="Screen/GameScreen/DialogueBox/HBoxContainer"]
-custom_minimum_size = Vector2(0, 200)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("2_vawgs")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Screen/GameScreen/DialogueBox/HBoxContainer/PanelContainer"]
-layout_mode = 2
-
-[node name="Space" type="Control" parent="Screen/GameScreen/DialogueBox/HBoxContainer/PanelContainer/HBoxContainer"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-
-[node name="Portrait" type="VBoxContainer" parent="Screen/GameScreen/DialogueBox/HBoxContainer/PanelContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="Space" type="Control" parent="Screen/GameScreen/DialogueBox/HBoxContainer/PanelContainer/HBoxContainer/Portrait"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="NPCPortrait" type="TextureRect" parent="Screen/GameScreen/DialogueBox/HBoxContainer/PanelContainer/HBoxContainer/Portrait"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-texture = ExtResource("4_xm88t")
-
-[node name="NPCName" type="Label" parent="Screen/GameScreen/DialogueBox/HBoxContainer/PanelContainer/HBoxContainer/Portrait"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-theme_override_colors/font_color = Color(0.582511, 0.726563, 0.318739, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/line_spacing = -1
-text = "Name Here"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="Space2" type="Control" parent="Screen/GameScreen/DialogueBox/HBoxContainer/PanelContainer/HBoxContainer"]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Screen/GameScreen/DialogueBox/HBoxContainer/PanelContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="TextBox" type="VBoxContainer" parent="Screen/GameScreen/DialogueBox/HBoxContainer/PanelContainer/HBoxContainer/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Space" type="Control" parent="Screen/GameScreen/DialogueBox/HBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/TextBox"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="DialogueText" type="Label" parent="Screen/GameScreen/DialogueBox/HBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/TextBox"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-theme_override_colors/font_color = Color(0.89, 0.719713, 0.5251, 1)
-theme_override_constants/line_spacing = -1
-text = "Dialogue text here ..."
-autowrap_mode = 2
-
-[node name="Space2" type="Control" parent="Screen/GameScreen/DialogueBox/HBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/TextBox"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="Answers" parent="Screen/GameScreen/DialogueBox/HBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource("4_nb6pd")]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.8
-options = Array[String](["Answer 1", "Answer 2"])
-
-[node name="Space2" type="Control" parent="Screen/GameScreen/DialogueBox/HBoxContainer"]
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
-
-[node name="Space" type="Control" parent="Screen/GameScreen/DialogueBox"]
-visible = false
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
 
 [node name="QuestBook" type="ColorRect" parent="Screen"]
 custom_minimum_size = Vector2(300, 0)
@@ -309,4 +211,142 @@ layout_mode = 2
 texture = ExtResource("7_00w14")
 stretch_mode = 2
 
-[connection signal="option_selected" from="Screen/GameScreen/DialogueBox/HBoxContainer/PanelContainer/HBoxContainer/Answers" to="." method="_on_answers_option_selected"]
+[node name="DialogueBox" type="Control" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1152, 300)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_right = 576.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="DialogueBoxH" type="VBoxContainer" parent="DialogueBox"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DialogueBox/DialogueBoxH"]
+layout_mode = 2
+
+[node name="Space" type="Control" parent="DialogueBox/DialogueBoxH/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="DialogueBox/DialogueBoxH/HBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_vawgs")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DialogueBox/DialogueBoxH/HBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Space" type="Control" parent="DialogueBox/DialogueBoxH/HBoxContainer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="Portrait" type="VBoxContainer" parent="DialogueBox/DialogueBoxH/HBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Space" type="Control" parent="DialogueBox/DialogueBoxH/HBoxContainer/PanelContainer/HBoxContainer/Portrait"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="NPCPortrait_2" type="TextureRect" parent="DialogueBox/DialogueBoxH/HBoxContainer/PanelContainer/HBoxContainer/Portrait"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("4_xm88t")
+
+[node name="Space2" type="Control" parent="DialogueBox/DialogueBoxH/HBoxContainer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="DialogueBox/DialogueBoxH/HBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextBox" type="VBoxContainer" parent="DialogueBox/DialogueBoxH/HBoxContainer/PanelContainer/HBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Space" type="Control" parent="DialogueBox/DialogueBoxH/HBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/TextBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="DialogueText" type="Label" parent="DialogueBox/DialogueBoxH/HBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/TextBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.89, 0.719713, 0.5251, 1)
+theme_override_constants/line_spacing = -1
+text = "Dialogue text here ..."
+autowrap_mode = 2
+
+[node name="Space2" type="Control" parent="DialogueBox/DialogueBoxH/HBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/TextBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Answers" parent="DialogueBox/DialogueBoxH/HBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource("4_nb6pd")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+options = Array[String](["Answer 1", "Answer 2"])
+
+[node name="Space2" type="Control" parent="DialogueBox/DialogueBoxH/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Space" type="Control" parent="DialogueBox/DialogueBoxH"]
+visible = false
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="NPCPortrait" type="TextureRect" parent="DialogueBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 300)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -300.0
+offset_right = 256.0
+grow_vertical = 0
+theme = ExtResource("2_vawgs")
+texture = ExtResource("5_3ieqy")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="NPCName" type="Label" parent="DialogueBox/NPCPortrait"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.804, 1, 0.44, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -1
+text = "Name Here"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[connection signal="option_selected" from="DialogueBox/DialogueBoxH/HBoxContainer/PanelContainer/HBoxContainer/Answers" to="." method="_on_answers_option_selected"]

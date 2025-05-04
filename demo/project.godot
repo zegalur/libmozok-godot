@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [display]
 
+window/size/mode=3
 window/size/resizable=false
 
 [editor_plugins]
