@@ -25,7 +25,7 @@ action InitPlayer:
 # ---------------------------- Player Actions -------------------------------- #
 
 # Move from location `from` to location `to`
-action MoveTo:
+action MoveTo { map_movement }:
 	player : Player
 	from : Location
 	to : Location

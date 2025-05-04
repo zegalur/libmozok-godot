@@ -127,6 +127,8 @@ rlist PTut_Init:
 	PTut_PlayerAt(pt_cell_33)
 
 
+agroup puzzle_tut
+
 # Blocks the exit making the Puzzle quest impossible to achieve.
 action PTut_BlockExit:
 	pre # none
@@ -134,7 +136,7 @@ action PTut_BlockExit:
 	add PTut_BlockAt(pt_cell_00)
 
 # Player moved left.
-action PTut_MoveLeft:
+action PTut_MoveLeft { puzzle_tut }:
 	a : PTut_Cell,TMLF # from
 	b : PTut_Cell,TMLT # to
 	pre PTut_Adjacent_H(b,a)
@@ -144,7 +146,7 @@ action PTut_MoveLeft:
 	add PTut_PlayerAt(b)
 
 # Player moved right.
-action PTut_MoveRight:
+action PTut_MoveRight { puzzle_tut }:
 	a : PTut_Cell,TMRF # from
 	b : PTut_Cell,TMRT # to
 	pre PTut_Adjacent_H(a,b)
@@ -154,7 +156,7 @@ action PTut_MoveRight:
 	add PTut_PlayerAt(b)
 
 # Player moved up.
-action PTut_MoveUp:
+action PTut_MoveUp { puzzle_tut }:
 	a : PTut_Cell,TMUF # from
 	b : PTut_Cell,TMUT # to
 	pre PTut_Adjacent_V(b,a)
@@ -164,7 +166,7 @@ action PTut_MoveUp:
 	add PTut_PlayerAt(b)
 
 # Player moved down.
-action PTut_MoveDown:
+action PTut_MoveDown { puzzle_tut }:
 	a : PTut_Cell,TMDF # from
 	b : PTut_Cell,TMDT # to
 	pre PTut_Adjacent_V(a,b)
@@ -174,7 +176,7 @@ action PTut_MoveDown:
 	add PTut_PlayerAt(b)
 
 # A movable block was pushed left.
-action PTut_PushLeft:
+action PTut_PushLeft { puzzle_tut }:
 	a : PTut_Cell,TPLF # player
 	b : PTut_Cell,TMLF # block
 	c : PTut_Cell,TMLT # free
@@ -191,7 +193,7 @@ action PTut_PushLeft:
 		PTut_Free(b)
 
 # A movable block was pushed right.
-action PTut_PushRight:
+action PTut_PushRight { puzzle_tut }:
 	a : PTut_Cell,TPRF # player
 	b : PTut_Cell,TMRF # block
 	c : PTut_Cell,TMRT # free
@@ -208,7 +210,7 @@ action PTut_PushRight:
 		PTut_Free(b)
 
 # A movable block was pushed up.
-action PTut_PushUp:
+action PTut_PushUp { puzzle_tut }:
 	a : PTut_Cell,TPUF # player
 	b : PTut_Cell,TMUF # block
 	c : PTut_Cell,TMUT # free
@@ -225,7 +227,7 @@ action PTut_PushUp:
 		PTut_Free(b)
 
 # A movable block was pushed down.
-action PTut_PushDown:
+action PTut_PushDown { puzzle_tut }:
 	a : PTut_Cell,TPDF # player
 	b : PTut_Cell,TMDF # block
 	c : PTut_Cell,TMDT # free
@@ -272,14 +274,7 @@ quest PuzzleTutorial_GetHeart:
 		TutorialFinished(puzzleTutorial)
 		TutorialFinished(puzzleTutorial_GetHeart)
 	actions:
-		PTut_MoveLeft
-		PTut_MoveRight
-		PTut_MoveUp
-		PTut_MoveDown
-		PTut_PushLeft
-		PTut_PushRight
-		PTut_PushUp
-		PTut_PushDown
+		puzzle_tut
 		PTut_Finish
 	objects:
 		puzzleTutorial

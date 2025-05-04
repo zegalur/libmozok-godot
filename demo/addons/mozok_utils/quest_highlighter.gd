@@ -7,12 +7,13 @@ const KEYWORD_COLOR_1 = Color.CORAL
 const KEYWORD_COLOR_2 = Color.SANDY_BROWN
 const STD_COLOR = Color.WHITE_SMOKE
 
-const SPECIAL = ":(),"
+const SPECIAL = ":(),{}"
 const SPECIAL_COLOR = Color.CORNFLOWER_BLUE
 
 const TYPE_COLOR = Color.LIGHT_SKY_BLUE
 const OBJECT_COLOR = Color.LIGHT_PINK
 const REL_COLOR = Color.AQUAMARINE
+const AGROUP_COLOR = Color.AQUA
 const ACTION_COLOR = Color.GREEN_YELLOW
 const QUEST_COLOR = Color.HOT_PINK
 const MAIN_QUEST_COLOR = Color.CORNFLOWER_BLUE
@@ -25,6 +26,7 @@ const KEYWORDS = {
 	"include" : [KEYWORD_COLOR_1, STD_COLOR],
 	"rel" : [KEYWORD_COLOR_1, REL_COLOR],
 	"rlist" : [KEYWORD_COLOR_1, REL_COLOR],
+	"agroup" : [KEYWORD_COLOR_1, AGROUP_COLOR],
 	"action" : [KEYWORD_COLOR_1, ACTION_COLOR],
 	"N/A" : [Color.RED, ACTION_COLOR],
 	"pre" : [KEYWORD_COLOR_2, STD_COLOR],
@@ -88,7 +90,8 @@ func _get_line_syntax_highlighting(line: int) -> Dictionary:
 					color_map[0] = { 
 						"color": TYPE_COLOR if startsWithUpper else OBJECT_COLOR }
 				elif prev_line.begins_with("actions"):
-					color_map[0] = { "color": ACTION_COLOR }
+					color_map[0] = { 
+						"color": ACTION_COLOR if startsWithUpper else AGROUP_COLOR }
 				elif prev_line.begins_with("subquests"):
 					color_map[0] = { "color": QUEST_COLOR }
 			break
@@ -130,6 +133,8 @@ func _get_line_syntax_highlighting(line: int) -> Dictionary:
 		std_col = TYPE_COLOR
 	for i in len(str):
 		if SPECIAL.find(str[i]) >= 0:
+			if SPECIAL.find(str[i]) == SPECIAL.find("{"):
+				std_col = AGROUP_COLOR
 			if SPECIAL.find(str[i]) == SPECIAL.find("("):
 				std_col = OBJECT_COLOR
 				color_map[

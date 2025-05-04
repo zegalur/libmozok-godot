@@ -49,7 +49,7 @@ main_quest GuardAtTheDoors:
 	actions:
 		TalkTo
 		GetFactFrom
-		MoveTo
+		map_movement
 	objects:
 		player_
 		king_is_waiting_
@@ -65,7 +65,7 @@ main_quest KingsInvitation:
 	goal:
 		Know(player_, cat_is_missing_)
 	actions:
-		MoveTo
+		map_movement
 		TalkTo
 		GetFactFrom
 	objects:
