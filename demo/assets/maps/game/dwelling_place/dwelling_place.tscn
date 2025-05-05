@@ -697,8 +697,7 @@ y_sort_enabled = true
 [node name="Guard" parent="Objects/NPCs" instance=ExtResource("9_3d5bl")]
 position = Vector2(-161, -326)
 portrait = ExtResource("10_2jatq")
-npc_name = "Philip
-(Royal Guard)"
+npc_name = "Philip (Royal Guard)"
 
 [node name="Intro" type="Node" parent="Objects/NPCs/Guard"]
 script = ExtResource("10_hw324")

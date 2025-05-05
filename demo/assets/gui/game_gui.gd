@@ -156,7 +156,7 @@ func start_dialogue(npc : NPC, dnode : DialogueNode) -> void:
 	_dialogue_box.show()
 	_answers.active = true
 	_npc_portrait.texture = npc.portrait if npc.portrait else _empty_portrait
-	_npc_name.text = npc.npc_name
+	_npc_name.text = npc.npc_name + ":"
 	_activate_dnode(dnode)
 
 
