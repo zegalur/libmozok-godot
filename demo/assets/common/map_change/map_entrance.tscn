@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b82kja08qo4nr"]
+
+[ext_resource type="Script" uid="uid://c5gcdqm6duxyk" path="res://assets/common/map_change/map_change.gd" id="1_bmwfr"]
+[ext_resource type="Script" uid="uid://b335rr5s0lwyw" path="res://assets/common/map_change/map_entrance.gd" id="1_n2eiy"]
+
+[node name="MapEntrance" type="StaticBody2D"]
+collision_layer = 65
+collision_mask = 0
+script = ExtResource("1_n2eiy")
+
+[node name="MapChange" type="Node2D" parent="."]
+script = ExtResource("1_bmwfr")
+metadata/_custom_type_script = "uid://c5gcdqm6duxyk"
+
+[connection signal="map_change_requested" from="MapChange" to="." method="_on_map_change_map_change_requested"]

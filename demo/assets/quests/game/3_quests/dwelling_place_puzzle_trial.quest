@@ -1,0 +1,438 @@
+# This file is a part of the LibMozok DEMO project, intended to demonstrate 
+# how the library can be integrated into a popular game engine. Also, it is a
+# good playground to test various features.
+
+# ===================== Dwelling Place Puzzle Trial ========================== #
+
+version 1 0
+project dwelling_place_puzzle_trial
+
+type DP_Cell
+	type DP_Cell_00 : DP_Cell
+	type DP_Cell_01 : DP_Cell
+	type DP_Cell_02 : DP_Cell
+	type DP_Cell_03 : DP_Cell
+	type DP_Cell_04 : DP_Cell
+		type DP_Cell_10 : DP_Cell
+		type DP_Cell_11 : DP_Cell
+		type DP_Cell_12 : DP_Cell
+		type DP_Cell_13 : DP_Cell
+		type DP_Cell_14 : DP_Cell
+	type DP_Cell_20 : DP_Cell
+	type DP_Cell_21 : DP_Cell
+	type DP_Cell_22 : DP_Cell
+	type DP_Cell_23 : DP_Cell
+	type DP_Cell_24 : DP_Cell
+		type DP_Cell_30 : DP_Cell
+		type DP_Cell_31 : DP_Cell
+		type DP_Cell_32 : DP_Cell
+		type DP_Cell_33 : DP_Cell
+		type DP_Cell_34 : DP_Cell
+	type DP_Cell_Exit : DP_Cell_02
+
+type DP_ML # We can move to the left
+type DP_MR # We can move to the right
+type DP_MU # We can move upward
+type DP_MD # We can move downward
+
+object dp_cell_00_ : DP_Cell_00, DP_MR,DP_MD
+object dp_cell_01_ : DP_Cell_01, DP_ML,DP_MR,DP_MD
+object dp_cell_02_ : DP_Cell_Exit, DP_ML,DP_MR,DP_MD
+object dp_cell_03_ : DP_Cell_03, DP_ML,DP_MR,DP_MD
+object dp_cell_04_ : DP_Cell_04, DP_ML,DP_MD
+	object dp_cell_10_ : DP_Cell_10, DP_MR,DP_MD,DP_MU
+	object dp_cell_11_ : DP_Cell_11, DP_ML,DP_MR,DP_MD,DP_MU
+	object dp_cell_12_ : DP_Cell_12, DP_ML,DP_MR,DP_MD,DP_MU
+	object dp_cell_13_ : DP_Cell_13, DP_ML,DP_MR,DP_MD,DP_MU
+	object dp_cell_14_ : DP_Cell_14, DP_ML,DP_MD,DP_MU
+object dp_cell_20_ : DP_Cell_20, DP_MR,DP_MD,DP_MU
+object dp_cell_21_ : DP_Cell_21, DP_ML,DP_MR,DP_MD,DP_MU
+object dp_cell_22_ : DP_Cell_22, DP_ML,DP_MR,DP_MD,DP_MU
+object dp_cell_23_ : DP_Cell_23, DP_ML,DP_MR,DP_MD,DP_MU
+object dp_cell_24_ : DP_Cell_24, DP_ML,DP_MD,DP_MU
+	object dp_cell_30_ : DP_Cell_30, DP_MR,DP_MU
+	object dp_cell_31_ : DP_Cell_31, DP_ML,DP_MR,DP_MU
+	object dp_cell_32_ : DP_Cell_32, DP_ML,DP_MR,DP_MU
+	object dp_cell_33_ : DP_Cell_33, DP_ML,DP_MR,DP_MU
+	object dp_cell_34_ : DP_Cell_34, DP_ML,DP_MU
+
+rel DP_Free(DP_Cell) # Cell is free.
+rel DP_Closed(DP_Cell) # Cell was already visited and now is closed.
+
+rel DP_At(DP_Cell) # Player is now inside this cell.
+
+rel DP_ALeft(DP_Cell, DP_Cell) # 1 -> 2 (can move left)
+rel DP_ARight(DP_Cell, DP_Cell) # 1 -> 2 (can move right)
+rel DP_AUp(DP_Cell, DP_Cell) # 1 -> 2 (can move up)
+rel DP_ADown(DP_Cell, DP_Cell) # 1 -> 2 (can move down)
+
+agroup dp_puzzle_trial
+
+
+action DP_MoveLeft {dp_puzzle_trial}:
+	at : DP_Cell, DP_ML
+	left : DP_Cell, DP_MR
+	pre DP_At(at)
+		DP_ALeft(at, left)
+		DP_Free(left)
+		DP_Free(at)
+	rem DP_At(at)
+		DP_Free(at)
+	add DP_At(left)
+		DP_Closed(at)
+
+
+action DP_MoveRight {dp_puzzle_trial}:
+	at : DP_Cell, DP_MR
+	right : DP_Cell, DP_ML
+	pre DP_At(at)
+		DP_ARight(at, right)
+		DP_Free(right)
+		DP_Free(at)
+	rem DP_At(at)
+		DP_Free(at)
+	add DP_At(right)
+		DP_Closed(at)
+
+
+action DP_MoveUp {dp_puzzle_trial}:
+	at : DP_Cell, DP_MU
+	up : DP_Cell, DP_MD
+	pre DP_At(at)
+		DP_AUp(at, up)
+		DP_Free(up)
+		DP_Free(at)
+	rem DP_At(at)
+		DP_Free(at)
+	add DP_At(up)
+		DP_Closed(at)
+
+
+action DP_MoveDown {dp_puzzle_trial}:
+	at : DP_Cell, DP_MD
+	down : DP_Cell, DP_MU
+	pre DP_At(at)
+		DP_ADown(at, down)
+		DP_Free(down)
+		DP_Free(at)
+	rem DP_At(at)
+		DP_Free(at)
+	add DP_At(down)
+		DP_Closed(at)
+
+
+action DP_FinishPuzzle {dp_puzzle_trial}:
+	puzzle : DP_Trial
+	fighting : DP_Trial
+	#
+	c00 : DP_Cell_00
+	c01 : DP_Cell_01
+	c02_exit : DP_Cell_Exit
+	c03 : DP_Cell_03
+	c04 : DP_Cell_04
+	#
+	c10 : DP_Cell_10
+	c11 : DP_Cell_11
+	c12 : DP_Cell_12
+	c13 : DP_Cell_13
+	c14 : DP_Cell_14
+	#
+	c20 : DP_Cell_20
+	c21 : DP_Cell_21
+	c22 : DP_Cell_22
+	c23 : DP_Cell_23
+	c24 : DP_Cell_24
+	#
+	c30 : DP_Cell_30
+	c31 : DP_Cell_31
+	c32 : DP_Cell_32
+	c33 : DP_Cell_33
+	c34 : DP_Cell_34
+	pre DP_At(c02_exit)
+		
+		DP_Closed(c00)
+		DP_Closed(c01)
+		DP_Closed(c03)
+		DP_Closed(c04)
+		
+		DP_Closed(c10)
+		DP_Closed(c11)
+		DP_Closed(c12)
+		DP_Closed(c13)
+		DP_Closed(c14)
+		
+		DP_Closed(c20)
+		DP_Closed(c21)
+		DP_Closed(c22)
+		DP_Closed(c23)
+		DP_Closed(c24)
+		
+		DP_Closed(c30)
+		DP_Closed(c31)
+		DP_Closed(c32)
+		DP_Closed(c33)
+		DP_Closed(c34)
+		
+		DP_Cur_Trial(puzzle)
+	rem DP_Cur_Trial(puzzle)
+	add DP_Cur_Trial(fighting)
+
+
+rlist DP_ResetPuzzle_REM:
+	c00 : DP_Cell_00
+	c01 : DP_Cell_01
+	c02 : DP_Cell_02
+	c03 : DP_Cell_03
+	c04 : DP_Cell_04
+	#
+	c10 : DP_Cell_10
+	c11 : DP_Cell_11
+	c12 : DP_Cell_12
+	c13 : DP_Cell_13
+	c14 : DP_Cell_14
+	#
+	c20 : DP_Cell_20
+	c21 : DP_Cell_21
+	c22 : DP_Cell_22
+	c23 : DP_Cell_23
+	c24 : DP_Cell_24
+	#
+	c30 : DP_Cell_30
+	c31 : DP_Cell_31
+	c32 : DP_Cell_32
+	c33 : DP_Cell_33
+	c34 : DP_Cell_34
+	
+	DP_At(c00)
+	DP_At(c01)
+	DP_At(c02)
+	DP_At(c03)
+	DP_At(c04)
+	
+	DP_At(c10)
+	DP_At(c11)
+	DP_At(c12)
+	DP_At(c13)
+	DP_At(c14)
+	
+	DP_At(c20)
+	DP_At(c21)
+	DP_At(c22)
+	DP_At(c23)
+	DP_At(c24)
+	
+	DP_At(c30)
+	DP_At(c31)
+	DP_At(c32)
+	DP_At(c33)
+	DP_At(c34)
+	
+	DP_Closed(c00)
+	DP_Closed(c01)
+	DP_Closed(c02)
+	DP_Closed(c03)
+	DP_Closed(c04)
+	
+	DP_Closed(c10)
+	DP_Closed(c11)
+	DP_Closed(c12)
+	DP_Closed(c13)
+	DP_Closed(c14)
+	
+	DP_Closed(c20)
+	DP_Closed(c21)
+	DP_Closed(c22)
+	DP_Closed(c23)
+	DP_Closed(c24)
+	
+	DP_Closed(c30)
+	DP_Closed(c31)
+	DP_Closed(c32)
+	DP_Closed(c33)
+	DP_Closed(c34)
+
+
+rlist DP_ResetPuzzle_ADD:
+	c00 : DP_Cell_00
+	c01 : DP_Cell_01
+	c02 : DP_Cell_02
+	c03 : DP_Cell_03
+	c04 : DP_Cell_04
+	#
+	c10 : DP_Cell_10
+	c11 : DP_Cell_11
+	c12 : DP_Cell_12
+	c13 : DP_Cell_13
+	c14 : DP_Cell_14
+	#
+	c20 : DP_Cell_20
+	c21 : DP_Cell_21
+	c22 : DP_Cell_22
+	c23 : DP_Cell_23
+	c24 : DP_Cell_24
+	#
+	c30 : DP_Cell_30
+	c31 : DP_Cell_31
+	c32 : DP_Cell_32
+	c33 : DP_Cell_33
+	c34 : DP_Cell_34 
+	
+	DP_At(c32)
+	
+	DP_Free(c00)
+	DP_Free(c01)
+	DP_Free(c02)
+	DP_Free(c03)
+	DP_Free(c04)
+	
+	DP_Free(c10)
+	DP_Free(c11)
+	DP_Free(c12)
+	DP_Free(c13)
+	DP_Free(c14)
+	
+	DP_Free(c20)
+	DP_Free(c21)
+	DP_Free(c22)
+	DP_Free(c23)
+	DP_Free(c24)
+	
+	DP_Free(c30)
+	DP_Free(c31)
+	DP_Free(c32)
+	DP_Free(c33)
+	DP_Free(c34)
+
+
+action DP_ResetPuzzle {dp_puzzle_trial}:
+	c00 : DP_Cell_00
+	c01 : DP_Cell_01
+	c02 : DP_Cell_02
+	c03 : DP_Cell_03
+	c04 : DP_Cell_04
+	#
+	c10 : DP_Cell_10
+	c11 : DP_Cell_11
+	c12 : DP_Cell_12
+	c13 : DP_Cell_13
+	c14 : DP_Cell_14
+	#
+	c20 : DP_Cell_20
+	c21 : DP_Cell_21
+	c22 : DP_Cell_22
+	c23 : DP_Cell_23
+	c24 : DP_Cell_24
+	#
+	c30 : DP_Cell_30
+	c31 : DP_Cell_31
+	c32 : DP_Cell_32
+	c33 : DP_Cell_33
+	c34 : DP_Cell_34
+	pre # none
+	rem DP_ResetPuzzle_REM(c00,c01,c02,c03,c04, c10,c11,c12,c13,c14, c20,c21,c22,c23,c24, c30,c31,c32,c33,c34)
+	add DP_ResetPuzzle_ADD(c00,c01,c02,c03,c04, c10,c11,c12,c13,c14, c20,c21,c22,c23,c24, c30,c31,c32,c33,c34)
+
+
+action InitDwellingPlacePuzzleTrial:
+	pre # none
+	rem DP_ResetPuzzle_REM(dp_cell_00_,dp_cell_01_,dp_cell_02_,dp_cell_03_,dp_cell_04_, dp_cell_10_,dp_cell_11_,dp_cell_12_,dp_cell_13_,dp_cell_14_, dp_cell_20_,dp_cell_21_,dp_cell_22_,dp_cell_23_,dp_cell_24_, dp_cell_30_,dp_cell_31_,dp_cell_32_,dp_cell_33_,dp_cell_34_)
+	add DP_ResetPuzzle_ADD(dp_cell_00_,dp_cell_01_,dp_cell_02_,dp_cell_03_,dp_cell_04_, dp_cell_10_,dp_cell_11_,dp_cell_12_,dp_cell_13_,dp_cell_14_, dp_cell_20_,dp_cell_21_,dp_cell_22_,dp_cell_23_,dp_cell_24_, dp_cell_30_,dp_cell_31_,dp_cell_32_,dp_cell_33_,dp_cell_34_)
+		# Left
+		DP_ALeft(dp_cell_01_, dp_cell_00_)
+		DP_ALeft(dp_cell_02_, dp_cell_01_)
+		DP_ALeft(dp_cell_03_, dp_cell_02_)
+		DP_ALeft(dp_cell_04_, dp_cell_03_)
+		
+		DP_ALeft(dp_cell_11_, dp_cell_10_)
+		DP_ALeft(dp_cell_12_, dp_cell_11_)
+		DP_ALeft(dp_cell_13_, dp_cell_12_)
+		DP_ALeft(dp_cell_14_, dp_cell_13_)
+		
+		DP_ALeft(dp_cell_21_, dp_cell_20_)
+		DP_ALeft(dp_cell_22_, dp_cell_21_)
+		DP_ALeft(dp_cell_23_, dp_cell_22_)
+		DP_ALeft(dp_cell_24_, dp_cell_23_)
+		
+		DP_ALeft(dp_cell_31_, dp_cell_30_)
+		DP_ALeft(dp_cell_32_, dp_cell_31_)
+		DP_ALeft(dp_cell_33_, dp_cell_32_)
+		DP_ALeft(dp_cell_34_, dp_cell_33_)
+		
+		# Right
+		DP_ARight(dp_cell_00_, dp_cell_01_)
+		DP_ARight(dp_cell_01_, dp_cell_02_)
+		DP_ARight(dp_cell_02_, dp_cell_03_)
+		DP_ARight(dp_cell_03_, dp_cell_04_)
+		
+		DP_ARight(dp_cell_10_, dp_cell_11_)
+		DP_ARight(dp_cell_11_, dp_cell_12_)
+		DP_ARight(dp_cell_12_, dp_cell_13_)
+		DP_ARight(dp_cell_13_, dp_cell_14_)
+		
+		DP_ARight(dp_cell_20_, dp_cell_21_)
+		DP_ARight(dp_cell_21_, dp_cell_22_)
+		DP_ARight(dp_cell_22_, dp_cell_23_)
+		DP_ARight(dp_cell_23_, dp_cell_24_)
+		
+		DP_ARight(dp_cell_30_, dp_cell_31_)
+		DP_ARight(dp_cell_31_, dp_cell_32_)
+		DP_ARight(dp_cell_32_, dp_cell_33_)
+		DP_ARight(dp_cell_33_, dp_cell_34_)
+		
+		# Up
+		DP_AUp(dp_cell_10_, dp_cell_00_)
+		DP_AUp(dp_cell_11_, dp_cell_01_)
+		DP_AUp(dp_cell_12_, dp_cell_02_)
+		DP_AUp(dp_cell_13_, dp_cell_03_)
+		DP_AUp(dp_cell_14_, dp_cell_04_)
+		
+		DP_AUp(dp_cell_20_, dp_cell_10_)
+		DP_AUp(dp_cell_21_, dp_cell_11_)
+		DP_AUp(dp_cell_22_, dp_cell_12_)
+		DP_AUp(dp_cell_23_, dp_cell_13_)
+		DP_AUp(dp_cell_24_, dp_cell_14_)
+		
+		DP_AUp(dp_cell_30_, dp_cell_20_)
+		DP_AUp(dp_cell_31_, dp_cell_21_)
+		DP_AUp(dp_cell_32_, dp_cell_22_)
+		DP_AUp(dp_cell_33_, dp_cell_23_)
+		DP_AUp(dp_cell_34_, dp_cell_24_)
+		
+		# Down
+		DP_ADown(dp_cell_00_, dp_cell_10_)
+		DP_ADown(dp_cell_01_, dp_cell_11_)
+		DP_ADown(dp_cell_02_, dp_cell_12_)
+		DP_ADown(dp_cell_03_, dp_cell_13_)
+		DP_ADown(dp_cell_04_, dp_cell_14_)
+		
+		DP_ADown(dp_cell_10_, dp_cell_20_)
+		DP_ADown(dp_cell_11_, dp_cell_21_)
+		DP_ADown(dp_cell_12_, dp_cell_22_)
+		DP_ADown(dp_cell_13_, dp_cell_23_)
+		DP_ADown(dp_cell_14_, dp_cell_24_)
+		
+		DP_ADown(dp_cell_20_, dp_cell_30_)
+		DP_ADown(dp_cell_21_, dp_cell_31_)
+		DP_ADown(dp_cell_22_, dp_cell_32_)
+		DP_ADown(dp_cell_23_, dp_cell_33_)
+		DP_ADown(dp_cell_24_, dp_cell_34_)
+
+
+quest DwellingPlace_PuzzleTrial:
+	options:
+		searchLimit 20000
+		strategy DFS
+		#heuristic HSP
+	preconditions:
+		DP_Cur_Trial(dp_trial_puzzle_)
+	goal:
+		DP_Cur_Trial(dp_trial_fighting_)
+	actions:
+		dp_puzzle_trial
+		#-DP_ResetPuzzle
+	objects:
+		dp_trial_puzzle_
+		dp_trial_fighting_
+		DP_Cell
+	subquests:
+		# none

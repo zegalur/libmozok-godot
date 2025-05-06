@@ -1,0 +1,26 @@
+keys,en
+,
+OBJ_dwelling_place_,"Dwelling Place"
+OBJ_dwelling_place_heart_island_,"Heart Island"
+OBJ_dwelling_place_heart_trial_,"Heart Trial Cave"
+,
+OBJ_dp_trial_puzzle_,"Puzzle Trial"
+OBJ_dp_trial_fighting_,"Fighting Trial"
+,
+ACTION_DP_NextTrial,"Finish the {2}."
+ACTION_DP_FinishTrial,"Finish the heart trial."
+ACTION_DwellingPlace_BigHeartTrial,"Finish the heart trial."
+TITLE_DwellingPlace_BigHeartTrial,"Dwelling place heart trial"
+DESC_DwellingPlace_BigHeartTrial,"The cave beneath your house is actually a trial cave. If you're strong and smart enough, you'll be able to open the path to the Big Heart."
+,
+TITLE_DwellingPlace_PuzzleTrial,"Puzzle Trial (Dwelling Place)"
+DESC_DwellingPlace_PuzzleTrial,"Complete the puzzle trial in the cave beneath your house."
+ACTION_DP_FinishPuzzleTrial,"Finish the puzzle trial."
+ACTION_DP_FinishPuzzle,"Finish the puzzle trial."
+ACTION_DP_MoveLeft,"Move left"
+ACTION_DP_MoveRight,"Move right"
+ACTION_DP_MoveUp,"Move upward"
+ACTION_DP_MoveDown,"Move downward"
+ACTION_DP_ResetPuzzle,"Jump into a portal"
+,
+ACTION_DP_FinishFightingTrial,"Finish the fighting trial."

@@ -75,6 +75,7 @@ func _get_line_syntax_highlighting(line: int) -> Dictionary:
 	# Quest Sections (`objects:` etc).
 	var startsWith = str.strip_edges().substr(0, 1)
 	var startsWithUpper = startsWith == startsWith.to_upper()
+	var startsWithMinus = startsWith == "-"
 	if line > 0:
 		var l = line
 		while l >= 0:
@@ -85,13 +86,17 @@ func _get_line_syntax_highlighting(line: int) -> Dictionary:
 			prev_line = prev_line.strip_edges()
 			if prev_line.is_valid_identifier():
 				continue
+			if prev_line.begins_with("-") and prev_line.substr(1).is_valid_identifier():
+				continue
 			if prev_line.ends_with(":"):
 				if prev_line.begins_with("objects"):
-					color_map[0] = { 
+					color_map[0] = {
 						"color": TYPE_COLOR if startsWithUpper else OBJECT_COLOR }
 				elif prev_line.begins_with("actions"):
-					color_map[0] = { 
-						"color": ACTION_COLOR if startsWithUpper else AGROUP_COLOR }
+					var col = ACTION_COLOR if startsWithUpper else AGROUP_COLOR
+					if startsWithMinus:
+						col = Color.RED
+					color_map[0] = { "color": col }
 				elif prev_line.begins_with("subquests"):
 					color_map[0] = { "color": QUEST_COLOR }
 			break

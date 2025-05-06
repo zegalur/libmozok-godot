@@ -12,6 +12,9 @@ extends Enemy
 ## Damage from one kick.
 @export var attack_damage = 1.0
 
+## Maximum distance to the player before attack is count as miss.
+@export var attack_distance = 27.0
+
 ## Enemy's health points.
 @export var hearts = 3.0
 
@@ -99,6 +102,22 @@ func take_hit(from : Vector2, damage : float):
 	hearts = max(0, hearts - damage)
 	if hearts <= 0.0:
 		_dead()
+
+
+func is_dead() -> bool:
+	return _state == EnemyState.DEAD
+
+
+func reset() -> void:
+	hearts = _initial_hearts
+	global_position = _initial_pos
+	_state = EnemyState.SLEEP
+	_nav_timer = 0.0
+	_dead_timer = 0.0
+	_kick_timer = 0.0
+	_dead_timer = 0.0
+	collision_layer = _initial_collision_layer
+	animated_sprite.play("idle")
 
 
 func _physics_process(delta):
@@ -193,7 +212,7 @@ func _process(delta):
 		else:
 			var dx = _player.global_position.x - global_position.x
 			animated_sprite.scale.x = -1.0 if dx > 0.0 else 1.0
-			_player.take_hit(global_position, attack_damage)
+			_player.take_hit(global_position, attack_damage, attack_distance)
 
 
 func _dead():
@@ -208,3 +227,4 @@ func _respawn():
 	_state = EnemyState.WALK_BACK
 	collision_layer = _initial_collision_layer
 	hearts = _initial_hearts
+	global_position = _initial_pos

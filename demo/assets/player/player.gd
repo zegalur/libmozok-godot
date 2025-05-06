@@ -142,17 +142,29 @@ func _dir_to_str(dir : PlayerDir) -> String:
 
 
 ## Take a hit from the given point and with the given damage.
-func take_hit(from : Vector2, damage : float):
+## If `square` - uses the manhattan distance.
+func take_hit(
+		from : Vector2, 
+		damage : float, 
+		impact_radius : float = 27.0, 
+		square : bool = false,
+		ignore_shield : bool = false
+		):
 	if _damage_state == DamageState.DAMAGED:
 		return # player is invincible in the damaged state
-	if (global_position - from).length() > 27.0:
+	var l = (global_position - from).length()
+	if square:
+		var m = (global_position - from).abs()
+		l = max(m.x, m.y)
+	if l > impact_radius:
 		return # miss
 	_kick_force_vec = (global_position - from).normalized()
 	
-	if _state == PlayerState.HIDE:
-		if _to_dir(-_kick_force_vec) == _last_direction:
-			emit_signal("hit_blocked", from)
-			return
+	if not ignore_shield:
+		if _state == PlayerState.HIDE:
+			if _to_dir(-_kick_force_vec) == _last_direction:
+				emit_signal("hit_blocked", from)
+				return
 	
 	_damage_state_timer = 0.0
 	_damage_state = DamageState.DAMAGED
@@ -235,13 +247,17 @@ func set_camera_limits(
 	_camera.limit_top = limit.position.y - _camera.offset.y
 	_camera.limit_right = limit.end.x + _camera.offset.x
 	_camera.limit_bottom = limit.end.y - _camera.offset.y
+	_camera.drag_horizontal_offset = 0
+	_camera.drag_vertical_offset = 0
 
 
-func start_teleporting(teleport_name : String) -> void:
+## Returns the time needed to play the teleportation animation (in seconds).
+func start_teleporting(teleport_name : String, spawn_point : String) -> float:
 	_teleport_name = teleport_name
 	_teleport_timer = 0.0
 	_state = PlayerState.TELEPORT
 	animated_sprite.play("rotating")
+	return TELEPORT_TIME
 
 
 func start_dialogue(npc : NPC, dnode : DialogueNode) -> void:
@@ -452,6 +468,9 @@ func _on_use():
 		elif obj is SavePoint:
 			if _state not in INACTIVE_STATES:
 				emit_signal("save_game", obj)
+		
+		elif obj.has_method("use"):
+			obj.use()
 
 
 func _on_use_area_body_entered(body: Node2D) -> void:

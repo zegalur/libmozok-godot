@@ -1,0 +1,27 @@
+# This file is a part of the LibMozok DEMO project, intended to demonstrate 
+# how the library can be integrated into a popular game engine. Also, it is a
+# good playground to test various features.
+
+# ======================== Dwelling Place Quests ============================= #
+
+version 1 0
+project dwelling_place_quests
+
+
+quest DwellingPlace_BigHeartTrial:
+	preconditions:
+		# none
+	goal:
+		Path(dwelling_place_heart_trial_, dwelling_place_heart_island_)
+	actions:
+		map_movement
+		-DwellingPlace_BigHeartTrial
+		DP_FinishPuzzleTrial
+		DP_FinishFightingTrial
+		DP_FinishTrial
+	objects:
+		player_
+		DP_Trial
+		Map
+	subquests:
+		DwellingPlace_PuzzleTrial

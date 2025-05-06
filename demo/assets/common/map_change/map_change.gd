@@ -1,16 +1,10 @@
 class_name MapChange
-extends Area2D
-## A map change area that emits `map_change_requested` when the player steps into it.
+extends Node2D
+## A map change node that can emit `map_change_requested` received by the map.
 
-## Emitted when the player steps into a `MapChange` area.
+## Emitted when the player initiated a `MapChange`.
 signal map_change_requested(next_map : String, spawn_point : String)
 
-## The path to the map `.tscn` file.
-@export_file("*.tscn") var next_map_scene : String
 
-## The name of the spawn point where the player will be spawned.
-@export var spawn_point : String
-
-
-func _on_body_entered(_body: Node2D) -> void:
+func request_map_change(next_map_scene : String, spawn_point : String):
 	emit_signal("map_change_requested", next_map_scene, spawn_point)

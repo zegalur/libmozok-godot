@@ -2,9 +2,8 @@
 # how the library can be integrated into a popular game engine. Also, it is a
 # good playground to test various features.
 
-# ============================== World Map =================================== #
-
-# Describe connections between the separate game maps.
+# ========================= World Map Structure ============================== #
+# Overall connections between the separate game maps.
 
 version 1 0
 project world

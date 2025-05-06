@@ -1,0 +1,15 @@
+version 1 0
+script tutorial_debugger
+
+worlds: # none
+projects: # none
+init: # none
+
+
+onSearchLimitReached [game] _:
+ALWAYS SEARCH_LIMIT: 
+	exit ERROR: Search limit reached!
+
+onSpaceLimitReached [game] _:
+ALWAYS SPACE_LIMIT: 
+	exit ERROR: Space limit reached!

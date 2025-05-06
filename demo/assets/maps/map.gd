@@ -54,7 +54,7 @@ func setup(
 	else:
 		printerr("Can't find spawn point `%s`" % spawn_point)
 	
-	# Setup camera limits.
+	# Setup camera.
 	if camera_limits.is_empty():
 		player.set_camera_limits()
 	else:
@@ -68,6 +68,15 @@ func setup(
 	for node in children:
 		var enemy = node as Enemy
 		enemy.set_player(_player_node)
+
+
+## Teleports player to the given spawn point.
+func teleport_to(spawn_point : String) -> void:
+	var sp = find_children(spawn_point, "SpawnPoint")
+	if sp.size() == 0:
+		printerr("Unknown spawn point `%s`. Map = `%s`." % [spawn_point, map_name])
+		return
+	_player_node.global_position = sp[0].global_position
 
 
 func _on_map_change_requested(next_map : String, spawn_point : String):

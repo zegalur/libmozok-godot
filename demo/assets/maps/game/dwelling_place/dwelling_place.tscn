@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://bjpi8d0v5msej"]
+[gd_scene load_steps=29 format=4 uid="uid://bjpi8d0v5msej"]
 
 [ext_resource type="TileSet" uid="uid://b4s8t3ntx2tux" path="res://assets/env/green_fields/green_field.tres" id="1_78kef"]
 [ext_resource type="Script" uid="uid://wefg4qmcq7lp" path="res://assets/maps/game/dwelling_place/dwelling_place.gd" id="1_dyc1d"]
@@ -16,8 +16,10 @@
 [ext_resource type="Texture2D" uid="uid://cigrh7pfs57yc" path="res://assets/npc/guard/imgs/guard-portrait-1.png" id="10_2jatq"]
 [ext_resource type="PackedScene" uid="uid://013k056kqci8" path="res://assets/common/respawn_area/respawn_area.tscn" id="10_h2fuu"]
 [ext_resource type="Script" uid="uid://c02yehtofmvfo" path="res://assets/npc/dialogue/dialogue_node.gd" id="10_hw324"]
-[ext_resource type="PackedScene" uid="uid://duu6wb1ddsaji" path="res://assets/common/map_change/map_change.tscn" id="14_tldgf"]
+[ext_resource type="PackedScene" uid="uid://duu6wb1ddsaji" path="res://assets/common/map_change/map_change_area.tscn" id="14_tldgf"]
 [ext_resource type="PackedScene" uid="uid://b53353po40fcl" path="res://assets/common/save_point/save_point.tscn" id="15_2jatq"]
+[ext_resource type="PackedScene" uid="uid://b82kja08qo4nr" path="res://assets/common/map_change/map_entrance.tscn" id="19_ecokd"]
+[ext_resource type="Texture2D" uid="uid://du4pda400mngp" path="res://assets/env/green_fields/imgs/cliff-ao.png" id="20_f3872"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ecokd"]
 particles_animation = true
@@ -47,6 +49,12 @@ size = Vector2(186, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2jatq"]
 size = Vector2(281, 252)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f3872"]
+size = Vector2(54, 29)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ecokd"]
+radius = 24.0
 
 [node name="DwellingPlace" type="Node2D" groups=["SaveLoad"]]
 script = ExtResource("1_dyc1d")
@@ -96,7 +104,7 @@ tile_map_data = PackedByteArray("AAD8//v/AAADAAIAAAD8//r/AAACAAEAAAD7//r/AAABAAM
 tile_set = ExtResource("2_dv3c7")
 
 [node name="Cliffs" type="TileMapLayer" parent="Env/HiGround"]
-tile_map_data = PackedByteArray("AAD8//r/AAADAAYAAAD8//n/AAALAAIAAAD8//j/AAAEAAIAAAD8//f/AAAEAAEAAAD7//r/AAADAAYAAAD7//n/AAADAAYAAAD7//j/AAADAAYAAAD7//f/AAAHAAEAAAD6//r/AAAMAAEAAAD6//n/AAADAAYAAAD6//j/AAADAAYAAAD6//f/AAAHAAEAAAD5//r/AAAHAAIAAAD5//n/AAADAAYAAAD5//j/AAADAAYAAAD5//f/AAALAAIAAAD4//r/AAAHAAIAAAD4//n/AAADAAYAAAD4//j/AAADAAYAAAD4//f/AAADAAYAAAD3//n/AAADAAYAAAD3//j/AAADAAYAAAD3//f/AAAMAAIAAAD2//n/AAADAAYAAAD2//j/AAADAAYAAAD2//f/AAAHAAEAAAD1//r/AAAMAAEAAAD1//n/AAADAAYAAAD1//j/AAADAAYAAAD1//f/AAAHAAEAAAD0//r/AAADAAQAAAD0//n/AAADAAIAAAD0//j/AAADAAIAAAD0//f/AAADAAEAAAD8//v/AAABAAAAAAD7//v/AAAJAAIAAAD6//v/AAADAAQAAAD5//v/AAAMAAUAAAD4//v/AAALAAUAAAD3//v/AAAEAAQAAAD2//v/AAAIAAIAAAD1//v/AAADAAQAAAD0//v/AAAGAAUAAAD2//z/AAABAAUAAAD1//z/AAAGAAUAAAD5//b/AAAEAAEAAAD4//b/AAAHAAEAAAD3//b/AAADAAEAAAD9//v/AAAGAAIAAAD9//r/AAALAAIAAAD9//n/AAAEAAEAAAD9//z/AAAHAAUAAAD8//z/AAABAAMAAAD7//z/AAAHAAUAAAD6//z/AAAGAAUAAAD3//z/AAAJAAUAAAD3//r/AAALAAEAAAD+//z/AAAJAAUAAAD+//v/AAAEAAQAAAD+//r/AAAEAAEAAAABAPv/AAAHAAIAAAABAPr/AAAHAAEAAAAAAPv/AAADAAQAAAAAAPr/AAADAAEAAAABAPz/AAABAAUAAAAAAPz/AAAGAAUAAAACAPv/AAAEAAQAAAACAPr/AAAEAAEAAAACAPz/AAAJAAUAAAAMAPv/AAAEAAQAAAAMAPr/AAAEAAIAAAAMAPn/AAAEAAEAAAALAPv/AAAGAAIAAAALAPr/AAADAAYAAAALAPn/AAALAAIAAAAKAPr/AAADAAYAAAAKAPn/AAADAAYAAAAJAPv/AAAJAAIAAAAJAPr/AAADAAYAAAAJAPn/AAADAAYAAAAIAPv/AAAHAAIAAAAIAPr/AAADAAYAAAAIAPn/AAAMAAIAAAAHAPv/AAAHAAIAAAAHAPr/AAADAAYAAAAHAPn/AAAHAAEAAAAGAPv/AAADAAQAAAAGAPr/AAAMAAEAAAAGAPn/AAAHAAEAAAAFAPv/AAAGAAUAAAAFAPr/AAADAAQAAAAFAPn/AAADAAEAAAALAPj/AAAEAAEAAAAKAPj/AAAHAAEAAAAJAPj/AAAHAAEAAAAIAPj/AAADAAEAAAAMAPz/AAAJAAUAAAALAPz/AAAHAAUAAAAKAPz/AAABAAMAAAAJAPz/AAAHAAUAAAAIAPz/AAAHAAUAAAAHAPz/AAAHAAUAAAAGAPz/AAAGAAUAAAAKAPv/AAABAAAAAAA=")
+tile_map_data = PackedByteArray("AAD8//r/AAADAAYAAAD8//n/AAALAAIAAAD8//j/AAAEAAIAAAD8//f/AAAEAAEAAAD7//r/AAADAAYAAAD7//n/AAADAAYAAAD7//j/AAADAAYAAAD7//f/AAAHAAEAAAD6//r/AAAMAAEAAAD6//n/AAADAAYAAAD6//j/AAADAAYAAAD6//f/AAAHAAEAAAD5//r/AAAHAAIAAAD5//n/AAADAAYAAAD5//j/AAADAAYAAAD5//f/AAALAAIAAAD4//r/AAAHAAIAAAD4//n/AAADAAYAAAD4//j/AAADAAYAAAD4//f/AAADAAYAAAD3//n/AAADAAYAAAD3//j/AAADAAYAAAD3//f/AAAMAAIAAAD2//n/AAADAAYAAAD2//j/AAADAAYAAAD2//f/AAAHAAEAAAD1//r/AAAMAAEAAAD1//n/AAADAAYAAAD1//j/AAADAAYAAAD1//f/AAAHAAEAAAD0//r/AAADAAQAAAD0//n/AAADAAIAAAD0//j/AAADAAIAAAD0//f/AAADAAEAAAD8//v/AAABAAAAAAD7//v/AAAJAAIAAAD6//v/AAADAAQAAAD5//v/AAAMAAUAAAD4//v/AAALAAUAAAD3//v/AAAEAAQAAAD2//v/AAAIAAIAAAD1//v/AAADAAQAAAD0//v/AAAGAAUAAAD2//z/AAABAAUAAAD1//z/AAAGAAUAAAD5//b/AAAEAAEAAAD4//b/AAAHAAEAAAD3//b/AAADAAEAAAD9//v/AAAGAAIAAAD9//r/AAALAAIAAAD9//n/AAAEAAEAAAD9//z/AAAGAAUAAAD8//z/AAABAAMAAAD7//z/AAAJAAUAAAD6//z/AAAGAAUAAAD3//z/AAAJAAUAAAD3//r/AAALAAEAAAD+//z/AAAJAAUAAAD+//v/AAAEAAQAAAD+//r/AAAEAAEAAAABAPv/AAAHAAIAAAABAPr/AAAHAAEAAAAAAPv/AAADAAQAAAAAAPr/AAADAAEAAAABAPz/AAABAAUAAAAAAPz/AAAGAAUAAAACAPv/AAAEAAQAAAACAPr/AAAEAAEAAAACAPz/AAAJAAUAAAAMAPv/AAAEAAQAAAAMAPr/AAAEAAIAAAAMAPn/AAAEAAEAAAALAPv/AAAGAAIAAAALAPr/AAADAAYAAAALAPn/AAALAAIAAAAKAPr/AAADAAYAAAAKAPn/AAADAAYAAAAJAPv/AAAJAAIAAAAJAPr/AAADAAYAAAAJAPn/AAADAAYAAAAIAPv/AAAHAAIAAAAIAPr/AAADAAYAAAAIAPn/AAAMAAIAAAAHAPv/AAAHAAIAAAAHAPr/AAADAAYAAAAHAPn/AAAHAAEAAAAGAPv/AAADAAQAAAAGAPr/AAAMAAEAAAAGAPn/AAAHAAEAAAAFAPv/AAAGAAUAAAAFAPr/AAADAAQAAAAFAPn/AAADAAEAAAALAPj/AAAEAAEAAAAKAPj/AAAHAAEAAAAJAPj/AAAHAAEAAAAIAPj/AAADAAEAAAAMAPz/AAAJAAUAAAALAPz/AAAGAAUAAAAKAPz/AAABAAMAAAAJAPz/AAAJAAUAAAAIAPz/AAAHAAUAAAAHAPz/AAAHAAUAAAAGAPz/AAAGAAUAAAAKAPv/AAABAAAAAAA=")
 tile_set = ExtResource("2_njf1r")
 
 [node name="Houses" type="Node2D" parent="Env/HiGround"]
@@ -164,6 +172,24 @@ region_rect = Rect2(192, 0, 96, 128)
 [node name="Details" type="Node2D" parent="Env"]
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
+
+[node name="TrialHole" type="Sprite2D" parent="Env/Details"]
+position = Vector2(288, -672)
+texture = ExtResource("20_f3872")
+region_enabled = true
+region_rect = Rect2(0, 192, 64, 64)
+
+[node name="TrialHole2" type="Sprite2D" parent="Env/Details/TrialHole"]
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("20_f3872")
+region_enabled = true
+region_rect = Rect2(0, 192, 64, 64)
+
+[node name="TrialHole3" type="Sprite2D" parent="Env/Details/TrialHole"]
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("20_f3872")
+region_enabled = true
+region_rect = Rect2(0, 192, 64, 64)
 
 [node name="Stone_03" type="Sprite2D" parent="Env/Details"]
 position = Vector2(-846, -113)
@@ -977,41 +1003,57 @@ position = Vector2(-32, -265)
 [node name="NPCs" type="Node2D" parent="Objects"]
 y_sort_enabled = true
 
-[node name="Guard" parent="Objects/NPCs" instance=ExtResource("9_3d5bl")]
+[node name="GuardPhilip" parent="Objects/NPCs" instance=ExtResource("9_3d5bl")]
 position = Vector2(-161, -326)
 portrait = ExtResource("10_2jatq")
 npc_name = "Philip (Royal Guard)"
 
-[node name="Intro" type="Node" parent="Objects/NPCs/Guard"]
+[node name="Intro" type="Node" parent="Objects/NPCs/GuardPhilip"]
 script = ExtResource("10_hw324")
 text = "Good day to thee, sir. I bring word: His Majesty, the King, doth await thee in his castle."
 metadata/_custom_type_script = "uid://c02yehtofmvfo"
 
-[node name="Reply" type="Node" parent="Objects/NPCs/Guard/Intro"]
+[node name="Reply" type="Node" parent="Objects/NPCs/GuardPhilip/Intro"]
 script = ExtResource("10_hw324")
 type = "REPLY"
 text = "Great, I’m curious what he wants."
 metadata/_custom_type_script = "uid://c02yehtofmvfo"
 
-[node name="Accept_1" type="Node" parent="Objects/NPCs/Guard/Intro/Reply"]
+[node name="Accept_1" type="Node" parent="Objects/NPCs/GuardPhilip/Intro/Reply"]
 script = ExtResource("10_hw324")
 text = "I'm sure 'twill be a simple request. Gather thy supplies and follow the road to the castle."
 metadata/_custom_type_script = "uid://c02yehtofmvfo"
 
-[node name="Accept_2" type="Node" parent="Objects/NPCs/Guard/Intro/Reply/Accept_1"]
+[node name="Accept_2" type="Node" parent="Objects/NPCs/GuardPhilip/Intro/Reply/Accept_1"]
 script = ExtResource("10_hw324")
 text = "We shall remain here to guard thy home in thy absence. Good fortune to thee."
 metadata/_custom_type_script = "uid://c02yehtofmvfo"
 
-[node name="Reply2" type="Node" parent="Objects/NPCs/Guard/Intro"]
+[node name="Reply2" type="Node" parent="Objects/NPCs/GuardPhilip/Intro"]
 script = ExtResource("10_hw324")
 type = "REPLY"
 text = "He’s no king of mine."
 metadata/_custom_type_script = "uid://c02yehtofmvfo"
 
-[node name="Reject" type="Node" parent="Objects/NPCs/Guard/Intro/Reply2"]
+[node name="Reject" type="Node" parent="Objects/NPCs/GuardPhilip/Intro/Reply2"]
 script = ExtResource("10_hw324")
 text = "Heavens, man - 'tis but a simple task. Go, earn thy coin."
+metadata/_custom_type_script = "uid://c02yehtofmvfo"
+
+[node name="GuardPhilip2" parent="Objects/NPCs" instance=ExtResource("9_3d5bl")]
+position = Vector2(184, -77)
+initial_anim = "wait-left"
+portrait = ExtResource("10_2jatq")
+npc_name = "Tom (Royal Guard)"
+
+[node name="AboutSavePoint" type="Node" parent="Objects/NPCs/GuardPhilip2"]
+script = ExtResource("10_hw324")
+text = "Well now, you're lucky - a save point this close to thy home! Not every noble enjoys such luxury."
+metadata/_custom_type_script = "uid://c02yehtofmvfo"
+
+[node name="TalkToPhilip" type="Node" parent="Objects/NPCs/GuardPhilip2/AboutSavePoint"]
+script = ExtResource("10_hw324")
+text = "Have you spoken to Philip already?"
 metadata/_custom_type_script = "uid://c02yehtofmvfo"
 
 [node name="SavePoints" type="Node2D" parent="Objects"]
@@ -1049,11 +1091,46 @@ shape = SubResource("RectangleShape2D_h2fuu")
 [node name="ForestEntry" parent="Other/MapChanges" instance=ExtResource("14_tldgf")]
 position = Vector2(130, 1016)
 next_map_scene = "uid://bjpi8d0v5msej"
-spawn_point = "Start"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Other/MapChanges/ForestEntry"]
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_2jatq")
 
-[connection signal="activated" from="Objects/NPCs/Guard/Intro" to="." method="_on_guard_intro_activated"]
+[node name="TrialEntrance" parent="Other/MapChanges" instance=ExtResource("19_ecokd")]
+position = Vector2(-609, -222)
+next_map_scene = "uid://v6ryfuccabsf"
+spawn_point = "Entrance_1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Other/MapChanges/TrialEntrance"]
+position = Vector2(0, 14.5)
+shape = SubResource("RectangleShape2D_f3872")
+
+[node name="CursorPos" type="Node2D" parent="Other/MapChanges/TrialEntrance"]
+position = Vector2(0, -29)
+
+[node name="CaveEntrance_1" type="Node2D" parent="Other/MapChanges/TrialEntrance"]
+position = Vector2(0, 61)
+script = ExtResource("9_dyc1d")
+metadata/_custom_type_script = "uid://c53rfi7lfvhlw"
+
+[node name="TrialEntrance_2" parent="Other/MapChanges" instance=ExtResource("19_ecokd")]
+position = Vector2(288, -672)
+next_map_scene = "uid://v6ryfuccabsf"
+spawn_point = "Entrance_2"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Other/MapChanges/TrialEntrance_2"]
+shape = SubResource("CircleShape2D_ecokd")
+
+[node name="CaveEntrance_2" type="Node2D" parent="Other/MapChanges/TrialEntrance_2"]
+position = Vector2(-64, 0)
+script = ExtResource("9_dyc1d")
+metadata/_custom_type_script = "uid://c53rfi7lfvhlw"
+
+[node name="CursorPos" type="Node2D" parent="Other/MapChanges/TrialEntrance_2"]
+position = Vector2(0, -32)
+
+[connection signal="picked_up" from="Objects/Items/BigHeart" to="." method="_on_big_heart_picked_up"]
+[connection signal="activated" from="Objects/NPCs/GuardPhilip/Intro" to="." method="_on_guard_intro_activated"]
 [connection signal="map_change_requested" from="Other/MapChanges/ForestEntry" to="." method="_on_forest_entry_map_change_requested"]
+[connection signal="map_change_requested" from="Other/MapChanges/TrialEntrance" to="." method="_on_trial_entrance_map_change_requested"]
+[connection signal="map_change_requested" from="Other/MapChanges/TrialEntrance_2" to="." method="_on_trial_entrance_2_map_change_requested"]

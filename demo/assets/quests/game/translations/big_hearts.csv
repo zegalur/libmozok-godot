@@ -1,0 +1,7 @@
+keys,en
+,
+OBJ_big_heart_dwelling_place_,"Big Heart"
+,
+ACTION_TakeBigHeart,"Take {1} at the {2}."
+TITLE_CollectBigHearts,"Collect all big hearts"
+DESC_CollectBigHearts,"Big Hearts are precious items that increase your heart count. They are scattered throughout the kingdom and are difficult to obtain. Collect them all!"

@@ -26,6 +26,7 @@ var _action_args : Array
 func _ready():
 	_is_ready = true
 	_update_text()
+	on_new_quest_state()
 
 
 func set_quest_name(quest_name : String):
@@ -87,6 +88,8 @@ func _update_text():
 		quest_icon = _done_icon
 	if _quest_status == LibMozokServer.QUEST_STATUS_UNREACHABLE:
 		quest_icon = _failed_icon
+	if _quest_status == LibMozokServer.QUEST_STATUS_UNKNOWN:
+		quest_icon = _unknown_icon
 	_quest_status_icon.texture = quest_icon
 	
 	_title.text = tr("TITLE_" + _quest_name)

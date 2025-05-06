@@ -17,4 +17,11 @@ rel At(Locatable, Location)
 # A path (road, passage, corridor etc.) exists between X and Y.
 rel Path(Location, Location)
 
+# Path from `a` to `b` and from `b` to `a`.
+rlist Path2:
+		a : Location
+		b : Location
+	Path(a, b)
+	Path(b, a)
+
 agroup map_movement

@@ -48,7 +48,7 @@ func _ready():
 	_answers.active = false
 
 
-func save_state(state : GameState) -> void:
+func save_state(_state : GameState) -> void:
 	pass
 
 
@@ -63,6 +63,7 @@ func _process(_delta):
 ## Displays an animated map name at the top-center of the screen.
 func show_map_name(map_name : String) -> void:
 	_map_name.text = tr(map_name)
+	_map_name_player.stop()
 	_map_name_player.play("ShowMapName")
 
 

@@ -30,5 +30,6 @@ action MoveTo { map_movement }:
 	from : Location
 	to : Location
 	pre At(player, from)
+		Path(from, to)
 	rem At(player, from)
 	add At(player, to)

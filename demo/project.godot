@@ -17,7 +17,6 @@ config/icon="res://icon.svg"
 
 [display]
 
-window/size/mode=3
 window/size/resizable=false
 
 [editor_plugins]
@@ -118,7 +117,7 @@ select_next={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://assets/quests/tutorials/tutorial_text.en.translation", "res://assets/quests/game/main_story/main_story.en.translation", "res://assets/quests/game/common/npc.en.translation", "res://assets/quests/game/common/player.en.translation", "res://assets/quests/game/maps/castle.en.translation", "res://assets/quests/game/maps/dwelling_place.en.translation")
+locale/translations=PackedStringArray("res://assets/quests/tutorials/tutorial_text.en.translation", "res://assets/quests/game/translations/big_hearts.en.translation", "res://assets/quests/game/translations/castle.en.translation", "res://assets/quests/game/translations/dwelling_place.en.translation", "res://assets/quests/game/translations/main_story.en.translation", "res://assets/quests/game/translations/npc.en.translation", "res://assets/quests/game/translations/player.en.translation")
 
 [layer_names]
 

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://qn4ph47rq0yv"]
+
+[ext_resource type="Script" uid="uid://cmul28bnua604" path="res://assets/common/fight_arena/fight_arena.gd" id="1_sk1af"]
+
+[node name="FightArena" type="Area2D"]
+script = ExtResource("1_sk1af")

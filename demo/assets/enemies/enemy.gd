@@ -14,3 +14,11 @@ func set_player(player : Player):
 ## Take a hit from the specified direction with the specified damage.
 func take_hit(_from : Vector2, _damage : float):
 	pass
+
+
+func is_dead() -> bool:
+	return false
+
+
+func reset() -> void:
+	pass

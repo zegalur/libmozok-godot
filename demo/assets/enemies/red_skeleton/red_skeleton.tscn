@@ -180,6 +180,7 @@ height = 52.0
 [node name="RedSkeleton" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 4
+collision_mask = 5
 script = ExtResource("1_u6geh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

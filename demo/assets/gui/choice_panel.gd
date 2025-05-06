@@ -84,7 +84,7 @@ func _input(event: InputEvent) -> void:
 		emit_signal("back_pressed")
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if fit_options:
 		await get_tree().process_frame
 		custom_minimum_size.y = $ScrollContainer/Options.size.y

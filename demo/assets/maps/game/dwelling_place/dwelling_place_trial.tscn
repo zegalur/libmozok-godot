@@ -1,0 +1,292 @@
+[gd_scene load_steps=18 format=4 uid="uid://v6ryfuccabsf"]
+
+[ext_resource type="Script" uid="uid://bqu04ryg0ifv" path="res://assets/maps/game/dwelling_place/dwelling_place_trial.gd" id="1_nel6t"]
+[ext_resource type="TileSet" uid="uid://che8k5m1oc3hk" path="res://assets/env/dungeon_and_grass_tiles_01/dungeon_and_grass_01.tres" id="2_750nv"]
+[ext_resource type="PackedScene" uid="uid://drt3orgm278cj" path="res://assets/env/dungeon_and_grass_tiles_01/dungeon_door.tscn" id="3_7fi5b"]
+[ext_resource type="PackedScene" uid="uid://cdawg40awoovw" path="res://assets/enemies/red_skeleton/red_skeleton.tscn" id="3_750nv"]
+[ext_resource type="PackedScene" uid="uid://uycotywmw35h" path="res://assets/common/portals/portal_area.tscn" id="4_c8gdi"]
+[ext_resource type="Script" uid="uid://c53rfi7lfvhlw" path="res://assets/maps/spawn_point.gd" id="5_5ukkd"]
+[ext_resource type="PackedScene" uid="uid://bplb2brsugti5" path="res://assets/other/damage_arena/damage_area.tscn" id="5_c8gdi"]
+[ext_resource type="PackedScene" uid="uid://duu6wb1ddsaji" path="res://assets/common/map_change/map_change_area.tscn" id="6_5q0jk"]
+[ext_resource type="PackedScene" uid="uid://013k056kqci8" path="res://assets/common/respawn_area/respawn_area.tscn" id="8_7fi5b"]
+[ext_resource type="PackedScene" uid="uid://b82kja08qo4nr" path="res://assets/common/map_change/map_entrance.tscn" id="9_5ukkd"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_nel6t"]
+vertices = PackedVector2Array(374, -138, 118, -138, -54, -182, -10, -182, 330, -394, 246, -394, -54, -438, -10, -438, 330, -266, 246, -266, -54, -310, -10, -310, 330, -310, 374, -566, 330, -438, 330, -522, 118, -566, 246, -522, 246, -438, 202, -438, 202, -522, 118, -522, 74, -566, 246, -310, 202, -310, 202, -394, 118, -394, 246, -182, 202, -182, 202, -266, 118, -266, -138, -310, 118, -74, 74, -74, 74, -138, -182, -138, -138, -182, -182, -566, -138, -266, 74, -630, 118, -630, 118, -438, 74, -522, 330, -182, 74, -438, -10, -522, 118, -310, 74, -310, 74, -394, -10, -394, -138, -438, 118, -182, 74, -182, 74, -266, -10, -266, -54, -522, -138, -522, -54, -394, -138, -394, -54, -266)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 13, 0, 8), PackedInt32Array(13, 12, 4), PackedInt32Array(14, 13, 4), PackedInt32Array(13, 14, 15), PackedInt32Array(16, 13, 15, 17), PackedInt32Array(17, 18, 19, 20), PackedInt32Array(16, 17, 20), PackedInt32Array(16, 20, 21, 22), PackedInt32Array(18, 14, 4), PackedInt32Array(5, 23, 24, 25), PackedInt32Array(6, 5, 25), PackedInt32Array(6, 25, 26), PackedInt32Array(9, 27, 28, 29), PackedInt32Array(10, 9, 29), PackedInt32Array(10, 29, 30, 31), PackedInt32Array(1, 32, 33, 34), PackedInt32Array(2, 1, 34), PackedInt32Array(2, 34, 35, 36), PackedInt32Array(36, 35, 37, 38), PackedInt32Array(22, 39, 40, 16), PackedInt32Array(22, 21, 41, 42), PackedInt32Array(0, 43, 8), PackedInt32Array(23, 12, 8), PackedInt32Array(27, 43, 0), PackedInt32Array(19, 18, 4), PackedInt32Array(24, 23, 8), PackedInt32Array(41, 19, 4), PackedInt32Array(41, 4, 44), PackedInt32Array(41, 44, 42), PackedInt32Array(22, 42, 45, 37), PackedInt32Array(46, 24, 8), PackedInt32Array(46, 8, 47), PackedInt32Array(26, 46, 47, 48), PackedInt32Array(6, 26, 48), PackedInt32Array(6, 48, 49, 50), PackedInt32Array(28, 27, 0), PackedInt32Array(51, 28, 0), PackedInt32Array(51, 0, 52), PackedInt32Array(30, 51, 52, 53), PackedInt32Array(31, 30, 53), PackedInt32Array(31, 53, 54), PackedInt32Array(7, 44, 4), PackedInt32Array(45, 7, 6, 55), PackedInt32Array(37, 45, 55), PackedInt32Array(37, 55, 56), PackedInt32Array(37, 56, 50), PackedInt32Array(11, 47, 8), PackedInt32Array(49, 11, 10, 57), PackedInt32Array(50, 49, 57), PackedInt32Array(50, 57, 58), PackedInt32Array(37, 50, 58), PackedInt32Array(37, 58, 31), PackedInt32Array(38, 37, 31), PackedInt32Array(59, 38, 31), PackedInt32Array(59, 31, 54), PackedInt32Array(59, 54, 3, 2), PackedInt32Array(0, 3, 52)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_7fi5b"]
+vertices = PackedVector2Array(118, -650, 74, -650, 74, -694, 118, -694, 374, -778, -182, -778, -182, -1206, 374, -1206)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7)])
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c8gdi"]
+radius = 24.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5426"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_70ydh"]
+size = Vector2(192, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ukkd"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c8gdi"]
+size = Vector2(192, 320)
+
+[node name="DwellingPlaceCaves" type="Node2D" groups=["SaveLoad"]]
+script = ExtResource("1_nel6t")
+player_node_dest = NodePath("Objects")
+camera_limits = NodePath("CameraLimits")
+map_name = "Big Heart Trial"
+metadata/_custom_type_script = "uid://dbvycn44addml"
+
+[node name="CameraLimits" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -1632.0
+offset_top = -1848.0
+offset_right = 1800.0
+offset_bottom = 314.0
+metadata/_edit_lock_ = true
+
+[node name="Env" type="Node2D" parent="."]
+
+[node name="Caves01" type="TileMapLayer" parent="Env"]
+z_index = -1
+tile_map_data = PackedByteArray("AAAAAAAAAAADAAQAAAAAAAEAAAAFAAEAAAAAAAIAAAAAAAQAAAABAAIAAAAAAAEAAAACAAIAAAAGAAQAAAACAAEAAAABAAEAAAACAAAAAAAEAAQAAAABAAAAAAAFAAEAAAABAAEAAAAGAAQAAAAAAAMAAAAGAAIAAAACAAMAAAAFAAIAAAD//wMAAAAAAAIAAAADAAMAAAAEAAIAAAADAAIAAAAFAAMAAAD//wIAAAAGAAMAAAADAAEAAAAFAAAAAAADAAAAAAAFAAAAAAADAP//AAAFAAAAAAD//wEAAAABAAAAAAD//wAAAAABAAAAAAD/////AAABAAAAAAAAAP//AAACAAAAAAABAP//AAAGAAQAAAACAP//AAAEAAAAAAABAAMAAAAAAAQAAAACAAQAAAAFAAMAAAAAAAQAAAAGAAMAAAABAAQAAAABAAQAAAABAOv/AAAAAAAAAgABAOr/AAAAAAAAAgABAOn/AAAAAAAAAgAAAOn/AAABAA0AAAD//+n/AAAAAA0AAAD//+j/AAAAAAwAAAD//+f/AAAAAAwAAAD//+b/AAAAAAcAAAAAAOb/AAABAAcAAAABAOb/AAAEAAcAAAACAOb/AAABAAcAAAADAOb/AAACAAcAAAADAOf/AAADAAwAAAADAOj/AAADAAwAAAADAOn/AAADAA0AAAACAOn/AAABAA0AAAAAAOf/AAACAA0AAAABAOf/AAACAAwAAAACAOf/AAABAAwAAAACAOj/AAACAA0AAAABAOj/AAABAAwAAAAAAOj/AAABAAwAAAA=")
+tile_set = ExtResource("2_750nv")
+
+[node name="PuzzleTrial" type="NavigationRegion2D" parent="Env"]
+y_sort_enabled = true
+navigation_polygon = SubResource("NavigationPolygon_nel6t")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Env/PuzzleTrial"]
+z_index = -1
+tile_map_data = PackedByteArray("AAD8//b/AAABAAAAAAD8//f/AAABAAAAAAD8//j/AAABAAAAAAD8//n/AAABAAAAAAD8//r/AAABAAAAAAD8//v/AAABAAAAAAD8//z/AAABAAAAAAD8//3/AAAGAAMAAAD9//b/AAACAAAAAAD9//f/AAAAAAEAAAD9//j/AAAAAAQAAAD9//n/AAAAAAEAAAD9//r/AAAAAAQAAAD9//v/AAAAAAEAAAD9//z/AAAAAAQAAAD9//3/AAAAAAEAAAD9//7/AAADAAIAAAD+//b/AAADAAMAAAD+//f/AAAAAAQAAAD+//j/AAACAAIAAAD+//n/AAAAAAQAAAD+//r/AAADAAIAAAD+//v/AAAAAAQAAAD+//z/AAADAAIAAAD+//3/AAAAAAQAAAD+//7/AAACAAIAAAD///b/AAADAAAAAAD///f/AAAAAAEAAAD///j/AAAAAAQAAAD///n/AAAAAAEAAAD///r/AAAAAAQAAAD///v/AAAAAAEAAAD///z/AAAAAAQAAAD///3/AAAAAAEAAAD///7/AAACAAIAAAAAAPb/AAAGAAAAAAAAAPf/AAAAAAQAAAAAAPj/AAADAAIAAAAAAPn/AAAAAAQAAAAAAPr/AAACAAIAAAAAAPv/AAAAAAQAAAAAAPz/AAADAAIAAAAAAP3/AAAAAAQAAAAAAP7/AAACAAIAAAABAPb/AAAAAAQAAAABAPf/AAAAAAEAAAABAPj/AAAAAAQAAAABAPn/AAAAAAEAAAABAPr/AAAAAAQAAAABAPv/AAAAAAEAAAABAPz/AAAAAAQAAAABAP3/AAAAAAEAAAABAP7/AAABAAEAAAACAPb/AAAGAAAAAAACAPf/AAAAAAQAAAACAPj/AAADAAIAAAACAPn/AAAAAAQAAAACAPr/AAADAAIAAAACAPv/AAAAAAQAAAACAPz/AAADAAIAAAACAP3/AAAAAAQAAAACAP7/AAACAAIAAAADAPb/AAADAAAAAAADAPf/AAAAAAEAAAADAPj/AAAAAAQAAAADAPn/AAAAAAEAAAADAPr/AAAAAAQAAAADAPv/AAAAAAEAAAADAPz/AAAAAAQAAAADAP3/AAAAAAEAAAADAP7/AAACAAIAAAAEAPb/AAADAAMAAAAEAPf/AAAAAAQAAAAEAPj/AAACAAIAAAAEAPn/AAAAAAQAAAAEAPr/AAADAAIAAAAEAPv/AAAAAAQAAAAEAPz/AAACAAIAAAAEAP3/AAAAAAQAAAAEAP7/AAACAAIAAAAFAPb/AAAEAAAAAAAFAPf/AAAAAAEAAAAFAPj/AAAAAAQAAAAFAPn/AAAAAAEAAAAFAPr/AAAAAAQAAAAFAPv/AAAAAAEAAAAFAPz/AAAAAAQAAAAFAP3/AAAAAAEAAAAFAP7/AAADAAIAAAAGAPb/AAAFAAAAAAAGAPf/AAAFAAAAAAAGAPj/AAAFAAAAAAAGAPn/AAAFAAAAAAAGAPr/AAAFAAAAAAAGAPv/AAAFAAAAAAAGAPz/AAAFAAAAAAAGAP3/AAAFAAMAAAA=")
+tile_set = ExtResource("2_750nv")
+
+[node name="Enemies" type="Node2D" parent="Env/PuzzleTrial"]
+y_sort_enabled = true
+
+[node name="RedSkeleton" parent="Env/PuzzleTrial/Enemies" instance=ExtResource("3_750nv")]
+position = Vector2(-160, -544)
+activation_distance = 450.0
+respawn_on_dead = true
+
+[node name="RedSkeleton2" parent="Env/PuzzleTrial/Enemies" instance=ExtResource("3_750nv")]
+position = Vector2(352, -544)
+activation_distance = 450.0
+respawn_on_dead = true
+
+[node name="RedSkeleton3" parent="Env/PuzzleTrial/Enemies" instance=ExtResource("3_750nv")]
+position = Vector2(-160, -160)
+activation_distance = 350.0
+respawn_on_dead = true
+
+[node name="RedSkeleton4" parent="Env/PuzzleTrial/Enemies" instance=ExtResource("3_750nv")]
+position = Vector2(352, -160)
+activation_distance = 350.0
+respawn_on_dead = true
+
+[node name="FightingTrial" type="NavigationRegion2D" parent="Env"]
+y_sort_enabled = true
+navigation_polygon = SubResource("NavigationPolygon_7fi5b")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Env/FightingTrial"]
+z_index = -2
+tile_map_data = PackedByteArray("AAABAPX/AAAAAAQAAAACAPX/AAAFAAMAAAAAAPX/AAAGAAMAAAABAPT/AAAAAAQAAAAAAPT/AAADAAIAAAACAPT/AAADAAIAAAD9//P/AAABAAQAAAD+//P/AAAFAAEAAAD///P/AAAAAAEAAAAAAPP/AAAAAAEAAAABAPP/AAAAAAEAAAACAPP/AAAAAAEAAAADAPP/AAAGAAEAAAAEAPP/AAAFAAEAAAAFAPP/AAAAAAQAAAAFAPL/AAAGAAEAAAAFAPH/AAAAAAEAAAAFAPD/AAAAAAEAAAAFAO//AAAAAAEAAAAFAO7/AAAAAAEAAAAEAO7/AAAAAAEAAAADAO7/AAAAAAEAAAACAO7/AAAGAAQAAAABAO7/AAAAAAQAAAAAAO7/AAAGAAQAAAD//+7/AAAAAAEAAAD+/+7/AAAAAAEAAAD9/+7/AAAFAAEAAAD9/+//AAAAAAEAAAD9//D/AAAAAAEAAAD9//H/AAAAAAEAAAD9//L/AAAGAAEAAAD+//L/AAAAAAEAAAD///L/AAAAAAEAAAAAAPL/AAAAAAEAAAABAPL/AAAAAAEAAAACAPL/AAAAAAEAAAADAPL/AAAAAAEAAAAEAPL/AAAGAAEAAAAEAPH/AAAAAAEAAAADAPH/AAAFAAEAAAACAPH/AAAAAAQAAAABAPH/AAAFAAEAAAAAAPH/AAAAAAQAAAD///H/AAAAAAEAAAD+//H/AAAAAAEAAAD+//D/AAAGAAEAAAD///D/AAAFAAQAAAAAAPD/AAAGAAQAAAABAPD/AAAAAAQAAAACAPD/AAAAAAQAAAADAPD/AAAAAAQAAAAEAPD/AAAAAAEAAAAEAO//AAAAAAEAAAADAO//AAAAAAQAAAACAO//AAAAAAEAAAABAO//AAAAAAQAAAAAAO//AAAAAAEAAAD//+//AAAAAAQAAAD+/+//AAAAAAEAAAD9/+3/AAACAAQAAAD+/+3/AAADAAEAAAD//+3/AAAFAAEAAAAAAO3/AAAGAAEAAAABAO3/AAAAAAEAAAACAO3/AAAAAAEAAAADAO3/AAAAAAEAAAAEAO3/AAAEAAEAAAAFAO3/AAAAAAQAAAADAPT/AAACAAIAAAAEAPT/AAACAAIAAAAFAPT/AAADAAIAAAD///T/AAACAAIAAAD+//T/AAACAAIAAAD9//T/AAADAAIAAAD8//P/AAAGAAMAAAAGAPP/AAAFAAMAAAAGAPL/AAAFAAAAAAAGAPH/AAAFAAAAAAAGAPD/AAAFAAAAAAAGAO//AAAFAAAAAAAGAO7/AAAFAAAAAAAGAO3/AAAFAAAAAAAGAOz/AAAFAAAAAAD8//L/AAABAAAAAAD8//H/AAABAAAAAAD8//D/AAABAAAAAAD8/+//AAABAAAAAAD8/+7/AAABAAAAAAD8/+3/AAABAAAAAAD8/+z/AAABAAAAAAD9/+z/AAACAAAAAAAFAOz/AAAEAAAAAAD+/+z/AAADAAMAAAD//+z/AAADAAAAAAAAAOz/AAAGAAAAAAACAOz/AAAGAAAAAAADAOz/AAADAAAAAAAEAOz/AAADAAMAAAABAOz/AAAAAAQAAAAGAPT/AAADAAIAAAD8//T/AAADAAIAAAA=")
+tile_set = ExtResource("2_750nv")
+
+[node name="Doors" type="Node2D" parent="Env/FightingTrial"]
+y_sort_enabled = true
+position = Vector2(96, -992)
+
+[node name="FightDoorIn" parent="Env/FightingTrial/Doors" instance=ExtResource("3_7fi5b")]
+unique_name_in_owner = true
+position = Vector2(-32, 224)
+
+[node name="FightDoorOut" parent="Env/FightingTrial/Doors" instance=ExtResource("3_7fi5b")]
+unique_name_in_owner = true
+position = Vector2(-32, -288)
+
+[node name="DamageAreas" type="Node2D" parent="Env/FightingTrial"]
+unique_name_in_owner = true
+z_index = -1
+position = Vector2(-192, -1216)
+
+[node name="DamageArea" parent="Env/FightingTrial/DamageAreas" instance=ExtResource("5_c8gdi")]
+position = Vector2(224, 160)
+
+[node name="DamageArea2" parent="Env/FightingTrial/DamageAreas" instance=ExtResource("5_c8gdi")]
+position = Vector2(352, 160)
+
+[node name="FightingArenaRect" type="Control" parent="Env/FightingTrial"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -192.0
+offset_top = -1216.0
+offset_right = 384.0
+offset_bottom = -768.0
+metadata/_edit_lock_ = true
+
+[node name="ArenaEnemies" type="Node2D" parent="Env/FightingTrial"]
+unique_name_in_owner = true
+y_sort_enabled = true
+position = Vector2(96, -992)
+
+[node name="RedSkeleton" parent="Env/FightingTrial/ArenaEnemies" instance=ExtResource("3_750nv")]
+position = Vector2(-256, -184)
+activation_distance = 500.0
+attack_distance = 35.0
+
+[node name="AdditionalSpace" type="CollisionShape2D" parent="Env/FightingTrial/ArenaEnemies/RedSkeleton"]
+shape = SubResource("CircleShape2D_c8gdi")
+
+[node name="RedSkeleton2" parent="Env/FightingTrial/ArenaEnemies" instance=ExtResource("3_750nv")]
+position = Vector2(-192, -184)
+activation_distance = 500.0
+attack_distance = 35.0
+
+[node name="AdditionalSpace" type="CollisionShape2D" parent="Env/FightingTrial/ArenaEnemies/RedSkeleton2"]
+shape = SubResource("CircleShape2D_c8gdi")
+
+[node name="RedSkeleton3" parent="Env/FightingTrial/ArenaEnemies" instance=ExtResource("3_750nv")]
+position = Vector2(-128, -184)
+activation_distance = 500.0
+attack_distance = 35.0
+
+[node name="AdditionalSpace" type="CollisionShape2D" parent="Env/FightingTrial/ArenaEnemies/RedSkeleton3"]
+shape = SubResource("CircleShape2D_c8gdi")
+
+[node name="RedSkeleton4" parent="Env/FightingTrial/ArenaEnemies" instance=ExtResource("3_750nv")]
+position = Vector2(-64, -184)
+activation_distance = 500.0
+attack_distance = 35.0
+
+[node name="AdditionalSpace" type="CollisionShape2D" parent="Env/FightingTrial/ArenaEnemies/RedSkeleton4"]
+shape = SubResource("CircleShape2D_c8gdi")
+
+[node name="RedSkeleton5" parent="Env/FightingTrial/ArenaEnemies" instance=ExtResource("3_750nv")]
+position = Vector2(0, -184)
+activation_distance = 500.0
+attack_distance = 35.0
+
+[node name="AdditionalSpace" type="CollisionShape2D" parent="Env/FightingTrial/ArenaEnemies/RedSkeleton5"]
+shape = SubResource("CircleShape2D_c8gdi")
+
+[node name="RedSkeleton6" parent="Env/FightingTrial/ArenaEnemies" instance=ExtResource("3_750nv")]
+position = Vector2(64, -184)
+activation_distance = 500.0
+attack_distance = 35.0
+
+[node name="AdditionalSpace" type="CollisionShape2D" parent="Env/FightingTrial/ArenaEnemies/RedSkeleton6"]
+shape = SubResource("CircleShape2D_c8gdi")
+
+[node name="RedSkeleton7" parent="Env/FightingTrial/ArenaEnemies" instance=ExtResource("3_750nv")]
+position = Vector2(128, -184)
+activation_distance = 500.0
+attack_distance = 35.0
+
+[node name="AdditionalSpace" type="CollisionShape2D" parent="Env/FightingTrial/ArenaEnemies/RedSkeleton7"]
+shape = SubResource("CircleShape2D_c8gdi")
+
+[node name="RedSkeleton8" parent="Env/FightingTrial/ArenaEnemies" instance=ExtResource("3_750nv")]
+position = Vector2(192, -184)
+activation_distance = 500.0
+attack_distance = 35.0
+
+[node name="AdditionalSpace" type="CollisionShape2D" parent="Env/FightingTrial/ArenaEnemies/RedSkeleton8"]
+shape = SubResource("CircleShape2D_c8gdi")
+
+[node name="RedSkeleton9" parent="Env/FightingTrial/ArenaEnemies" instance=ExtResource("3_750nv")]
+position = Vector2(256, -184)
+activation_distance = 500.0
+attack_distance = 35.0
+
+[node name="AdditionalSpace" type="CollisionShape2D" parent="Env/FightingTrial/ArenaEnemies/RedSkeleton9"]
+shape = SubResource("CircleShape2D_c8gdi")
+
+[node name="Puzzle" type="Node2D" parent="."]
+
+[node name="Puzzle_Door" parent="Puzzle" instance=ExtResource("3_7fi5b")]
+unique_name_in_owner = true
+z_index = -1
+position = Vector2(64, -640)
+open_by_key = false
+
+[node name="Puzzle_Area" type="Control" parent="Puzzle"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -192.0
+offset_top = -576.0
+offset_right = 384.0
+offset_bottom = -128.0
+
+[node name="PuzzlePortalArea" parent="Puzzle" instance=ExtResource("4_c8gdi")]
+position = Vector2(-96, -32)
+spawn_point = "Entrance_1"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Puzzle/PuzzlePortalArea"]
+shape = SubResource("RectangleShape2D_h5426")
+
+[node name="Puzzle_Entrance" type="Node2D" parent="Puzzle"]
+unique_name_in_owner = true
+position = Vector2(96, -32)
+
+[node name="Portals" type="Node2D" parent="Puzzle"]
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Other" type="Node2D" parent="."]
+
+[node name="SpawnPoints" type="Node2D" parent="Other"]
+
+[node name="Entrance_1" type="Node2D" parent="Other/SpawnPoints"]
+unique_name_in_owner = true
+position = Vector2(97, 162)
+script = ExtResource("5_5ukkd")
+metadata/_custom_type_script = "uid://c53rfi7lfvhlw"
+
+[node name="Entrance_2" type="Node2D" parent="Other/SpawnPoints"]
+unique_name_in_owner = true
+position = Vector2(96, -1568)
+script = ExtResource("5_5ukkd")
+metadata/_custom_type_script = "uid://c53rfi7lfvhlw"
+
+[node name="MapChanges" type="Node2D" parent="Other"]
+
+[node name="TrialEntrance_1" parent="Other/MapChanges" instance=ExtResource("6_5q0jk")]
+position = Vector2(96, 288)
+next_map_scene = "uid://bjpi8d0v5msej"
+spawn_point = "CaveEntrance_1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Other/MapChanges/TrialEntrance_1"]
+shape = SubResource("RectangleShape2D_70ydh")
+
+[node name="TrialEntrance_2" parent="Other/MapChanges" instance=ExtResource("9_5ukkd")]
+position = Vector2(96, -1632)
+next_map_scene = "uid://bjpi8d0v5msej"
+spawn_point = "CaveEntrance_2"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Other/MapChanges/TrialEntrance_2"]
+shape = SubResource("RectangleShape2D_5ukkd")
+
+[node name="CursorPos" type="Node2D" parent="Other/MapChanges/TrialEntrance_2"]
+position = Vector2(0, -40)
+
+[node name="RespawnAreas" type="Node2D" parent="Other"]
+
+[node name="EntranceRespawnArea" parent="Other/RespawnAreas" instance=ExtResource("8_7fi5b")]
+position = Vector2(96, 96)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Other/RespawnAreas/EntranceRespawnArea"]
+position = Vector2(0, 64)
+shape = SubResource("RectangleShape2D_c8gdi")
+
+[connection signal="start_teleporting" from="Puzzle/PuzzlePortalArea" to="." method="_on_puzzle_portal_area_start_teleporting"]
+[connection signal="teleported" from="Puzzle/PuzzlePortalArea" to="." method="_on_puzzle_portal_area_teleported"]
+[connection signal="map_change_requested" from="Other/MapChanges/TrialEntrance_1" to="." method="_on_trial_entrance_1_map_change_requested"]
+[connection signal="map_change_requested" from="Other/MapChanges/TrialEntrance_2" to="." method="_on_trial_entrance_2_map_change_requested"]

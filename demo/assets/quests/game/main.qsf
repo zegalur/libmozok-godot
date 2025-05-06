@@ -11,24 +11,35 @@ worlds:
 	game # Quest world where the mainstory quests took place.
 
 projects:
-	# Common
-	[game] common/location.quest
-	[game] common/information.quest
-	[game] common/player.quest
-	[game] common/npc.quest
+	# Common Things
+	[game] 1_common/location.quest
+	[game] 1_common/information.quest
+	[game] 1_common/player.quest
+	[game] 1_common/npc.quest
 	
-	# Locations
-	[game] maps/dwelling_place.quest
-	[game] maps/castle.quest
-	[game] maps/world.quest
+	# Game Structure
+	[game] 2_struct/dwelling_place.quest
+	[game] 2_struct/castle.quest
+	[game] 2_struct/world.quest
 	
-	# Main story
-	[game] main_story/main_story.quest
+	# Quests
+	[game] 3_quests/dwelling_place_puzzle_trial.quest
+	[game] 3_quests/dwelling_place.quest
+	[game] 3_quests/main_story.quest
+	[game] 3_quests/big_hearts.quest
 
 init:
+	# Common
 	[game] InitPlayer()
+	
+	# Locations
+	[game] InitDwellingPlacePuzzleTrial()
+	[game] InitDwellingPlace()
 	[game] InitWorld()
+	
+	# Main story
 	[game] InitMainStory()
+	[game] InitBigHearts()
 
 debug:
-	# none
+	debug/debug.qsf

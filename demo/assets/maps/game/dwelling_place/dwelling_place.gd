@@ -38,3 +38,28 @@ func _on_forest_entry_map_change_requested(
 			M.game.MoveTo_1_player.player_, 
 			M.game.MoveTo_2_from.dwelling_place_,
 			M.game.MoveTo_3_to.castle_)
+
+
+func _on_trial_entrance_map_change_requested(
+		_next_map: String, _spawn_point: String) -> void:
+	M.game.MoveTo(0, _quest_server, 
+			M.game.MoveTo_1_player.player_, 
+			M.game.MoveTo_2_from.dwelling_place_,
+			M.game.MoveTo_3_to.dwelling_place_heart_trial_)
+
+
+func _on_big_heart_picked_up() -> void:
+	# Take the dwelling place heart.
+	M.game.TakeBigHeart(0, _quest_server, 
+			M.game.TakeBigHeart_1_player.player_,
+			M.game.TakeBigHeart_2_big_heart.big_heart_dwelling_place_,
+			M.game.TakeBigHeart_3_location.dwelling_place_heart_island_
+			)
+
+
+func _on_trial_entrance_2_map_change_requested(
+		_next_map: String, _spawn_point: String) -> void:
+	M.game.MoveTo(0, _quest_server, 
+			M.game.MoveTo_1_player.player_, 
+			M.game.MoveTo_2_from.dwelling_place_heart_island_,
+			M.game.MoveTo_3_to.dwelling_place_heart_trial_)

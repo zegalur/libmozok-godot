@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://duu6wb1ddsaji"]
+
+[ext_resource type="Script" uid="uid://c5gcdqm6duxyk" path="res://assets/common/map_change/map_change.gd" id="1_jytkl"]
+[ext_resource type="Script" uid="uid://641g1sfjewih" path="res://assets/common/map_change/map_change_area.gd" id="1_w0wke"]
+
+[node name="MapChangeArea2D" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_w0wke")
+
+[node name="MapChange" type="Node2D" parent="."]
+script = ExtResource("1_jytkl")
+metadata/_custom_type_script = "uid://c5gcdqm6duxyk"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="map_change_requested" from="MapChange" to="." method="_on_map_change_map_change_requested"]

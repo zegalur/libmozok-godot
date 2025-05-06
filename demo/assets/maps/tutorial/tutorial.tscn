@@ -33,7 +33,17 @@ size = Vector2(72, 72)
 y_sort_enabled = true
 script = ExtResource("1_pyj42")
 player_node_dest = NodePath("Other")
+camera_limits = NodePath("CameraLimits")
 map_name = "Tutorial Map"
+
+[node name="CameraLimits" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -171.0
+offset_top = -1489.0
+offset_right = 1075.0
+offset_bottom = 1438.0
+metadata/_edit_lock_ = true
 
 [node name="Env" type="Node2D" parent="."]
 y_sort_enabled = true

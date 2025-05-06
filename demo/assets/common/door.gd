@@ -28,3 +28,12 @@ func open():
 	collision_layer = 0
 	animated_sprite.play("open")
 	_opened = true
+
+
+## Closes the door.
+func close():
+	if not _opened:
+		return
+	collision_layer = _inititial_collision_layer
+	animated_sprite.play("close")
+	_opened = false
