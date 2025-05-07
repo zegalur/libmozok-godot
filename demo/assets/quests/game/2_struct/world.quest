@@ -10,8 +10,8 @@ project world
 
 rlist InitWorld:
 	InitDwellingPlace()
-	Path(dwelling_place_, castle_)
-	Path(castle_, dwelling_place_)
+	Path2(dwelling_place_, forest_)
+	Path2(forest_, castle_)
 
 action InitWorld:
 	pre # none

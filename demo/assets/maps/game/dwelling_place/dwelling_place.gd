@@ -37,7 +37,7 @@ func _on_forest_entry_map_change_requested(
 	M.game.MoveTo(0, _quest_server, 
 			M.game.MoveTo_1_player.player_, 
 			M.game.MoveTo_2_from.dwelling_place_,
-			M.game.MoveTo_3_to.castle_)
+			M.game.MoveTo_3_to.forest_)
 
 
 func _on_trial_entrance_map_change_requested(

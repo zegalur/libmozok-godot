@@ -1,9 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://ydlwp1412cs8"]
+[gd_scene load_steps=8 format=3 uid="uid://ydlwp1412cs8"]
 
 [ext_resource type="Script" uid="uid://mw2sm3b4y5un" path="res://assets/gui/main_menu.gd" id="1_7j5yx"]
 [ext_resource type="Texture2D" uid="uid://cws2sw06mg6vd" path="res://assets/gui/imgs/mmenu_logo.png" id="1_xru34"]
 [ext_resource type="PackedScene" uid="uid://cpos0onod341e" path="res://assets/gui/choice_panel.tscn" id="2_g3370"]
+[ext_resource type="Shader" uid="uid://cxyvip2nbrn7m" path="res://assets/gui/fill.gdshader" id="2_u41er"]
 [ext_resource type="Theme" uid="uid://cqnnwflfspwe1" path="res://assets/gui/other/quest_book_theme.tres" id="3_5lldu"]
+[ext_resource type="Texture2D" uid="uid://dh7drnrmsviow" path="res://assets/other/signposts/img/wooden-signposts-portrait.png" id="5_crd14"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xtpb2"]
+shader = ExtResource("2_u41er")
+shader_parameter/color = Color(0.0284, 0.04, 0.04, 1)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -13,6 +19,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7j5yx")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_xtpb2")
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -300.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("5_crd14")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1

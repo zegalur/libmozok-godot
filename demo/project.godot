@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [display]
 
+window/size/mode=4
 window/size/resizable=false
 
 [editor_plugins]
@@ -117,7 +118,7 @@ select_next={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://assets/quests/tutorials/tutorial_text.en.translation", "res://assets/quests/game/translations/big_hearts.en.translation", "res://assets/quests/game/translations/castle.en.translation", "res://assets/quests/game/translations/dwelling_place.en.translation", "res://assets/quests/game/translations/main_story.en.translation", "res://assets/quests/game/translations/npc.en.translation", "res://assets/quests/game/translations/player.en.translation")
+locale/translations=PackedStringArray("res://assets/quests/tutorials/tutorial_text.en.translation", "res://assets/quests/game/translations/big_hearts.en.translation", "res://assets/quests/game/translations/castle.en.translation", "res://assets/quests/game/translations/dwelling_place.en.translation", "res://assets/quests/game/translations/main_story.en.translation", "res://assets/quests/game/translations/npc.en.translation", "res://assets/quests/game/translations/player.en.translation", "res://assets/quests/game/translations/forest.en.translation")
 
 [layer_names]
 
@@ -132,6 +133,7 @@ locale/translations=PackedStringArray("res://assets/quests/tutorials/tutorial_te
 2d_physics/layer_7="UsableObj"
 2d_physics/layer_8="NPCBody"
 2d_physics/layer_9="UsableDistantObj"
+2d_physics/layer_10="NPC_Obstacle"
 
 [mozok]
 

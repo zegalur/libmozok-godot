@@ -48,7 +48,7 @@ func _ready():
 	_answers.active = false
 
 
-func save_state(_state : GameState) -> void:
+func save_state(__state : GameState) -> void:
 	pass
 
 

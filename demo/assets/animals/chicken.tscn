@@ -1,0 +1,136 @@
+[gd_scene load_steps=18 format=3 uid="uid://bahywm7tjy3tq"]
+
+[ext_resource type="Texture2D" uid="uid://dtgwfvgq3qa1e" path="res://assets/animals/imgs/chicken.png" id="1_48n2a"]
+[ext_resource type="Script" uid="uid://c4kgkle4gt3be" path="res://assets/animals/chicken.gd" id="1_qjngu"]
+[ext_resource type="Texture2D" uid="uid://b7jhworjujpjk" path="res://assets/items/imgs/item-shadow.png" id="2_n0q6v"]
+[ext_resource type="Texture2D" uid="uid://1l0asqc3qdft" path="res://assets/effects/imgs/smoke-01.png" id="4_0ovse"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0q6v"]
+atlas = ExtResource("1_48n2a")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjngu"]
+atlas = ExtResource("1_48n2a")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ovse"]
+atlas = ExtResource("1_48n2a")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k58nm"]
+atlas = ExtResource("1_48n2a")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h52h3"]
+atlas = ExtResource("1_48n2a")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a1hoj"]
+atlas = ExtResource("1_48n2a")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e0nfa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0q6v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qjngu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ovse")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k58nm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h52h3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a1hoj")
+}],
+"loop": true,
+"name": &"running",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n0q6v"]
+radius = 22.2036
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qjngu"]
+radius = 65.7647
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k58nm"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_0ovse"]
+_data = [Vector2(0, 0), 0.0, 2.68448, 0, 0, Vector2(0.360294, 0.775281), 0.0, 0.0, 0, 0, Vector2(0.992647, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_k58nm"]
+curve = SubResource("Curve_0ovse")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0ovse"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+alpha_curve = SubResource("CurveTexture_k58nm")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="Chicken" type="CharacterBody2D"]
+y_sort_enabled = true
+collision_layer = 128
+collision_mask = 647
+motion_mode = 1
+script = ExtResource("1_qjngu")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, 2)
+texture = ExtResource("2_n0q6v")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+y_sort_enabled = true
+position = Vector2(0, 3)
+sprite_frames = SubResource("SpriteFrames_e0nfa")
+animation = &"running"
+autoplay = "running"
+frame_progress = 0.103999
+offset = Vector2(0, -27)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_n0q6v")
+
+[node name="PlayerDetection" type="Area2D" parent="."]
+visible = false
+position = Vector2(0, -5)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
+shape = SubResource("CircleShape2D_qjngu")
+
+[node name="Dust" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(0.84, 0.7672, 0.7308, 0.854902)
+z_index = 1
+material = SubResource("CanvasItemMaterial_k58nm")
+position = Vector2(-6, -5)
+emitting = false
+amount = 20
+texture = ExtResource("4_0ovse")
+lifetime = 2.0
+randomness = 0.4
+process_material = SubResource("ParticleProcessMaterial_0ovse")
+
+[connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]
+[connection signal="body_exited" from="PlayerDetection" to="." method="_on_player_detection_body_exited"]

@@ -19,6 +19,7 @@ projects:
 	
 	# Game Structure
 	[game] 2_struct/dwelling_place.quest
+	[game] 2_struct/forest.quest
 	[game] 2_struct/castle.quest
 	[game] 2_struct/world.quest
 	

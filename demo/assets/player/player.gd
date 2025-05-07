@@ -252,7 +252,7 @@ func set_camera_limits(
 
 
 ## Returns the time needed to play the teleportation animation (in seconds).
-func start_teleporting(teleport_name : String, spawn_point : String) -> float:
+func start_teleporting(teleport_name : String, _spawn_point : String) -> float:
 	_teleport_name = teleport_name
 	_teleport_timer = 0.0
 	_state = PlayerState.TELEPORT
@@ -286,7 +286,7 @@ func _process(_delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action("select_next"):
+	if event.is_action("select_next") and event.is_pressed():
 		if _usable_bodies.size() > 0:
 			_usable_body_indx = (_usable_body_indx + 1) % _usable_bodies.size()
 
@@ -475,8 +475,9 @@ func _on_use():
 
 func _on_use_area_body_entered(body: Node2D) -> void:
 	_usable_bodies.push_back(body)
+	_usable_body_indx = _usable_bodies.size() - 1
 
 
 func _on_use_area_body_exited(body: Node2D) -> void:
 	_usable_bodies.erase(body)
-	_usable_body_indx = min(_usable_bodies.size(), _usable_body_indx)
+	_usable_body_indx = min(_usable_bodies.size() - 1, _usable_body_indx)

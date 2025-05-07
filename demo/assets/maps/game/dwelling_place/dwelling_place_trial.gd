@@ -11,6 +11,7 @@ var _portals = []
 # Fight Arena
 @onready var _damage_area = preload("res://assets/other/damage_arena/damage_area.tscn")
 var _last_fcell : Vector2i # (x, y)
+var _fcell_timer : float
 
 
 func _ready() -> void:
@@ -78,9 +79,9 @@ func load_state(state: GameState) -> void:
 
 # ----------------------------------- Other ---------------------------------- #
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	_process_puzzle_trial()
-	_process_fighting_trial()
+	_process_fighting_trial(delta)
 
 
 func _process_puzzle_trial() -> void:
@@ -171,7 +172,7 @@ func _end_puzzle_trial() -> void:
 			M.game.DP_FinishPuzzle_22_c34.dp_cell_34_)
 
 
-func _process_fighting_trial() -> void:
+func _process_fighting_trial(delta : float) -> void:
 	if _fighting_trial_done:
 		return
 	if _player_node.is_dead():
@@ -179,15 +180,19 @@ func _process_fighting_trial() -> void:
 	
 	var arena_rect = %FightingArenaRect.get_global_rect() as Rect2
 	if arena_rect.has_point(_player_node.global_position) == false:
+		_fcell_timer = 0.0
 		return
+	
+	_fcell_timer += delta
 	
 	%FightDoorIn.close()
 	
 	var rel_pos = _player_node.position - arena_rect.position
 	var cell_pos = Vector2i((rel_pos / 64.0).floor())
 	
-	# New cell position?
-	if cell_pos != _last_fcell:
+	# New cell position (or timer event)?
+	if cell_pos != _last_fcell or _fcell_timer > 3.0:
+		_fcell_timer = 0.0
 		var damage_zone = _damage_area.instantiate() as Node2D
 		damage_zone.position = Vector2(cell_pos * 64) + Vector2(32,32)
 		%DamageAreas.add_child(damage_zone)
