@@ -7,13 +7,14 @@ const WALK_COEF = 0.5
 const RUN_COEF = 1.0
 const VELOCITY_CHANGE_TIME = 0.50
 const STOP_RUNNING_AT = 3.0
-var _velocity_timer = VELOCITY_CHANGE_TIME
-@onready var _last_angle : float = randf_range(0.0, 2.0 * PI)
 
 enum State {
 	WALKING,
 	RUNNING
 }
+
+@onready var _last_angle : float = randf_range(0.0, 2.0 * PI)
+var _velocity_timer = VELOCITY_CHANGE_TIME
 var _state = State.WALKING
 var _player_node : Player
 var _can_stop_running : bool
@@ -21,6 +22,7 @@ var _can_stop_running : bool
 
 func _ready() -> void:
 	%Sprite.frame = randi_range(0, 5)
+
 
 func _physics_process(delta: float) -> void:
 	if _state == State.RUNNING:

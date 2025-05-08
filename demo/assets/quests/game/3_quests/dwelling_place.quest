@@ -22,6 +22,6 @@ quest DwellingPlace_BigHeartTrial:
 	objects:
 		player_
 		DP_Trial
-		Map
+		MapMovement
 	subquests:
 		DwellingPlace_PuzzleTrial

@@ -24,6 +24,7 @@ projects:
 	[game] 2_struct/world.quest
 	
 	# Quests
+	[game] 3_quests/dwelling_place_chicken_pinball.quest
 	[game] 3_quests/dwelling_place_puzzle_trial.quest
 	[game] 3_quests/dwelling_place.quest
 	[game] 3_quests/main_story.quest
@@ -34,8 +35,11 @@ init:
 	[game] InitPlayer()
 	
 	# Locations
+	## Dwelling Place
+	[game] InitChickenPinball()
 	[game] InitDwellingPlacePuzzleTrial()
 	[game] InitDwellingPlace()
+	## World
 	[game] InitWorld()
 	
 	# Main story

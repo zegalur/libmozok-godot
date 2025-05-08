@@ -107,6 +107,7 @@ frame_progress = 0.103999
 offset = Vector2(0, -27)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_n0q6v")
 
 [node name="PlayerDetection" type="Area2D" parent="."]

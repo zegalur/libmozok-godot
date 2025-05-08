@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://d0oxdk08dmn6m"]
+[gd_scene load_steps=12 format=4 uid="uid://d0oxdk08dmn6m"]
 
 [ext_resource type="Script" uid="uid://bqnno56t3hee6" path="res://assets/maps/game/forest/forest.gd" id="1_iol1v"]
 [ext_resource type="TileSet" uid="uid://b4s8t3ntx2tux" path="res://assets/env/green_fields/green_field.tres" id="2_dirke"]
@@ -6,7 +6,12 @@
 [ext_resource type="TileSet" uid="uid://djwpbgm583uke" path="res://assets/env/green_fields/soil_roads.tres" id="3_n7223"]
 [ext_resource type="TileSet" uid="uid://bbcl2o8w30vn" path="res://assets/env/green_fields/cliff_shadows.tres" id="4_iol1v"]
 [ext_resource type="TileSet" uid="uid://113pk4isrgl2" path="res://assets/env/green_fields/soil_cliffs.tres" id="4_n7223"]
+[ext_resource type="PackedScene" uid="uid://b5fwwohkqvgql" path="res://assets/other/signposts/wooden_signpost_npc_2.tscn" id="6_n1emv"]
 [ext_resource type="PackedScene" uid="uid://duu6wb1ddsaji" path="res://assets/common/map_change/map_change_area.tscn" id="7_c2arg"]
+[ext_resource type="Script" uid="uid://c02yehtofmvfo" path="res://assets/npc/dialogue/dialogue_node.gd" id="7_lem3l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n1emv"]
+size = Vector2(384, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c2arg"]
 size = Vector2(320, 192)
@@ -52,6 +57,26 @@ tile_set = ExtResource("4_n7223")
 
 [node name="Objects" type="Node2D" parent="."]
 y_sort_enabled = true
+
+[node name="WIP" type="Node2D" parent="Objects"]
+y_sort_enabled = true
+
+[node name="WIP_Signpost" parent="Objects/WIP" instance=ExtResource("6_n1emv")]
+position = Vector2(78, 55)
+npc_name = "W.I.P Signpost"
+
+[node name="DialogueNode" type="Node" parent="Objects/WIP/WIP_Signpost"]
+script = ExtResource("7_lem3l")
+text = "Area Closed - Work in Progress. Follow libmozok-godot on GitHub to get the latest updates."
+metadata/_custom_type_script = "uid://c02yehtofmvfo"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Objects/WIP"]
+position = Vector2(32, 160)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/WIP/StaticBody2D"]
+position = Vector2(-32, 0)
+shape = SubResource("RectangleShape2D_n1emv")
 
 [node name="Other" type="Node2D" parent="."]
 metadata/_edit_lock_ = true

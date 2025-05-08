@@ -45,6 +45,8 @@ y_sort_enabled = true
 [connection signal="new_quest_state" from="LibMozokServer" to="GUI/GameGui" method="_on_new_quest_state"]
 [connection signal="new_quest_status" from="LibMozokServer" to="GUI/GameGui" method="_on_new_quest_status"]
 [connection signal="new_sub_quest" from="LibMozokServer" to="GUI/GameGui" method="new_sub_quest"]
+[connection signal="search_limit_reached" from="LibMozokServer" to="." method="_on_lib_mozok_server_search_limit_reached"]
+[connection signal="space_limit_reached" from="LibMozokServer" to="." method="_on_lib_mozok_server_space_limit_reached"]
 [connection signal="exit" from="GUI/MainMenu" to="." method="_on_main_menu_exit"]
 [connection signal="load_game" from="GUI/MainMenu" to="." method="_on_main_menu_load_game"]
 [connection signal="new_game" from="GUI/MainMenu" to="." method="_on_main_menu_new_game"]

@@ -54,7 +54,7 @@ main_quest GuardAtTheDoors:
 		player_
 		king_is_waiting_
 		guard_philip_
-		Map
+		MapMovement
 	subquests:
 		# none
 
@@ -72,6 +72,6 @@ main_quest KingsInvitation:
 		player_
 		cat_is_missing_
 		king_
-		Map
+		MapMovement
 	subquests:
 		# none

@@ -7,13 +7,16 @@
 version 1 0
 project dwelling_place
 
+type DwellingPlace : Map
 type DwellingPlace_HeartTrial : Map
 type DwellingPlace_HeartIsland : Map
 
-object dwelling_place_ : Map
+object dwelling_place_ : DwellingPlace
 object dwelling_place_heart_island_ : DwellingPlace_HeartIsland
 object dwelling_place_heart_trial_ : DwellingPlace_HeartTrial
 
+type DP_HeartCaveBloked : Fact
+object dp_heart_trial_cave_blocked_ : DP_HeartCaveBloked, MapMovement
 
 # ----------------------------- Big Heart Trial ------------------------------ #
 
@@ -61,6 +64,28 @@ action DP_FinishTrial:
 	add Path2(trials, island)
 
 
+action N/A DwellingPlace_ReadHeartCaveSign {map_movement}:
+	player : Player
+	dwelling_place : DwellingPlace
+	cave_blocked : DP_HeartCaveBloked
+	pre At(player, dwelling_place)
+		Unaware(player, cave_blocked)
+	rem # none
+	add Know(player, cave_blocked)
+
+
+action N/A DwellingPlace_OpenHeartCave {map_movement}:
+	player : Player
+	dwelling_place : DwellingPlace
+	heart_trial : DwellingPlace_HeartTrial
+	cave_blocked : DP_HeartCaveBloked
+	pre At(player, dwelling_place)
+		Know(player, cave_blocked)
+		NotBeenUsed(cave_blocked)
+	rem NotBeenUsed(cave_blocked)
+	add Path2(dwelling_place, heart_trial)
+
+
 action N/A DwellingPlace_BigHeartTrial {map_movement}:
 	player : Player
 	trial : DwellingPlace_HeartTrial
@@ -73,8 +98,8 @@ action N/A DwellingPlace_BigHeartTrial {map_movement}:
 # ----------------------------------- Init ----------------------------------- #
 
 rlist InitDwellingPlace:
-	# Big Heart Trial
-	Path2(dwelling_place_, dwelling_place_heart_trial_)
+	Unaware(player_, dp_heart_trial_cave_blocked_)
+	NotBeenUsed(dp_heart_trial_cave_blocked_)
 	DP_Cur_Trial(dp_trial_puzzle_)
 
 action InitDwellingPlace:

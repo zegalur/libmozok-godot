@@ -7,8 +7,9 @@
 version 1 0
 project location
 
+type MapMovement # Things related to the map movement or needed to open paths.
 type Location # Locations, like rooms, areas etc.
-	type Map : Location
+	type Map : Location, MapMovement
 type Locatable # Things that can be at some location.
 
 # A thing X is currently at the location Y.

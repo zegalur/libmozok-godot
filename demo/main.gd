@@ -256,3 +256,15 @@ func _load_game(indx : int) -> void:
 	var map_file = _state.read(META_CUR_MAP_FILE, "")
 	var spawn_point = _state.read(META_SPAWN_POINT, "")
 	_load_map(map_file, spawn_point)
+
+
+func _on_lib_mozok_server_search_limit_reached(
+		worldName: String, questName: String, searchLimitValue: int) -> void:
+	printerr("Search limit reached: [%s] %s %s" % [
+			worldName, questName, str(searchLimitValue)])
+
+
+func _on_lib_mozok_server_space_limit_reached(
+		worldName: String, questName: String, spaceLimitValue: int) -> void:
+	printerr("Space limit reached: [%s] %s %s" % [
+			worldName, questName, str(spaceLimitValue)])

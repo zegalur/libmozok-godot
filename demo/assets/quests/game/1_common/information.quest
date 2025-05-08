@@ -15,3 +15,17 @@ rel Unaware(Mindful, Fact)
 
 # A `Mindful` object knows a `Fact`.
 rel Know(Mindful, Fact)
+
+# Indicates that the fact has not been used.
+# Use this optimize one-shot actions.
+rel NotBeenUsed(Fact)
+
+
+# Informs a mindful agent about a fact.
+# Use this for non NPC related facts.
+action Inform:
+	who : Mindful
+	what : Fact
+	pre # none
+	rem Unaware(who, what)
+	add Know(who, what)

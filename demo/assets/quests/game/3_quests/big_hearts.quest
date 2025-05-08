@@ -14,15 +14,6 @@ object big_heart_dwelling_place_ : BigHeart
 rel BigHeartTaken(BigHeart)
 
 
-rlist InitBigHearts:
-	At(big_heart_dwelling_place_, dwelling_place_heart_island_)
-
-action InitBigHearts:
-	pre # none
-	rem # none
-	add InitBigHearts()
-
-
 action TakeBigHeart:
 	player : Player
 	big_heart : BigHeart
@@ -43,7 +34,19 @@ main_quest CollectBigHearts:
 		map_movement
 	objects:
 		player_
-		Map
+		MapMovement
 		BigHeart
 	subquests:
+		DwellingPlace_OpenHeartCave
 		DwellingPlace_BigHeartTrial
+
+
+# ----------------------------------- Init ----------------------------------- #
+
+rlist InitBigHearts:
+	At(big_heart_dwelling_place_, dwelling_place_heart_island_)
+
+action InitBigHearts:
+	pre # none
+	rem # none
+	add InitBigHearts()

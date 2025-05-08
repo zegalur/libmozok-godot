@@ -1,0 +1,190 @@
+# This file is a part of the LibMozok DEMO project, intended to demonstrate 
+# how the library can be integrated into a popular game engine. Also, it is a
+# good playground to test various features.
+
+# =================== Dwelling Place - Chicken Pinball ======================= #
+
+version 1 0
+project dwelling_place_chicken_pinball
+
+type DP_Color
+	type DP_Yellow : DP_Color
+	type DP_Blue : DP_Color
+	type DP_Red : DP_Color
+type DP_Chicken
+type DP_NumArea
+	type DP_NumArea_1 : DP_NumArea
+	type DP_NumArea_2 : DP_NumArea
+	type DP_NumArea_3 : DP_NumArea
+
+object dp_num_area_1_ : DP_NumArea_1
+object dp_num_area_2_ : DP_NumArea_2
+object dp_num_area_3_ : DP_NumArea_3
+
+# Chicken colors : YRBYRBYRB
+object dp_chicken_1_ : DP_Chicken, DP_Yellow
+object dp_chicken_2_ : DP_Chicken, DP_Red
+object dp_chicken_3_ : DP_Chicken, DP_Blue
+object dp_chicken_4_ : DP_Chicken, DP_Yellow
+object dp_chicken_5_ : DP_Chicken, DP_Red
+object dp_chicken_6_ : DP_Chicken, DP_Blue
+object dp_chicken_7_ : DP_Chicken, DP_Yellow
+object dp_chicken_8_ : DP_Chicken, DP_Red
+object dp_chicken_9_ : DP_Chicken, DP_Blue
+
+# Chicken A is inside the numbered area Y
+rel DP_ChickInside(DP_Chicken, DP_NumArea)
+
+agroup dp_chicken_pinball
+
+
+rlist DP_InitChickenPinball:
+	DP_ChickInside(dp_chicken_1_, dp_num_area_3_)
+	DP_ChickInside(dp_chicken_2_, dp_num_area_3_)
+	DP_ChickInside(dp_chicken_3_, dp_num_area_3_)
+	DP_ChickInside(dp_chicken_4_, dp_num_area_3_)
+	DP_ChickInside(dp_chicken_5_, dp_num_area_3_)
+	DP_ChickInside(dp_chicken_6_, dp_num_area_3_)
+	DP_ChickInside(dp_chicken_7_, dp_num_area_3_)
+	DP_ChickInside(dp_chicken_8_, dp_num_area_3_)
+	DP_ChickInside(dp_chicken_9_, dp_num_area_1_)
+
+
+# Opens the Heart Trial Cave. Password: 
+# 1. RRR
+# 2. YYY
+# 3. BBB
+action DP_OpenHeartTrialCave:
+	dwelling_place : DwellingPlace
+	heart_trial : DwellingPlace_HeartTrial
+	area_1 : DP_NumArea_1
+	area_2 : DP_NumArea_2
+	area_3 : DP_NumArea_3
+	yellow_1 : DP_Chicken, DP_Yellow
+	yellow_2 : DP_Chicken, DP_Yellow
+	yellow_3 : DP_Chicken, DP_Yellow
+	red_1 : DP_Chicken, DP_Red
+	red_2 : DP_Chicken, DP_Red
+	red_3 : DP_Chicken, DP_Red
+	blue_1 : DP_Chicken, DP_Blue
+	blue_2 : DP_Chicken, DP_Blue
+	blue_3 : DP_Chicken, DP_Blue
+	pre DP_ChickInside(red_1, area_1)
+		DP_ChickInside(red_2, area_1)
+		DP_ChickInside(red_3, area_1)
+		DP_ChickInside(yellow_1, area_2)
+		DP_ChickInside(yellow_2, area_2)
+		DP_ChickInside(yellow_3, area_2)
+		DP_ChickInside(blue_1, area_3)
+		DP_ChickInside(blue_2, area_3)
+		DP_ChickInside(blue_3, area_3)
+	rem # none
+	add Path2(dwelling_place, heart_trial)
+
+
+# Global version with no arguments (for using in code).
+action DP_OpenHeartTrialCave_GLOBAL:
+	pre DP_ChickInside(dp_chicken_2_, dp_num_area_1_)
+		DP_ChickInside(dp_chicken_5_, dp_num_area_1_)
+		DP_ChickInside(dp_chicken_8_, dp_num_area_1_)
+		DP_ChickInside(dp_chicken_1_, dp_num_area_2_)
+		DP_ChickInside(dp_chicken_4_, dp_num_area_2_)
+		DP_ChickInside(dp_chicken_7_, dp_num_area_2_)
+		DP_ChickInside(dp_chicken_3_, dp_num_area_3_)
+		DP_ChickInside(dp_chicken_6_, dp_num_area_3_)
+		DP_ChickInside(dp_chicken_9_, dp_num_area_3_)
+	rem NotBeenUsed(dp_heart_trial_cave_blocked_)
+	add Path2(dwelling_place_, dwelling_place_heart_trial_)
+
+
+# Drive chicken into a numbered area.
+action DP_DriveInto {dp_chicken_pinball}:
+	chicken : DP_Chicken
+	area : DP_NumArea
+	other_1 : DP_NumArea
+	other_2 : DP_NumArea
+	pre # none
+	rem DP_ChickInside(chicken, other_1)
+		DP_ChickInside(chicken, other_2)
+	add DP_ChickInside(chicken, area)
+
+
+# Drive chicken into a numbered area.
+action DP_DriveOut: #{dp_chicken_pinball}:
+	chicken : DP_Chicken
+	area_1 : DP_NumArea
+	area_2 : DP_NumArea
+	area_3 : DP_NumArea
+	pre # none
+	rem DP_ChickInside(chicken, area_1)
+		DP_ChickInside(chicken, area_2)
+		DP_ChickInside(chicken, area_3)
+	add # none
+
+
+action DP_ResetChickenPinball:
+	pre # none
+	rem DP_ChickInside(dp_chicken_1_, dp_num_area_1_)
+		DP_ChickInside(dp_chicken_1_, dp_num_area_2_)
+		DP_ChickInside(dp_chicken_1_, dp_num_area_3_)
+		#
+		DP_ChickInside(dp_chicken_2_, dp_num_area_1_)
+		DP_ChickInside(dp_chicken_2_, dp_num_area_2_)
+		DP_ChickInside(dp_chicken_2_, dp_num_area_3_)
+		#
+		DP_ChickInside(dp_chicken_3_, dp_num_area_1_)
+		DP_ChickInside(dp_chicken_3_, dp_num_area_2_)
+		DP_ChickInside(dp_chicken_3_, dp_num_area_3_)
+		#
+		DP_ChickInside(dp_chicken_4_, dp_num_area_1_)
+		DP_ChickInside(dp_chicken_4_, dp_num_area_2_)
+		DP_ChickInside(dp_chicken_4_, dp_num_area_3_)
+		#
+		DP_ChickInside(dp_chicken_5_, dp_num_area_1_)
+		DP_ChickInside(dp_chicken_5_, dp_num_area_2_)
+		DP_ChickInside(dp_chicken_5_, dp_num_area_3_)
+		#
+		DP_ChickInside(dp_chicken_6_, dp_num_area_1_)
+		DP_ChickInside(dp_chicken_6_, dp_num_area_2_)
+		DP_ChickInside(dp_chicken_6_, dp_num_area_3_)
+		#
+		DP_ChickInside(dp_chicken_7_, dp_num_area_1_)
+		DP_ChickInside(dp_chicken_7_, dp_num_area_2_)
+		DP_ChickInside(dp_chicken_7_, dp_num_area_3_)
+		#
+		DP_ChickInside(dp_chicken_8_, dp_num_area_1_)
+		DP_ChickInside(dp_chicken_8_, dp_num_area_2_)
+		DP_ChickInside(dp_chicken_8_, dp_num_area_3_)
+		#
+		DP_ChickInside(dp_chicken_9_, dp_num_area_1_)
+		DP_ChickInside(dp_chicken_9_, dp_num_area_2_)
+		DP_ChickInside(dp_chicken_9_, dp_num_area_3_)
+	add DP_InitChickenPinball()
+
+
+action InitChickenPinball:
+	pre # none
+	rem # none
+	add DP_InitChickenPinball()
+
+
+quest DwellingPlace_OpenHeartCave:
+	options:
+		searchLimit 20000
+		spaceLimit 20000
+		#strategy DFS
+		heuristic HSP
+	preconditions:
+		Know(player_, dp_heart_trial_cave_blocked_)
+	goal:
+		Path2(dwelling_place_, dwelling_place_heart_trial_)
+	actions:
+		dp_chicken_pinball
+		DP_OpenHeartTrialCave
+	objects:
+		dwelling_place_
+		dwelling_place_heart_trial_
+		DP_Chicken
+		DP_NumArea
+	subquests:
+		# none
