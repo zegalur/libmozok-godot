@@ -18,78 +18,29 @@ type DP_NumArea
 	type DP_NumArea_1 : DP_NumArea
 	type DP_NumArea_2 : DP_NumArea
 	type DP_NumArea_3 : DP_NumArea
-type DP_NullArea
-
-# DPL[X] = Less then [X]
-type DPL1
-type DPL2
-type DPL3
-type DPL4
-type DPL5
-type DPL6
-type DPL7
-type DPL8
-type DPL9
-
-# DPG[X] = Greater then [X]
-type DPG1
-type DPG2
-type DPG3
-type DPG4
-type DPG5
-type DPG6
-type DPG7
-type DPG8
-type DPG9
-
-type DP_Slot
 
 object dp_num_area_1_ : DP_NumArea_1
 object dp_num_area_2_ : DP_NumArea_2
 object dp_num_area_3_ : DP_NumArea_3
 
 # Chicken colors : YRBYRBYRB
-object dp_chicken_1_ : DP_Chicken, DP_Yellow, DP_Slot, DPL2,DPL3,DPL4,DPL5,DPL6,DPL7,DPL8,DPL9
-object dp_chicken_2_ : DP_Chicken, DP_Red,    DP_Slot, DPL3,DPL4,DPL5,DPL6,DPL7,DPL8,DPL9,     DPG1
-object dp_chicken_3_ : DP_Chicken, DP_Blue,   DP_Slot, DPL4,DPL5,DPL6,DPL7,DPL8,DPL9,     DPG1,DPG2
-object dp_chicken_4_ : DP_Chicken, DP_Yellow, DP_Slot, DPL5,DPL6,DPL7,DPL8,DPL9,     DPG1,DPG2,DPG3
-object dp_chicken_5_ : DP_Chicken, DP_Red,    DP_Slot, DPL6,DPL7,DPL8,DPL9,     DPG1,DPG2,DPG3,DPG4
-object dp_chicken_6_ : DP_Chicken, DP_Blue,   DP_Slot, DPL7,DPL8,DPL9,     DPG1,DPG2,DPG3,DPG4,DPG5
-object dp_chicken_7_ : DP_Chicken, DP_Yellow, DP_Slot, DPL8,DPL9,     DPG1,DPG2,DPG3,DPG4,DPG5,DPG6
-object dp_chicken_8_ : DP_Chicken, DP_Red,    DP_Slot, DPL9,     DPG1,DPG2,DPG3,DPG4,DPG5,DPG6,DPG7
-object dp_chicken_9_ : DP_Chicken, DP_Blue,   DP_Slot,      DPG1,DPG2,DPG3,DPG4,DPG5,DPG6,DPG7,DPG8
+object dp_chicken_1_ : DP_Chicken, DP_Yellow
+object dp_chicken_2_ : DP_Chicken, DP_Red
+object dp_chicken_3_ : DP_Chicken, DP_Blue
+object dp_chicken_4_ : DP_Chicken, DP_Yellow
+object dp_chicken_5_ : DP_Chicken, DP_Red
+object dp_chicken_6_ : DP_Chicken, DP_Blue
+object dp_chicken_7_ : DP_Chicken, DP_Yellow
+object dp_chicken_8_ : DP_Chicken, DP_Red
+object dp_chicken_9_ : DP_Chicken, DP_Blue
 
-object dp_a1_head : DP_Slot, DPL1,DPL2,DPL3,DPL4,DPL5,DPL6,DPL7,DPL8,DPL9
-object dp_a2_head : DP_Slot, DPL1,DPL2,DPL3,DPL4,DPL5,DPL6,DPL7,DPL8,DPL9
-object dp_a3_head : DP_Slot, DPL1,DPL2,DPL3,DPL4,DPL5,DPL6,DPL7,DPL8,DPL9
-object dp_a1_tail : DP_Slot
-object dp_a2_tail : DP_Slot
-object dp_a3_tail : DP_Slot
-
-# Chicken A is inside the numbered area Y.
+# Chicken A is inside the numbered area Y
 rel DP_ChickInside(DP_Chicken, DP_NumArea)
-
-# Chicken is outside of any numbered area.
-rel DP_ChickOutside(DP_Chicken)
-
-# [B],[C] in area [A].
-rel DP_NextTo(DP_Slot, DP_Slot)
 
 agroup dp_chicken_pinball
 
 
-# Chicken 9   in Area 1
-# Chicken 1-8 in Area 3
 rlist DP_InitChickenPinball:
-	# Area 1
-	DP_ChickInside(dp_chicken_9_, dp_num_area_1_)
-	DP_NextTo(dp_a1_head, dp_chicken_9_)
-	DP_NextTo(dp_chicken_9_, dp_a1_tail)
-	
-	# Area 2
-	DP_NextTo(dp_a2_head, dp_a2_tail)
-	
-	# Area 3
 	DP_ChickInside(dp_chicken_1_, dp_num_area_3_)
 	DP_ChickInside(dp_chicken_2_, dp_num_area_3_)
 	DP_ChickInside(dp_chicken_3_, dp_num_area_3_)
@@ -98,15 +49,7 @@ rlist DP_InitChickenPinball:
 	DP_ChickInside(dp_chicken_6_, dp_num_area_3_)
 	DP_ChickInside(dp_chicken_7_, dp_num_area_3_)
 	DP_ChickInside(dp_chicken_8_, dp_num_area_3_)
-	DP_NextTo(dp_a3_head, dp_chicken_1_)
-	DP_NextTo(dp_chicken_1_, dp_chicken_2_)
-	DP_NextTo(dp_chicken_2_, dp_chicken_3_)
-	DP_NextTo(dp_chicken_3_, dp_chicken_4_)
-	DP_NextTo(dp_chicken_4_, dp_chicken_5_)
-	DP_NextTo(dp_chicken_5_, dp_chicken_6_)
-	DP_NextTo(dp_chicken_6_, dp_chicken_7_)
-	DP_NextTo(dp_chicken_7_, dp_chicken_8_)
-	DP_NextTo(dp_chicken_8_, dp_a3_tail)
+	DP_ChickInside(dp_chicken_9_, dp_num_area_1_)
 
 
 # Opens the Heart Trial Cave. Password: 
@@ -143,8 +86,7 @@ action DP_OpenHeartTrialCave:
 
 # Global version with no arguments (for using in code).
 action DP_OpenHeartTrialCave_GLOBAL:
-	pre NotBeenUsed(dp_heart_trial_cave_blocked_)
-		DP_ChickInside(dp_chicken_2_, dp_num_area_1_)
+	pre DP_ChickInside(dp_chicken_2_, dp_num_area_1_)
 		DP_ChickInside(dp_chicken_5_, dp_num_area_1_)
 		DP_ChickInside(dp_chicken_8_, dp_num_area_1_)
 		DP_ChickInside(dp_chicken_1_, dp_num_area_2_)
@@ -219,7 +161,6 @@ action DP_ResetChickenPinball:
 		DP_ChickInside(dp_chicken_9_, dp_num_area_1_)
 		DP_ChickInside(dp_chicken_9_, dp_num_area_2_)
 		DP_ChickInside(dp_chicken_9_, dp_num_area_3_)
-		#
 	add DP_InitChickenPinball()
 
 
