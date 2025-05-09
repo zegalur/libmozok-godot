@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bpn8msqwjqemh"]
+[gd_scene load_steps=9 format=3 uid="uid://bpn8msqwjqemh"]
 
 [ext_resource type="Theme" uid="uid://cqnnwflfspwe1" path="res://assets/gui/other/quest_book_theme.tres" id="1_ee5m8"]
 [ext_resource type="Script" uid="uid://dim6qcg6ory7i" path="res://assets/gui/quest_panel.gd" id="1_gkq0r"]
@@ -32,9 +32,43 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_rsmyr"]
+resource_name = "active_hotter"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Border:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 0.583799, 0, 1), Color(1, 0.204106, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_f6rbt"]
+resource_name = "active_cooler"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Border:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(0, 0.620417, 1, 1), Color(0, 0.268015, 1, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r20f5"]
 _data = {
-&"active": SubResource("Animation_34yi3")
+&"active": SubResource("Animation_34yi3"),
+&"active_cooler": SubResource("Animation_f6rbt"),
+&"active_hotter": SubResource("Animation_rsmyr")
 }
 
 [node name="QuestPanel" type="PanelContainer"]

@@ -39,12 +39,20 @@ func set_quest_name(quest_name : String):
 func set_quest_plan(
 		actionList : PackedStringArray, 
 		actionArgsList : Array):
+	var anim = "active"
+	if actionList.size() != _action_list.size():
+		if actionList.size() > 0 and _action_list.size() > 0:
+			if actionList.size() < _action_list.size():
+				anim = "active_hotter"
+			else:
+				anim = "active_cooler"
+		
 	_action_list = actionList
 	_action_args = actionArgsList
 	_plan.modulate.a = 1.0
 	_update_text()
 	$AnimationPlayer.stop()
-	$AnimationPlayer.play("active")
+	$AnimationPlayer.play(anim)
 
 
 func set_quest_status(new_status : int):

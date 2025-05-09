@@ -12,6 +12,7 @@ All significant modifications to this demo will be recorded in this file. The st
 - Syntax highlight for `.quest` and `.qsf`.
 - Generate GDScript from the QSF.
 - New assets, main menu and new demo.
+- Quest panels now indicate `hotter` or `cooler` using different highlight colors.
 
 ### Changed
 
