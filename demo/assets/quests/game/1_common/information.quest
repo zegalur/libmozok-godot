@@ -22,7 +22,7 @@ rel NotBeenUsed(Fact)
 
 
 # Informs a mindful agent about a fact.
-# Use this for non NPC related facts.
+# You can use this for non NPC related facts.
 action Inform:
 	who : Mindful
 	what : Fact

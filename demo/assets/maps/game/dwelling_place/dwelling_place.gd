@@ -181,6 +181,7 @@ func _on_heart_cave_password_signpost_activated() -> void:
 	if heart_cave_sign_read:
 		return
 	heart_cave_sign_read = true
-	M.game.Inform(0, _quest_server,
-			M.game.Inform_1_who.player_,
-			M.game.Inform_2_what.dp_heart_trial_cave_blocked_)
+	M.game.DwellingPlace_ReadHeartCaveSign(0, _quest_server,
+			M.game.DwellingPlace_ReadHeartCaveSign_1_player.player_,
+			M.game.DwellingPlace_ReadHeartCaveSign_2_dwelling_place.dwelling_place_,
+			M.game.DwellingPlace_ReadHeartCaveSign_3_cave_blocked.dp_heart_trial_cave_blocked_)

@@ -64,13 +64,13 @@ action DP_FinishTrial:
 	add Path2(trials, island)
 
 
-action N/A DwellingPlace_ReadHeartCaveSign {map_movement}:
+action DwellingPlace_ReadHeartCaveSign {map_movement}:
 	player : Player
 	dwelling_place : DwellingPlace
 	cave_blocked : DP_HeartCaveBloked
 	pre At(player, dwelling_place)
 		Unaware(player, cave_blocked)
-	rem # none
+	rem Unaware(player, cave_blocked)
 	add Know(player, cave_blocked)
 
 
