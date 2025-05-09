@@ -4,6 +4,8 @@
 #include <godot_cpp/classes/node.hpp>
 #include <libmozok/mozok.hpp>
 
+#include <memory>
+
 namespace godot {
 
 class LibMozokServer : public Node, public mozok::MessageProcessor {
