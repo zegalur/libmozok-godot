@@ -6,9 +6,17 @@ projects: # none
 init: # none
 
 
+onInit:
+ALWAYS READ_DP_PORTAL_SIGNS:
+	print "Player reads the portal signs at the Dwelling Place."
+	push [game] Inform(player_, dp_portal_1_password_)
+	push [game] Inform(player_, dp_portal_2_password_)
+
+
 onSearchLimitReached [game] _:
 ALWAYS SEARCH_LIMIT: 
 	exit ERROR: Search limit reached!
+
 
 onSpaceLimitReached [game] _:
 ALWAYS SPACE_LIMIT: 

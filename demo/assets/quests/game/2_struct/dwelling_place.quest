@@ -17,6 +17,8 @@ object dwelling_place_heart_trial_ : DwellingPlace_HeartTrial
 
 type DP_HeartCaveBloked : Fact
 object dp_heart_trial_cave_blocked_ : DP_HeartCaveBloked, MapMovement
+object dp_portal_1_password_ : Fact
+object dp_portal_2_password_ : Fact
 
 # ----------------------------- Big Heart Trial ------------------------------ #
 
@@ -99,6 +101,8 @@ action N/A DwellingPlace_BigHeartTrial {map_movement}:
 
 rlist InitDwellingPlace:
 	Unaware(player_, dp_heart_trial_cave_blocked_)
+	Unaware(player_, dp_portal_1_password_)
+	Unaware(player_, dp_portal_2_password_)
 	NotBeenUsed(dp_heart_trial_cave_blocked_)
 	DP_Cur_Trial(dp_trial_puzzle_)
 

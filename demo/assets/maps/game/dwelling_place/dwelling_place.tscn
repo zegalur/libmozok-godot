@@ -1811,18 +1811,20 @@ tile_set = ExtResource("8_nup47")
 
 [node name="Portals" type="Node2D" parent="Env"]
 
-[node name="KeyPortal" parent="Env/Portals" instance=ExtResource("13_4ee4t")]
+[node name="Portal_1" parent="Env/Portals" instance=ExtResource("13_4ee4t")]
+unique_name_in_owner = true
 position = Vector2(808, -32)
 spawn_point = "SpawnAt3"
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Env/Portals/KeyPortal"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Env/Portals/Portal_1"]
 shape = SubResource("RectangleShape2D_ikljt")
 
-[node name="ChestPortal" parent="Env/Portals" instance=ExtResource("13_4ee4t")]
+[node name="Portal_2" parent="Env/Portals" instance=ExtResource("13_4ee4t")]
+unique_name_in_owner = true
 position = Vector2(1248, 160)
 spawn_point = "SpawnAt3"
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Env/Portals/ChestPortal"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Env/Portals/Portal_2"]
 shape = SubResource("RectangleShape2D_negjg")
 
 [node name="Objects" type="Node2D" parent="."]
@@ -3079,22 +3081,33 @@ script = ExtResource("10_hw324")
 text = "LibMozok and this demo created by Pavlo Savchuk, 2024-2025. Enjoy the journey!"
 metadata/_custom_type_script = "uid://c02yehtofmvfo"
 
-[node name="KeySignpost" parent="Objects/NPCs" instance=ExtResource("22_jn0rp")]
+[node name="Portal_1_Signpost" parent="Objects/NPCs" instance=ExtResource("22_jn0rp")]
 position = Vector2(720, -24)
 npc_name = "Password"
 
-[node name="KeyPassword" type="Node" parent="Objects/NPCs/KeySignpost"]
+[node name="Portal_1_Password" type="Node" parent="Objects/NPCs/Portal_1_Signpost"]
 script = ExtResource("10_hw324")
-text = "1. BYR
-2. BYR
-3. BYR"
+text = "1. YRB
+2. YRB
+3. YRB"
 metadata/_custom_type_script = "uid://c02yehtofmvfo"
 
-[node name="ChestSignpost" parent="Objects/NPCs" instance=ExtResource("22_jn0rp")]
+[node name="Portal_2_Signpost" parent="Objects/NPCs" instance=ExtResource("22_jn0rp")]
 position = Vector2(1144, 200)
 npc_name = "Password"
 
-[node name="ChestPassword" type="Node" parent="Objects/NPCs/ChestSignpost"]
+[node name="Portal_2_Password" type="Node" parent="Objects/NPCs/Portal_2_Signpost"]
+script = ExtResource("10_hw324")
+text = "1. BRY
+2. YYR
+3. RBB"
+metadata/_custom_type_script = "uid://c02yehtofmvfo"
+
+[node name="SecretCave_Signpost" parent="Objects/NPCs" instance=ExtResource("22_jn0rp")]
+position = Vector2(32, -176)
+npc_name = "Password"
+
+[node name="SecretCave_Password" type="Node" parent="Objects/NPCs/SecretCave_Signpost"]
 script = ExtResource("10_hw324")
 text = "ABC = RBY"
 metadata/_custom_type_script = "uid://c02yehtofmvfo"
@@ -3474,11 +3487,13 @@ offset_right = 1248.0
 offset_bottom = 928.0
 metadata/_edit_lock_ = true
 
-[connection signal="teleported" from="Env/Portals/KeyPortal" to="." method="_on_chicken_portal_teleported"]
-[connection signal="teleported" from="Env/Portals/ChestPortal" to="." method="_on_chicken_portal_teleported"]
+[connection signal="teleported" from="Env/Portals/Portal_1" to="." method="_on_chicken_portal_teleported"]
+[connection signal="teleported" from="Env/Portals/Portal_2" to="." method="_on_chicken_portal_teleported"]
 [connection signal="picked_up" from="Objects/Items/BigHeart" to="." method="_on_big_heart_picked_up"]
 [connection signal="activated" from="Objects/NPCs/GuardPhilip/Intro" to="." method="_on_guard_intro_activated"]
 [connection signal="activated" from="Objects/NPCs/HeartTrialSignpost/Password" to="." method="_on_heart_cave_password_signpost_activated"]
+[connection signal="activated" from="Objects/NPCs/Portal_1_Signpost/Portal_1_Password" to="." method="_on_portal_1_password_signpost_activated"]
+[connection signal="activated" from="Objects/NPCs/Portal_2_Signpost/Portal_2_Password" to="." method="_on_portal_2_password_sign_activated"]
 [connection signal="map_change_requested" from="Other/MapChanges/ForestEntry" to="." method="_on_forest_entry_map_change_requested"]
 [connection signal="map_change_requested" from="Other/MapChanges/TrialEntrance" to="." method="_on_trial_entrance_map_change_requested"]
 [connection signal="map_change_requested" from="Other/MapChanges/TrialEntrance_2" to="." method="_on_trial_entrance_2_map_change_requested"]

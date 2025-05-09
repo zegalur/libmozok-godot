@@ -64,6 +64,8 @@ func _on_lib_mozok_server_action_error(
 
 func _on_main_menu_exit() -> void:
 	get_tree().quit()
+	_player.queue_free()
+	_gui.queue_free()
 
 
 func _hide_main_menu() -> void:

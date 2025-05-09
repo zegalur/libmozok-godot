@@ -37,6 +37,13 @@ const NEXT_ANSWER = "[next]"
 @onready var _map_name_player = %MapNamePlayer
 var _state : GameState
 
+var _free_at_delete : Array[Object] = [
+	_heart_red,
+	_heart_gray,
+	_heart_half,
+	_dungeon_key_icon
+]
+
 
 func _ready():
 	custom_minimum_size = get_viewport_rect().size
@@ -46,6 +53,12 @@ func _ready():
 		_keys_box.remove_child(key_icon)
 	_dialogue_box.hide()
 	_answers.active = false
+
+
+func _exit_tree() -> void:
+	if is_queued_for_deletion():
+		for node in _free_at_delete:
+			node.free()
 
 
 func save_state(__state : GameState) -> void:

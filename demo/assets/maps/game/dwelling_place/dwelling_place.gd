@@ -2,6 +2,8 @@ extends Map
 ## The player's home and the starting location of the game.
 
 const HEART_CAVE_PASSWORD = ["RRR", "YYY", "BBB"]
+const PORTAL_1_PASSWORD = ["YRB", "YRB", "YRB"]
+const PORTAL_2_PASSWORD = ["BRY", "YYR", "RBB"]
 const CHICKEN_COLORS = "YRBYRBYRB"
 
 @onready var _chickens = %Chickens.get_children()
@@ -31,22 +33,44 @@ var _abc_state : String = ""
 # ----------------------------------- State ---------------------------------- #
 
 const STATE_PRE = "dwelling_place/"
+
 var talked_to_the_guard : bool
+
 var heart_cave_sign_read : bool
+var portal_1_sign_read : bool
+var portal_2_sign_read : bool
+var secret_cave_sign_read : bool
+
 var heart_cave_opened : bool
+var portal_1_removed : bool
+var portal_2_removed : bool
 var secret_cave_opened : bool
 
 func save_state(state : GameState):
 	state.write(STATE_PRE + "talked_to_the_guard", talked_to_the_guard)
 	state.write(STATE_PRE + "heart_cave_sign_read", heart_cave_sign_read)
+	state.write(STATE_PRE + "portal_1_sign_read", portal_1_sign_read)
+	state.write(STATE_PRE + "portal_2_sign_read", portal_2_sign_read)
+	state.write(STATE_PRE + "secret_cave_sign_read", secret_cave_sign_read)
 	state.write(STATE_PRE + "heart_cave_opened", heart_cave_opened)
+	state.write(STATE_PRE + "portal_1_removed", portal_1_removed)
+	state.write(STATE_PRE + "portal_2_removed", portal_2_removed)
 	state.write(STATE_PRE + "secret_cave_opened", secret_cave_opened)
 
 func load_state(state : GameState):
 	talked_to_the_guard = state.read(STATE_PRE + "talked_to_the_guard", false)
 	heart_cave_sign_read = state.read(STATE_PRE + "heart_cave_sign_read", false)
+	portal_1_sign_read = state.read(STATE_PRE + "portal_1_sign_read", false)
+	portal_2_sign_read = state.read(STATE_PRE + "portal_2_sign_read", false)
+	secret_cave_sign_read = state.read(STATE_PRE + "secret_cave_sign_read", false)
 	heart_cave_opened = state.read(STATE_PRE + "heart_cave_opened", false)
+	portal_1_removed = state.read(STATE_PRE + "portal_1_removed", false)
+	portal_2_removed = state.read(STATE_PRE + "portal_2_removed", false)
 	secret_cave_opened = state.read(STATE_PRE + "secret_cave_opened", false)
+	if portal_1_removed:
+		_remove_portal(%Portal_1)
+	if portal_2_removed:
+		_remove_portal(%Portal_2)
 	if heart_cave_opened:
 		_remove_cave_rock(%HeartTrialCaveRock)
 	if secret_cave_opened:
@@ -74,7 +98,9 @@ func _chicken_pinball(_delta: float) -> void:
 		%CurrentColors_2,
 		%CurrentColors_3,
 		]
-	var cur_state_123 : Array[String] = ["", "", ""]
+	
+	var area_chickens : Array[Array] = [ [], [], [] ]
+	
 	for i in _chickens.size():
 		var chicken = _chickens[i] as CharacterBody2D
 		if is_instance_valid(chicken) == false:
@@ -82,10 +108,17 @@ func _chicken_pinball(_delta: float) -> void:
 		var hidden = true
 		for rect in rects.keys():
 			if rect.get_global_rect().has_point(chicken.global_position):
-				cur_state_123[rects[rect]] += CHICKEN_COLORS[i]
+				area_chickens[rects[rect]].push_back(i)
 				hidden = false
 				if _chicken_color_points[i].get_parent() != tabs[rects[rect]]:
+					var new_indx : int = 0
+					for chick in tabs[rects[rect]].get_children():
+						if str(chick.name) < str(_chicken_color_points[i].name):
+							new_indx += 1
+						else:
+							break
 					_chicken_color_points[i].reparent(tabs[rects[rect]])
+					tabs[rects[rect]].move_child(_chicken_color_points[i], new_indx)
 					var other = [0,1,2]
 					other.erase(rects[rect])
 					M.game.DP_DriveInto(0, _quest_server, 
@@ -103,14 +136,63 @@ func _chicken_pinball(_delta: float) -> void:
 						_narea_qobjs[1], 
 						_narea_qobjs[2])
 	
+	# Sorted by chicken number.
+	var cur_state_123 : Array[String] = [ "", "", "" ]
+	for area_config in area_chickens:
+		area_config.sort()
+	for i in area_chickens.size():
+		for j in area_chickens[i].size():
+			cur_state_123[i] += CHICKEN_COLORS[area_chickens[i][j]]
+	
 	# New 123-state?
 	if cur_state_123 != _numbers_state:
 		_numbers_state = cur_state_123
+		
 		if HEART_CAVE_PASSWORD == _numbers_state:
 			if heart_cave_opened == false:
 				heart_cave_opened = true
 				_remove_cave_rock(%HeartTrialCaveRock)
 				M.game.DP_OpenHeartTrialCave_GLOBAL(0, _quest_server)
+				
+		if PORTAL_1_PASSWORD == _numbers_state:
+			if portal_1_removed == false:
+				portal_1_removed = true
+				_remove_portal(%Portal_1)
+				M.game.DP_RemovePortal_1(0, _quest_server,
+					M.game.DP_RemovePortal_1_1_portal_1.dp_portal_1_,
+					M.game.DP_RemovePortal_1_2_area_1.dp_num_area_1_,
+					M.game.DP_RemovePortal_1_3_area_2.dp_num_area_2_,
+					M.game.DP_RemovePortal_1_4_area_3.dp_num_area_3_,
+					_chicken_qobjs[area_chickens[0][0]],
+					_chicken_qobjs[area_chickens[0][1]],
+					_chicken_qobjs[area_chickens[0][2]],
+					_chicken_qobjs[area_chickens[1][0]],
+					_chicken_qobjs[area_chickens[1][1]],
+					_chicken_qobjs[area_chickens[1][2]],
+					_chicken_qobjs[area_chickens[2][0]],
+					_chicken_qobjs[area_chickens[2][1]],
+					_chicken_qobjs[area_chickens[2][2]],
+					)
+		
+		if PORTAL_2_PASSWORD == _numbers_state:
+			if portal_2_removed == false:
+				portal_2_removed = true
+				_remove_portal(%Portal_2)
+				M.game.DP_RemovePortal_2(0, _quest_server,
+					M.game.DP_RemovePortal_2_1_portal_2.dp_portal_2_,
+					M.game.DP_RemovePortal_2_2_area_1.dp_num_area_1_,
+					M.game.DP_RemovePortal_2_3_area_2.dp_num_area_2_,
+					M.game.DP_RemovePortal_2_4_area_3.dp_num_area_3_,
+					_chicken_qobjs[area_chickens[0][0]],
+					_chicken_qobjs[area_chickens[0][1]],
+					_chicken_qobjs[area_chickens[0][2]],
+					_chicken_qobjs[area_chickens[1][0]],
+					_chicken_qobjs[area_chickens[1][1]],
+					_chicken_qobjs[area_chickens[1][2]],
+					_chicken_qobjs[area_chickens[2][0]],
+					_chicken_qobjs[area_chickens[2][1]],
+					_chicken_qobjs[area_chickens[2][2]],
+					)
 
 
 func _remove_cave_rock(node : Node2D) -> void:
@@ -121,6 +203,11 @@ func _remove_cave_rock(node : Node2D) -> void:
 	await get_tree().create_timer(1.0).timeout
 	body.queue_free()
 	sprite.queue_free()
+
+
+func _remove_portal(portal_node : Node2D) -> void:
+	portal_node.queue_free()
+
 
 # ----------------------------------- Other ---------------------------------- #
 
@@ -185,3 +272,21 @@ func _on_heart_cave_password_signpost_activated() -> void:
 			M.game.DwellingPlace_ReadHeartCaveSign_1_player.player_,
 			M.game.DwellingPlace_ReadHeartCaveSign_2_dwelling_place.dwelling_place_,
 			M.game.DwellingPlace_ReadHeartCaveSign_3_cave_blocked.dp_heart_trial_cave_blocked_)
+
+
+func _on_portal_1_password_signpost_activated() -> void:
+	if portal_1_sign_read:
+		return
+	portal_1_sign_read = true
+	M.game.Inform(0, _quest_server,
+			M.game.Inform_1_who.player_,
+			M.game.Inform_2_what.dp_portal_1_password_)
+
+
+func _on_portal_2_password_sign_activated() -> void:
+	if portal_2_sign_read:
+		return
+	portal_2_sign_read = true
+	M.game.Inform(0, _quest_server, 
+			M.game.Inform_1_who.player_, 
+			M.game.Inform_2_what.dp_portal_2_password_)
