@@ -117,7 +117,7 @@ select_next={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://assets/quests/tutorials/tutorial_text.en.translation", "res://assets/quests/game/translations/big_hearts.en.translation", "res://assets/quests/game/translations/castle.en.translation", "res://assets/quests/game/translations/dwelling_place.en.translation", "res://assets/quests/game/translations/main_story.en.translation", "res://assets/quests/game/translations/npc.en.translation", "res://assets/quests/game/translations/player.en.translation", "res://assets/quests/game/translations/forest.en.translation")
+locale/translations=PackedStringArray("res://quests/tutorials/tutorial_text.en.translation", "res://quests/game/translations/big_hearts.en.translation", "res://quests/game/translations/castle.en.translation", "res://quests/game/translations/dwelling_place.en.translation", "res://quests/game/translations/forest.en.translation", "res://quests/game/translations/main_story.en.translation", "res://quests/game/translations/npc.en.translation", "res://quests/game/translations/player.en.translation")
 
 [layer_names]
 
@@ -136,9 +136,9 @@ locale/translations=PackedStringArray("res://assets/quests/tutorials/tutorial_te
 
 [mozok]
 
-gen/output="res://assets/quests/generated/game.gd"
+gen/output="res://quests/generated/game.gd"
 gen/qsf="main.qsf"
-gen/wdir="res://assets/quests/game/"
+gen/wdir="res://quests/game/"
 gen/class="M"
 
 [rendering]

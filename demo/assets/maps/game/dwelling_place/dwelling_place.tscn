@@ -1815,6 +1815,7 @@ tile_set = ExtResource("8_nup47")
 unique_name_in_owner = true
 position = Vector2(808, -32)
 spawn_point = "SpawnAt3"
+call_teleport = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Env/Portals/Portal_1"]
 shape = SubResource("RectangleShape2D_ikljt")
@@ -1823,6 +1824,7 @@ shape = SubResource("RectangleShape2D_ikljt")
 unique_name_in_owner = true
 position = Vector2(1248, 160)
 spawn_point = "SpawnAt3"
+call_teleport = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Env/Portals/Portal_2"]
 shape = SubResource("RectangleShape2D_negjg")
@@ -3018,7 +3020,7 @@ This cave is a Heart Trial Cave. Solve the puzzles, defeat all the enemies, and 
 metadata/_custom_type_script = "uid://c02yehtofmvfo"
 
 [node name="ForestSignpost" parent="Objects/NPCs" instance=ExtResource("17_nqcfl")]
-position = Vector2(136, 640)
+position = Vector2(128, 752)
 
 [node name="DialogueNode" type="Node" parent="Objects/NPCs/ForestSignpost"]
 script = ExtResource("10_hw324")
@@ -3487,8 +3489,6 @@ offset_right = 1248.0
 offset_bottom = 928.0
 metadata/_edit_lock_ = true
 
-[connection signal="teleported" from="Env/Portals/Portal_1" to="." method="_on_chicken_portal_teleported"]
-[connection signal="teleported" from="Env/Portals/Portal_2" to="." method="_on_chicken_portal_teleported"]
 [connection signal="picked_up" from="Objects/Items/BigHeart" to="." method="_on_big_heart_picked_up"]
 [connection signal="activated" from="Objects/NPCs/GuardPhilip/Intro" to="." method="_on_guard_intro_activated"]
 [connection signal="activated" from="Objects/NPCs/HeartTrialSignpost/Password" to="." method="_on_heart_cave_password_signpost_activated"]

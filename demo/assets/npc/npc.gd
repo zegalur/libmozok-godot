@@ -1,5 +1,6 @@
 class_name NPC
 extends CharacterBody2D
+## NPC (Non-Playable Character). Can be talked to.
 
 @export var portrait : Texture2D
 @export_multiline var npc_name : String = "[Unknown]"

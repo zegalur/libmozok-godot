@@ -1,4 +1,5 @@
 extends Area2D
+## Damages the player if they are inside the damage area during the damage stage.
 
 
 func _on_body_entered(body: Node2D) -> void:

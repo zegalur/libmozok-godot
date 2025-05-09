@@ -1,0 +1,375 @@
+# This file is a part of the LibMozok DEMO project, intended to demonstrate 
+# how the library can be integrated into a popular game engine. Also, it is a
+# good playground to test various features.
+
+# =================== Dwelling Place - Chicken Pinball ======================= #
+# Puzzles around the chicken pinball mechanics.
+
+# TODO: Replace large lists with rlist's `...` notation once it is supported.
+
+version 1 0
+project dwelling_place_chicken_pinball
+
+agroup dp_chicken_pinball
+
+type DP_Color
+	type DP_Yellow : DP_Color
+	type DP_Blue : DP_Color
+	type DP_Red : DP_Color
+type DP_Chicken
+type DP_NumArea
+	type DP_NumArea_1 : DP_NumArea
+	type DP_NumArea_2 : DP_NumArea
+	type DP_NumArea_3 : DP_NumArea
+type DP_Obstacle
+	type DP_Portal_1 : DP_Obstacle
+	type DP_Portal_2 : DP_Obstacle
+	type DP_SecretCaveRock : DP_Obstacle
+
+object dp_portal_1_ : DP_Portal_1
+object dp_portal_2_ : DP_Portal_2
+object dp_secret_cave_rock_ : DP_SecretCaveRock
+
+object dp_num_area_1_ : DP_NumArea_1
+object dp_num_area_2_ : DP_NumArea_2
+object dp_num_area_3_ : DP_NumArea_3
+
+# Chicken colors : YRBYRBYRB
+object dp_chicken_1_ : DP_Chicken, DP_Yellow
+object dp_chicken_2_ : DP_Chicken, DP_Red
+object dp_chicken_3_ : DP_Chicken, DP_Blue
+object dp_chicken_4_ : DP_Chicken, DP_Yellow
+object dp_chicken_5_ : DP_Chicken, DP_Red
+object dp_chicken_6_ : DP_Chicken, DP_Blue
+object dp_chicken_7_ : DP_Chicken, DP_Yellow
+object dp_chicken_8_ : DP_Chicken, DP_Red
+object dp_chicken_9_ : DP_Chicken, DP_Blue
+
+# Chicken A is inside the numbered area Y.
+rel DP_ChickInside(DP_Chicken, DP_NumArea)
+
+# Chicken A number is less then Chicken B number.
+rel DP_LessThen(DP_Chicken, DP_Chicken)
+
+# Marks that obstacle X have been removed.
+rel DP_ObstacleRemoved(DP_Obstacle)
+
+
+rlist DP_InitChickenPinball_Struct:
+	DP_LessThen(dp_chicken_1_, dp_chicken_2_)
+	DP_LessThen(dp_chicken_1_, dp_chicken_3_)
+	DP_LessThen(dp_chicken_1_, dp_chicken_4_)
+	DP_LessThen(dp_chicken_1_, dp_chicken_5_)
+	DP_LessThen(dp_chicken_1_, dp_chicken_6_)
+	DP_LessThen(dp_chicken_1_, dp_chicken_7_)
+	DP_LessThen(dp_chicken_1_, dp_chicken_8_)
+	DP_LessThen(dp_chicken_1_, dp_chicken_9_)
+		DP_LessThen(dp_chicken_2_, dp_chicken_3_)
+		DP_LessThen(dp_chicken_2_, dp_chicken_4_)
+		DP_LessThen(dp_chicken_2_, dp_chicken_5_)
+		DP_LessThen(dp_chicken_2_, dp_chicken_6_)
+		DP_LessThen(dp_chicken_2_, dp_chicken_7_)
+		DP_LessThen(dp_chicken_2_, dp_chicken_8_)
+		DP_LessThen(dp_chicken_2_, dp_chicken_9_)
+	DP_LessThen(dp_chicken_3_, dp_chicken_4_)
+	DP_LessThen(dp_chicken_3_, dp_chicken_5_)
+	DP_LessThen(dp_chicken_3_, dp_chicken_6_)
+	DP_LessThen(dp_chicken_3_, dp_chicken_7_)
+	DP_LessThen(dp_chicken_3_, dp_chicken_8_)
+	DP_LessThen(dp_chicken_3_, dp_chicken_9_)
+		DP_LessThen(dp_chicken_4_, dp_chicken_5_)
+		DP_LessThen(dp_chicken_4_, dp_chicken_6_)
+		DP_LessThen(dp_chicken_4_, dp_chicken_7_)
+		DP_LessThen(dp_chicken_4_, dp_chicken_8_)
+		DP_LessThen(dp_chicken_4_, dp_chicken_9_)
+	DP_LessThen(dp_chicken_5_, dp_chicken_6_)
+	DP_LessThen(dp_chicken_5_, dp_chicken_7_)
+	DP_LessThen(dp_chicken_5_, dp_chicken_8_)
+	DP_LessThen(dp_chicken_5_, dp_chicken_9_)
+		DP_LessThen(dp_chicken_6_, dp_chicken_7_)
+		DP_LessThen(dp_chicken_6_, dp_chicken_8_)
+		DP_LessThen(dp_chicken_6_, dp_chicken_9_)
+	DP_LessThen(dp_chicken_7_, dp_chicken_8_)
+	DP_LessThen(dp_chicken_7_, dp_chicken_9_)
+		DP_LessThen(dp_chicken_8_, dp_chicken_9_)
+
+
+# Chicken 9 in Area 1
+# Chicken 1-8 in Area 3
+rlist DP_InitChickenPinball_InitialState:
+	DP_ChickInside(dp_chicken_9_, dp_num_area_1_)
+	DP_ChickInside(dp_chicken_1_, dp_num_area_3_)
+	DP_ChickInside(dp_chicken_2_, dp_num_area_3_)
+	DP_ChickInside(dp_chicken_3_, dp_num_area_3_)
+	DP_ChickInside(dp_chicken_4_, dp_num_area_3_)
+	DP_ChickInside(dp_chicken_5_, dp_num_area_3_)
+	DP_ChickInside(dp_chicken_6_, dp_num_area_3_)
+	DP_ChickInside(dp_chicken_7_, dp_num_area_3_)
+	DP_ChickInside(dp_chicken_8_, dp_num_area_3_)
+
+
+# Opens the Heart Trial Cave. Password: 
+# 1. RRR
+# 2. YYY
+# 3. BBB
+action DP_OpenHeartTrialCave:
+	dwelling_place : DwellingPlace
+	heart_trial : DwellingPlace_HeartTrial
+	area_1 : DP_NumArea_1
+	area_2 : DP_NumArea_2
+	area_3 : DP_NumArea_3
+	yellow_1 : DP_Chicken, DP_Yellow
+	yellow_2 : DP_Chicken, DP_Yellow
+	yellow_3 : DP_Chicken, DP_Yellow
+	red_1 : DP_Chicken, DP_Red
+	red_2 : DP_Chicken, DP_Red
+	red_3 : DP_Chicken, DP_Red
+	blue_1 : DP_Chicken, DP_Blue
+	blue_2 : DP_Chicken, DP_Blue
+	blue_3 : DP_Chicken, DP_Blue
+	pre DP_ChickInside(red_1, area_1)
+		DP_ChickInside(red_2, area_1)
+		DP_ChickInside(red_3, area_1)
+		DP_ChickInside(yellow_1, area_2)
+		DP_ChickInside(yellow_2, area_2)
+		DP_ChickInside(yellow_3, area_2)
+		DP_ChickInside(blue_1, area_3)
+		DP_ChickInside(blue_2, area_3)
+		DP_ChickInside(blue_3, area_3)
+	rem # none
+	add Path2(dwelling_place, heart_trial)
+
+
+# Global version with no arguments (for using in code).
+action DP_OpenHeartTrialCave_GLOBAL:
+	pre DP_ChickInside(dp_chicken_2_, dp_num_area_1_)
+		DP_ChickInside(dp_chicken_5_, dp_num_area_1_)
+		DP_ChickInside(dp_chicken_8_, dp_num_area_1_)
+		DP_ChickInside(dp_chicken_1_, dp_num_area_2_)
+		DP_ChickInside(dp_chicken_4_, dp_num_area_2_)
+		DP_ChickInside(dp_chicken_7_, dp_num_area_2_)
+		DP_ChickInside(dp_chicken_3_, dp_num_area_3_)
+		DP_ChickInside(dp_chicken_6_, dp_num_area_3_)
+		DP_ChickInside(dp_chicken_9_, dp_num_area_3_)
+	rem NotBeenUsed(dp_heart_trial_cave_blocked_)
+	add Path2(dwelling_place_, dwelling_place_heart_trial_)
+
+
+# Removes the portal 1. Password:
+# 1. YRB
+# 2. YRB
+# 3. YRB
+action DP_RemovePortal_1:
+	portal_1 : DP_Portal_1
+	area_1 : DP_NumArea_1
+	area_2 : DP_NumArea_2
+	area_3 : DP_NumArea_3
+	yellow_1 : DP_Chicken, DP_Yellow
+	red_1 : DP_Chicken, DP_Red
+	blue_1 : DP_Chicken, DP_Blue
+	yellow_2 : DP_Chicken, DP_Yellow
+	red_2 : DP_Chicken, DP_Red
+	blue_2 : DP_Chicken, DP_Blue
+	yellow_3 : DP_Chicken, DP_Yellow
+	red_3 : DP_Chicken, DP_Red
+	blue_3 : DP_Chicken, DP_Blue
+	pre # area 1
+		DP_LessThen(yellow_1, red_1)
+		DP_LessThen(yellow_1, blue_1)
+		DP_LessThen(red_1, blue_1)
+		DP_ChickInside(blue_1, area_1)
+		DP_ChickInside(yellow_1, area_1)
+		DP_ChickInside(red_1, area_1)
+		# area 2
+		DP_LessThen(yellow_2, red_2)
+		DP_LessThen(yellow_2, blue_2)
+		DP_LessThen(red_2, blue_2)
+		DP_ChickInside(blue_2, area_2)
+		DP_ChickInside(yellow_2, area_2)
+		DP_ChickInside(red_2, area_2)
+		# area 3
+		DP_LessThen(yellow_3, red_3)
+		DP_LessThen(yellow_3, blue_3)
+		DP_LessThen(red_3, blue_3)
+		DP_ChickInside(blue_3, area_3)
+		DP_ChickInside(yellow_3, area_3)
+		DP_ChickInside(red_3, area_3)
+	rem # none
+	add DP_ObstacleRemoved(portal_1)
+
+
+# Removes the portal 2. Password:
+# 1. BRY (eg 357)
+# 2. YYR (eg 148)
+# 3. RBB (eg 269)
+action DP_RemovePortal_2:
+	portal_2 : DP_Portal_2
+	area_1 : DP_NumArea_1
+	area_2 : DP_NumArea_2
+	area_3 : DP_NumArea_3
+	blue_1 : DP_Chicken, DP_Blue
+	red_1 : DP_Chicken, DP_Red
+	yellow_1 : DP_Chicken, DP_Yellow
+	yellow_2 : DP_Chicken, DP_Yellow
+	yellow_3 : DP_Chicken, DP_Yellow
+	red_2 : DP_Chicken, DP_Red
+	red_3 : DP_Chicken, DP_Red
+	blue_2 : DP_Chicken, DP_Blue
+	blue_3 : DP_Chicken, DP_Blue
+	pre # area 1
+		DP_LessThen(blue_1, red_1)
+		DP_LessThen(blue_1, yellow_1)
+		DP_LessThen(red_1, yellow_1)
+		DP_ChickInside(blue_1, area_1)
+		DP_ChickInside(red_1, area_1)
+		DP_ChickInside(yellow_1, area_1)
+		# area 2
+		DP_LessThen(yellow_2, yellow_3)
+		DP_LessThen(yellow_2, red_2)
+		DP_LessThen(yellow_3, red_2)
+		DP_ChickInside(yellow_2, area_2)
+		DP_ChickInside(yellow_3, area_2)
+		DP_ChickInside(red_2, area_2)
+		# area 3
+		DP_LessThen(red_3, blue_2)
+		DP_LessThen(red_3, blue_3)
+		DP_LessThen(blue_2, blue_3)
+		DP_ChickInside(red_3, area_3)
+		DP_ChickInside(blue_2, area_3)
+		DP_ChickInside(blue_3, area_3)
+	rem # none
+	add DP_ObstacleRemoved(portal_2)
+
+
+# Drive chicken into a numbered area.
+action DP_DriveInto {dp_chicken_pinball}:
+	chicken : DP_Chicken
+	area : DP_NumArea
+	other_1 : DP_NumArea
+	other_2 : DP_NumArea
+	pre # none
+	rem DP_ChickInside(chicken, other_1)
+		DP_ChickInside(chicken, other_2)
+	add DP_ChickInside(chicken, area)
+
+
+# Drive chicken into a numbered area.
+action DP_DriveOut: #{dp_chicken_pinball}:
+	chicken : DP_Chicken
+	area_1 : DP_NumArea
+	area_2 : DP_NumArea
+	area_3 : DP_NumArea
+	pre # none
+	rem DP_ChickInside(chicken, area_1)
+		DP_ChickInside(chicken, area_2)
+		DP_ChickInside(chicken, area_3)
+	add # none
+
+
+action DP_ResetChickenPinball:
+	pre # none
+	rem DP_ChickInside(dp_chicken_1_, dp_num_area_1_)
+		DP_ChickInside(dp_chicken_1_, dp_num_area_2_)
+		DP_ChickInside(dp_chicken_1_, dp_num_area_3_)
+		#
+		DP_ChickInside(dp_chicken_2_, dp_num_area_1_)
+		DP_ChickInside(dp_chicken_2_, dp_num_area_2_)
+		DP_ChickInside(dp_chicken_2_, dp_num_area_3_)
+		#
+		DP_ChickInside(dp_chicken_3_, dp_num_area_1_)
+		DP_ChickInside(dp_chicken_3_, dp_num_area_2_)
+		DP_ChickInside(dp_chicken_3_, dp_num_area_3_)
+		#
+		DP_ChickInside(dp_chicken_4_, dp_num_area_1_)
+		DP_ChickInside(dp_chicken_4_, dp_num_area_2_)
+		DP_ChickInside(dp_chicken_4_, dp_num_area_3_)
+		#
+		DP_ChickInside(dp_chicken_5_, dp_num_area_1_)
+		DP_ChickInside(dp_chicken_5_, dp_num_area_2_)
+		DP_ChickInside(dp_chicken_5_, dp_num_area_3_)
+		#
+		DP_ChickInside(dp_chicken_6_, dp_num_area_1_)
+		DP_ChickInside(dp_chicken_6_, dp_num_area_2_)
+		DP_ChickInside(dp_chicken_6_, dp_num_area_3_)
+		#
+		DP_ChickInside(dp_chicken_7_, dp_num_area_1_)
+		DP_ChickInside(dp_chicken_7_, dp_num_area_2_)
+		DP_ChickInside(dp_chicken_7_, dp_num_area_3_)
+		#
+		DP_ChickInside(dp_chicken_8_, dp_num_area_1_)
+		DP_ChickInside(dp_chicken_8_, dp_num_area_2_)
+		DP_ChickInside(dp_chicken_8_, dp_num_area_3_)
+		#
+		DP_ChickInside(dp_chicken_9_, dp_num_area_1_)
+		DP_ChickInside(dp_chicken_9_, dp_num_area_2_)
+		DP_ChickInside(dp_chicken_9_, dp_num_area_3_)
+	add DP_InitChickenPinball_InitialState()
+
+
+action InitChickenPinball:
+	pre # none
+	rem # none
+	add DP_InitChickenPinball_Struct()
+		DP_InitChickenPinball_InitialState()
+
+
+quest DwellingPlace_OpenHeartCave:
+	options:
+		searchLimit 2000
+		spaceLimit 2000
+		#strategy DFS
+		heuristic HSP
+	preconditions:
+		Know(player_, dp_heart_trial_cave_blocked_)
+	goal:
+		Path2(dwelling_place_, dwelling_place_heart_trial_)
+	actions:
+		dp_chicken_pinball
+		DP_OpenHeartTrialCave
+	objects:
+		dwelling_place_
+		dwelling_place_heart_trial_
+		DP_Chicken
+		DP_NumArea
+	subquests:
+		# none
+
+
+main_quest DwellingPlace_RemovePortal_1:
+	options:
+		searchLimit 3000
+		spaceLimit 3000
+		heuristic HSP
+	preconditions:
+		Know(player_, dp_portal_1_password_)
+	goal:
+		DP_ObstacleRemoved(dp_portal_1_)
+	actions:
+		dp_chicken_pinball
+		DP_RemovePortal_1
+	objects:
+		dp_portal_1_
+		DP_Chicken
+		DP_NumArea
+	subquests:
+		# none
+
+
+main_quest DwellingPlace_RemovePortal_2:
+	options:
+		searchLimit 3000
+		spaceLimit 3000
+		heuristic HSP
+	preconditions:
+		Know(player_, dp_portal_2_password_)
+	goal:
+		DP_ObstacleRemoved(dp_portal_2_)
+	actions:
+		dp_chicken_pinball
+		DP_RemovePortal_2
+	objects:
+		dp_portal_2_
+		DP_Chicken
+		DP_NumArea
+	subquests:
+		# none

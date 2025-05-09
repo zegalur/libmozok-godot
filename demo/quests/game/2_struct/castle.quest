@@ -1,0 +1,13 @@
+# This file is a part of the LibMozok DEMO project, intended to demonstrate 
+# how the library can be integrated into a popular game engine. Also, it is a
+# good playground to test various features.
+
+# ========================== Castle Location Map ============================= #
+
+# WARNING: Work in Progress ...
+
+version 1 0
+project castle
+
+type Castle : Map
+object castle_ : Castle

@@ -1,4 +1,7 @@
 extends Map
+## Forest location
+
+# WARNING: Work In Progress !
 
 
 func _on_dwelling_place_entrance_map_change_requested(

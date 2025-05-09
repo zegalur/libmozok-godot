@@ -2,6 +2,14 @@
 
 extends Node2D
 
+const MAIN_QSF = "main.qsf.txt"
+const TUTORIAL_MAP = "res://assets/maps/tutorial/tutorial.tscn"
+const TUTORIAL_WORK_DIR = "res://quests/tutorials/"
+const GAME_FIRST_MAP = "res://assets/maps/game/dwelling_place/dwelling_place.tscn"
+const GAME_WORK_DIR = "res://quests/game/"
+const START_SPAWN = "Start"
+const EMPTY_FILE_SLOT = "[ empty ]"
+
 @onready var _state : GameState = GameState.new()
 @onready var _quest_server : LibMozokServer = %LibMozokServer
 @onready var _gui : GameGUI = %GameGui
@@ -13,13 +21,8 @@ var _current_map : Map
 var _current_map_file : String
 var _current_spawn_point : String
 var _load_wnd = true
+var _save_file_list : Array[String] = []
 
-const MAIN_QSF = "main.qsf.txt"
-const TUTORIAL_MAP = "res://assets/maps/tutorial/tutorial.tscn"
-const TUTORIAL_WORK_DIR = "res://assets/quests/tutorials/"
-const GAME_FIRST_MAP = "res://assets/maps/game/dwelling_place/dwelling_place.tscn"
-const GAME_WORK_DIR = "res://assets/quests/game/"
-const START_SPAWN = "Start"
 
 ## Initialize the quest server, game map, and quest world.
 func _ready():
@@ -173,7 +176,7 @@ func _show_save_load(title : String) -> void:
 	var file_list : Array[String] = []
 	for i in SAVE_FILE_COUNT:
 		if FileAccess.file_exists(_get_save_file_name(i)) == false:
-			file_list.push_back("[ empty ]")
+			file_list.push_back(EMPTY_FILE_SLOT)
 			continue
 		else:
 			# Read the meta information.
@@ -184,6 +187,7 @@ func _show_save_load(title : String) -> void:
 			var map_name = tmp_state.read(
 					META_CUR_MAP_NAME, "Unknown")
 			file_list.push_back(datetime.replace("T"," ") + " - " + map_name)
+	_save_file_list = file_list.duplicate(true)
 	file_list.push_back("Cancel")
 	if _load_wnd:
 		%MainMenu.deactivate()
@@ -194,6 +198,9 @@ func _on_save_load_game_option_selected(indx: int) -> void:
 	if _load_wnd:
 		if indx == SAVE_LOAD_CANCEL_INDX:
 			%MainMenu.call_deferred("activate")
+			return
+		if _save_file_list[indx] == EMPTY_FILE_SLOT:
+			_show_save_load("Load Game")
 			return
 		_load_game(indx)
 	else:

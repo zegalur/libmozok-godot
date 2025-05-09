@@ -1,5 +1,5 @@
 extends Map
-## The player's home and the starting location of the game.
+## Main character's home and the starting location of the game.
 
 const HEART_CAVE_PASSWORD = ["RRR", "YYY", "BBB"]
 const PORTAL_1_PASSWORD = ["YRB", "YRB", "YRB"]
@@ -105,11 +105,11 @@ func _chicken_pinball(_delta: float) -> void:
 		var chicken = _chickens[i] as CharacterBody2D
 		if is_instance_valid(chicken) == false:
 			continue
-		var hidden = true
+		var chick_color_hidden = true
 		for rect in rects.keys():
 			if rect.get_global_rect().has_point(chicken.global_position):
 				area_chickens[rects[rect]].push_back(i)
-				hidden = false
+				chick_color_hidden = false
 				if _chicken_color_points[i].get_parent() != tabs[rects[rect]]:
 					var new_indx : int = 0
 					for chick in tabs[rects[rect]].get_children():
@@ -127,7 +127,7 @@ func _chicken_pinball(_delta: float) -> void:
 							_narea_qobjs[other[0]],
 							_narea_qobjs[other[1]])
 				break
-		if hidden:
+		if chick_color_hidden:
 			if _chicken_color_points[i].get_parent() != %HiddenColors:
 				_chicken_color_points[i].reparent(%HiddenColors)
 				M.game.DP_DriveOut(0, _quest_server,
@@ -228,7 +228,6 @@ func _on_guard_intro_activated() -> void:
 
 func _on_forest_entry_map_change_requested(
 		_next_map: String, _spawn_point: String) -> void:
-	# TODO: change to forest
 	M.game.MoveTo(0, _quest_server, 
 			M.game.MoveTo_1_player.player_, 
 			M.game.MoveTo_2_from.dwelling_place_,
@@ -258,10 +257,6 @@ func _on_trial_entrance_2_map_change_requested(
 			M.game.MoveTo_1_player.player_, 
 			M.game.MoveTo_2_from.dwelling_place_heart_island_,
 			M.game.MoveTo_3_to.dwelling_place_heart_trial_)
-
-
-func _on_chicken_portal_teleported(spawn_point: String) -> void:
-	teleport_to(spawn_point)
 
 
 func _on_heart_cave_password_signpost_activated() -> void:

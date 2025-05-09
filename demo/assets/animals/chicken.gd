@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+## A chicken that runs away from the player.
 
 const WALK_SPEED = 36.0
 const RUN_SPEED = 300.0
@@ -14,6 +14,7 @@ enum State {
 }
 
 @onready var _last_angle : float = randf_range(0.0, 2.0 * PI)
+
 var _velocity_timer = VELOCITY_CHANGE_TIME
 var _state = State.WALKING
 var _player_node : Player

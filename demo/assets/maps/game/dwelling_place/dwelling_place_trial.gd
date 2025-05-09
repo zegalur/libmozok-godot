@@ -53,6 +53,7 @@ func setup(
 	super(server, player, spawn_point, state)
 	player.connect("dead", _on_dead)
 
+
 # ----------------------------------- State ---------------------------------- #
 
 const PRE = "dwelling_place/"

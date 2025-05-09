@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://dep8eeg3jxfkh"
+
+[deps]
+
+files=["res://quests/game/translations/npc.en.translation"]
+
+source_file="res://quests/game/translations/npc.csv"
+dest_files=["res://quests/game/translations/npc.en.translation"]
+
+[params]
+
+compress=true
+delimiter=0

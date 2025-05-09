@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://ddi3ophvvc75d"
+
+[deps]
+
+files=["res://quests/game/translations/forest.en.translation"]
+
+source_file="res://quests/game/translations/forest.csv"
+dest_files=["res://quests/game/translations/forest.en.translation"]
+
+[params]
+
+compress=true
+delimiter=0

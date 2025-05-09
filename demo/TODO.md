@@ -4,6 +4,8 @@ Libmozok godot demo TODO list.
 
 ### Todo
 
+- [ ] Replace large lists with rlist's `...` notation once it is supported.
+
 ### In Progress
 
 - [ ] Finish all the tutorials
