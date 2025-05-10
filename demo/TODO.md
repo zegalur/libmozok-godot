@@ -4,6 +4,7 @@ Libmozok godot demo TODO list.
 
 ### Todo
 
+- [ ] Add: add `server.flush()` or some non-blocking alternative to flush all queues before the saving (see main.gd::_save_game(...)).
 - [ ] Replace large lists with rlist's `...` notation once it is supported.
 
 ### In Progress

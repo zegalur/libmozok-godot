@@ -216,7 +216,8 @@ func _save_game(indx : int) -> void:
 	_state.write(META_CUR_MAP_NAME, _current_map.map_name)
 	_state.write(META_SPAWN_POINT, _current_spawn_point)
 	
-	# TODO: add server.flush() to LibMozokServer public interface.
+	# TODO: add server.flush() to LibMozokServer public interface 
+	#		or some non-blocking alternative to flush queues before the saving.
 	
 	# Process all the messages from the message queue.
 	while _quest_server.processNextMessage():
