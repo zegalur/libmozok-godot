@@ -23,6 +23,7 @@ var _quests : Dictionary # Quest Name -> Quest Panel
 
 # Dialogue Box
 @onready var _dialogue_box = %DialogueBox
+@onready var _dialogue_gradient = $DialogueGradient
 @onready var _npc_portrait = %NPCPortrait
 @onready var _npc_name = %NPCName
 @onready var _dialogue_text = %DialogueText
@@ -52,6 +53,7 @@ func _ready():
 	for key_icon in _keys_box.get_children():
 		_keys_box.remove_child(key_icon)
 	_dialogue_box.hide()
+	_dialogue_gradient.hide()
 	_answers.active = false
 
 
@@ -168,6 +170,7 @@ func _on_new_quest_status(_worldName, questName, questStatus):
 ## Starts a new dialogue with the given NPC from the specified dialogue node.
 func start_dialogue(npc : NPC, dnode : DialogueNode) -> void:
 	_dialogue_box.show()
+	_dialogue_gradient.show()
 	_answers.active = true
 	_npc_portrait.texture = npc.portrait if npc.portrait else _empty_portrait
 	_npc_name.text = npc.npc_name + ":"
@@ -210,6 +213,7 @@ func _on_answers_option_selected(indx: int) -> void:
 
 
 func _end_dialogue() -> void:
+	_dialogue_gradient.hide()
 	_dialogue_box.hide()
 	_answers.active = false
 	emit_signal("dialogue_ended")

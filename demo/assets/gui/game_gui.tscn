@@ -218,6 +218,19 @@ layout_mode = 2
 texture = ExtResource("7_00w14")
 stretch_mode = 2
 
+[node name="DialogueGradient" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.529412)
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("GradientTexture2D_y17lx")
+expand_mode = 1
+
 [node name="DialogueBox" type="Control" parent="."]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(1152, 300)
@@ -231,16 +244,6 @@ offset_left = -576.0
 offset_right = 576.0
 grow_horizontal = 2
 grow_vertical = 0
-
-[node name="Gradient" type="TextureRect" parent="DialogueBox"]
-modulate = Color(1, 1, 1, 0.529412)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture2D_y17lx")
 
 [node name="DialogueBoxH" type="VBoxContainer" parent="DialogueBox"]
 layout_mode = 1
