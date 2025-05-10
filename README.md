@@ -32,6 +32,7 @@ LibMozok generates a plan for a quest in real-time and detects when the quest be
 3. SCons
 4. Godot 4.3 or newer
 5. git
+6. Enable Git LFS
 
 ## Installation
 
@@ -87,4 +88,4 @@ LibMozok generates a plan for a quest in real-time and detects when the quest be
 LibMozok is subject to the MIT license. 
 All other assets created for this demo are under CC0.
 
-Created by Pavlo Savchuk, 2024.
+Created by Pavlo Savchuk, 2024-2025.
