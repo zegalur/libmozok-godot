@@ -1,33 +1,59 @@
-[gd_scene load_steps=5 format=3 uid="uid://cck1pnhry51uy"]
+[gd_scene load_steps=6 format=3 uid="uid://cck1pnhry51uy"]
 
-[ext_resource type="PackedScene" uid="uid://8bhrc565a12u" path="res://assets/maps/tutorial/tutorial.tscn" id="1_4bkb0"]
 [ext_resource type="Script" uid="uid://c72bapv1431q3" path="res://main.gd" id="1_83sc1"]
 [ext_resource type="PackedScene" uid="uid://dtriolaeom25o" path="res://assets/gui/game_gui.tscn" id="3_kb5ts"]
 [ext_resource type="PackedScene" uid="uid://deaxyyt1n43i2" path="res://assets/player/player.tscn" id="3_mi51r"]
+[ext_resource type="PackedScene" uid="uid://ydlwp1412cs8" path="res://assets/gui/main_menu.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://ieo5a52lpb6u" path="res://assets/gui/save_load_game.tscn" id="4_lquwl"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" groups=["SaveLoad"]]
+process_mode = 3
 y_sort_enabled = true
 script = ExtResource("1_83sc1")
 
 [node name="LibMozokServer" type="LibMozokServer" parent="."]
+unique_name_in_owner = true
 
-[node name="GameGui" parent="." instance=ExtResource("3_kb5ts")]
-top_level = true
-
-[node name="Map" type="Node2D" parent="."]
+[node name="Maps" type="Node2D" parent="."]
+unique_name_in_owner = true
+process_mode = 1
 y_sort_enabled = true
 
-[node name="Tutorial" parent="Map" instance=ExtResource("1_4bkb0")]
+[node name="GUI" type="CanvasLayer" parent="."]
+process_mode = 1
+layer = 5
+
+[node name="MainMenu" parent="GUI" instance=ExtResource("4_1bvp3")]
+unique_name_in_owner = true
+size_flags_horizontal = 4
+
+[node name="GameGui" parent="GUI" instance=ExtResource("3_kb5ts")]
+unique_name_in_owner = true
+process_mode = 1
+
+[node name="SaveLoadGame" parent="GUI" instance=ExtResource("4_lquwl")]
+unique_name_in_owner = true
+visible = false
 
 [node name="Player" parent="." instance=ExtResource("3_mi51r")]
+unique_name_in_owner = true
 y_sort_enabled = true
-position = Vector2(290, 759)
 
 [connection signal="action_error" from="LibMozokServer" to="." method="_on_lib_mozok_server_action_error"]
-[connection signal="new_main_quest" from="LibMozokServer" to="GameGui" method="new_main_quest"]
-[connection signal="new_quest_plan" from="LibMozokServer" to="GameGui" method="new_quest_plan"]
-[connection signal="new_quest_state" from="LibMozokServer" to="GameGui" method="_on_new_quest_state"]
-[connection signal="new_quest_status" from="LibMozokServer" to="GameGui" method="_on_new_quest_status"]
-[connection signal="new_sub_quest" from="LibMozokServer" to="GameGui" method="new_sub_quest"]
-[connection signal="hearts_changed" from="Player" to="GameGui" method="update_hearts"]
-[connection signal="keys_changed" from="Player" to="GameGui" method="update_keys"]
+[connection signal="new_main_quest" from="LibMozokServer" to="GUI/GameGui" method="new_main_quest"]
+[connection signal="new_quest_plan" from="LibMozokServer" to="GUI/GameGui" method="new_quest_plan"]
+[connection signal="new_quest_state" from="LibMozokServer" to="GUI/GameGui" method="_on_new_quest_state"]
+[connection signal="new_quest_status" from="LibMozokServer" to="GUI/GameGui" method="_on_new_quest_status"]
+[connection signal="new_sub_quest" from="LibMozokServer" to="GUI/GameGui" method="new_sub_quest"]
+[connection signal="search_limit_reached" from="LibMozokServer" to="." method="_on_lib_mozok_server_search_limit_reached"]
+[connection signal="space_limit_reached" from="LibMozokServer" to="." method="_on_lib_mozok_server_space_limit_reached"]
+[connection signal="exit" from="GUI/MainMenu" to="." method="_on_main_menu_exit"]
+[connection signal="load_game" from="GUI/MainMenu" to="." method="_on_main_menu_load_game"]
+[connection signal="new_game" from="GUI/MainMenu" to="." method="_on_main_menu_new_game"]
+[connection signal="tutorial" from="GUI/MainMenu" to="." method="_on_main_menu_tutorial"]
+[connection signal="dialogue_ended" from="GUI/GameGui" to="Player" method="end_dialogue"]
+[connection signal="option_selected" from="GUI/SaveLoadGame" to="." method="_on_save_load_game_option_selected"]
+[connection signal="dialogue_started" from="Player" to="GUI/GameGui" method="start_dialogue"]
+[connection signal="hearts_changed" from="Player" to="GUI/GameGui" method="update_hearts"]
+[connection signal="keys_changed" from="Player" to="GUI/GameGui" method="update_keys"]
+[connection signal="save_game" from="Player" to="." method="_on_save_game"]

@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://y1ddro4tt26x"
+
+[deps]
+
+files=["res://quests/game/translations/player.en.translation"]
+
+source_file="res://quests/game/translations/player.csv"
+dest_files=["res://quests/game/translations/player.en.translation"]
+
+[params]
+
+compress=true
+delimiter=0

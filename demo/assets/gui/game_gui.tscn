@@ -1,12 +1,60 @@
-[gd_scene load_steps=9 format=3 uid="uid://dtriolaeom25o"]
+[gd_scene load_steps=18 format=3 uid="uid://dtriolaeom25o"]
 
 [ext_resource type="Texture2D" uid="uid://dl3hncv4xcoi2" path="res://assets/gui/imgs/heart-red.png" id="1_6qic7"]
 [ext_resource type="Script" uid="uid://b82a10tjumqn4" path="res://assets/gui/game_gui.gd" id="1_ejoor"]
 [ext_resource type="Texture2D" uid="uid://tw3iufq5atlh" path="res://assets/gui/imgs/heart-half.png" id="2_lc456"]
-[ext_resource type="Theme" uid="uid://cqnnwflfspwe1" path="res://assets/gui/quest_book_theme.tres" id="2_vawgs"]
+[ext_resource type="Theme" uid="uid://cqnnwflfspwe1" path="res://assets/gui/other/quest_book_theme.tres" id="2_vawgs"]
 [ext_resource type="Texture2D" uid="uid://brhg0rlyo1xi0" path="res://assets/gui/imgs/heart-gray.png" id="3_3q5m1"]
-[ext_resource type="SystemFont" uid="uid://1u2x028wj1ph" path="res://assets/gui/fonts.tres" id="3_h7eun"]
+[ext_resource type="SystemFont" uid="uid://1u2x028wj1ph" path="res://assets/gui/other/fonts.tres" id="3_h7eun"]
+[ext_resource type="PackedScene" uid="uid://cpos0onod341e" path="res://assets/gui/choice_panel.tscn" id="4_nb6pd"]
+[ext_resource type="Texture2D" uid="uid://b1ji7xs7dujs6" path="res://assets/gui/imgs/empty_portrait.svg" id="4_xm88t"]
+[ext_resource type="Texture2D" uid="uid://cigrh7pfs57yc" path="res://assets/npc/guard/imgs/guard-portrait-1.png" id="5_3ieqy"]
 [ext_resource type="Texture2D" uid="uid://c7lyhlkrcvc3n" path="res://assets/items/keys/imgs/dungeon-key.png" id="7_00w14"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_31g2u"]
+font = ExtResource("3_h7eun")
+font_size = 23
+outline_size = 1
+outline_color = Color(0.6, 0.3885, 0.33, 1)
+shadow_color = Color(0, 0, 0, 0.988235)
+shadow_offset = Vector2(1, 2)
+
+[sub_resource type="Animation" id="Animation_nb6pd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MapNameLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_31g2u"]
+resource_name = "ShowMapName"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MapNameLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 5, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nb6pd"]
+_data = {
+&"RESET": SubResource("Animation_nb6pd"),
+&"ShowMapName": SubResource("Animation_31g2u")
+}
 
 [sub_resource type="LabelSettings" id="LabelSettings_pia5y"]
 font = ExtResource("3_h7eun")
@@ -15,35 +63,23 @@ font_color = Color(0.679688, 0.590645, 0.565059, 1)
 outline_size = 1
 outline_color = Color(0.6, 0.3885, 0.33, 1)
 
+[sub_resource type="Gradient" id="Gradient_3ieqy"]
+colors = PackedColorArray(0.0639, 0.09, 0.09, 0, 0.0639, 0.09, 0.09, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_y17lx"]
+gradient = SubResource("Gradient_3ieqy")
+fill_to = Vector2(0, 0.990826)
+
 [node name="GameGui" type="Control"]
-custom_minimum_size = Vector2(1152, 648)
 layout_mode = 3
-anchors_preset = 0
-offset_right = 800.0
-offset_bottom = 500.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_ejoor")
 
-[node name="QuestBook" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="Base" type="ColorRect" parent="QuestBook"]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 0
-grow_vertical = 2
-color = Color(0.0852, 0.12, 0.12, 1)
-
-[node name="HBoxContainer" type="HBoxContainer" parent="QuestBook/Base"]
+[node name="Screen" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,64 +87,102 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Space" type="Control" parent="QuestBook/Base/HBoxContainer"]
+[node name="GameScreen" type="VBoxContainer" parent="Screen"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MapName" type="VBoxContainer" parent="Screen/GameScreen"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TopMargin" type="Control" parent="Screen/GameScreen/MapName"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+
+[node name="MapNameLabel" type="Label" parent="Screen/GameScreen/MapName"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Map Name"
+label_settings = SubResource("LabelSettings_31g2u")
+horizontal_alignment = 1
+
+[node name="MapNamePlayer" type="AnimationPlayer" parent="Screen/GameScreen/MapName"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_nb6pd")
+}
+
+[node name="QuestBook" type="ColorRect" parent="Screen"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+color = Color(0.0852, 0.12, 0.12, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Screen/QuestBook"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Space" type="Control" parent="Screen/QuestBook/HBoxContainer"]
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="QuestBook/Base/HBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Screen/QuestBook/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_vawgs")
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="QuestBook/Base/HBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Screen/QuestBook/HBoxContainer/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="Space" type="Control" parent="QuestBook/Base/HBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Space" type="Control" parent="Screen/QuestBook/HBoxContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 5)
 layout_mode = 2
 
-[node name="TitleOpen" type="Label" parent="QuestBook/Base/HBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="TitleOpen" type="Label" parent="Screen/QuestBook/HBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 text = "OPEN:"
 label_settings = SubResource("LabelSettings_pia5y")
 horizontal_alignment = 1
 
-[node name="OpenQuests" type="VBoxContainer" parent="QuestBook/Base/HBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="OpenQuests" type="VBoxContainer" parent="Screen/QuestBook/HBoxContainer/ScrollContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Space2" type="Control" parent="QuestBook/Base/HBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Space2" type="Control" parent="Screen/QuestBook/HBoxContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 
-[node name="TitleDone" type="Label" parent="QuestBook/Base/HBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="TitleDone" type="Label" parent="Screen/QuestBook/HBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 text = "DONE:"
 label_settings = SubResource("LabelSettings_pia5y")
 horizontal_alignment = 1
 
-[node name="DoneQuests" type="VBoxContainer" parent="QuestBook/Base/HBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="DoneQuests" type="VBoxContainer" parent="Screen/QuestBook/HBoxContainer/ScrollContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Space3" type="Control" parent="QuestBook/Base/HBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Space3" type="Control" parent="Screen/QuestBook/HBoxContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 
-[node name="TitleFailed" type="Label" parent="QuestBook/Base/HBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="TitleFailed" type="Label" parent="Screen/QuestBook/HBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 text = "FAILED:"
 label_settings = SubResource("LabelSettings_pia5y")
 horizontal_alignment = 1
 
-[node name="FailedQuests" type="VBoxContainer" parent="QuestBook/Base/HBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="FailedQuests" type="VBoxContainer" parent="Screen/QuestBook/HBoxContainer/ScrollContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Space4" type="Control" parent="QuestBook/Base/HBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Space4" type="Control" parent="Screen/QuestBook/HBoxContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 
@@ -143,3 +217,145 @@ scale = Vector2(0.7, 0.7)
 layout_mode = 2
 texture = ExtResource("7_00w14")
 stretch_mode = 2
+
+[node name="DialogueBox" type="Control" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1152, 300)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_right = 576.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Gradient" type="TextureRect" parent="DialogueBox"]
+modulate = Color(1, 1, 1, 0.529412)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_y17lx")
+
+[node name="DialogueBoxH" type="VBoxContainer" parent="DialogueBox"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DialogueBox/DialogueBoxH"]
+layout_mode = 2
+
+[node name="Space" type="Control" parent="DialogueBox/DialogueBoxH/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="DialogueBox/DialogueBoxH/HBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_vawgs")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DialogueBox/DialogueBoxH/HBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Space" type="Control" parent="DialogueBox/DialogueBoxH/HBoxContainer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="Portrait" type="VBoxContainer" parent="DialogueBox/DialogueBoxH/HBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Space" type="Control" parent="DialogueBox/DialogueBoxH/HBoxContainer/PanelContainer/HBoxContainer/Portrait"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="NPCPortrait_2" type="TextureRect" parent="DialogueBox/DialogueBoxH/HBoxContainer/PanelContainer/HBoxContainer/Portrait"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("4_xm88t")
+
+[node name="Space2" type="Control" parent="DialogueBox/DialogueBoxH/HBoxContainer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="DialogueBox/DialogueBoxH/HBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextBox" type="VBoxContainer" parent="DialogueBox/DialogueBoxH/HBoxContainer/PanelContainer/HBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Space" type="Control" parent="DialogueBox/DialogueBoxH/HBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/TextBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="NPCName" type="Label" parent="DialogueBox/DialogueBoxH/HBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/TextBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.804, 1, 0.44, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -1
+text = "Name Here:"
+autowrap_mode = 2
+
+[node name="DialogueText" type="Label" parent="DialogueBox/DialogueBoxH/HBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/TextBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.89, 0.719713, 0.5251, 1)
+theme_override_constants/line_spacing = -1
+text = "Dialogue text here ..."
+autowrap_mode = 2
+
+[node name="Space2" type="Control" parent="DialogueBox/DialogueBoxH/HBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/TextBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Answers" parent="DialogueBox/DialogueBoxH/HBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource("4_nb6pd")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+options = Array[String](["Answer 1", "Answer 2"])
+
+[node name="Space2" type="Control" parent="DialogueBox/DialogueBoxH/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Space" type="Control" parent="DialogueBox/DialogueBoxH"]
+visible = false
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="NPCPortrait" type="TextureRect" parent="DialogueBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 300)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -300.0
+offset_right = 256.0
+grow_vertical = 0
+theme = ExtResource("2_vawgs")
+texture = ExtResource("5_3ieqy")
+expand_mode = 1
+stretch_mode = 3
+
+[connection signal="option_selected" from="DialogueBox/DialogueBoxH/HBoxContainer/PanelContainer/HBoxContainer/Answers" to="." method="_on_answers_option_selected"]

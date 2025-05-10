@@ -1,0 +1,26 @@
+# This file is a part of the LibMozok DEMO project, intended to demonstrate 
+# how the library can be integrated into a popular game engine. Also, it is a
+# good playground to test various features.
+
+# =============================== Tutorial QSF =============================== #
+
+version 1 0
+script main
+
+worlds:
+	tut # A special quest world just for tutorials.
+
+projects:
+	[tut] utils.quest
+	[tut] controls.quest
+	[tut] fighting.quest
+	[tut] key.quest
+	[tut] puzzle.quest
+	[tut] portal.quest
+	[tut] main.quest
+
+init:
+	[tut] InitTutorials()
+
+debug:
+	debug.qsf

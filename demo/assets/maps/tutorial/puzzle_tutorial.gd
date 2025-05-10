@@ -1,7 +1,6 @@
 class_name PuzzleTutorial
 extends NullTutorial
 
-# Puzzle Tutorial
 var _is_player_in_puzzle_area = false
 var _player_cell_col : int = 3
 var _player_cell_row : int = 3
@@ -9,6 +8,7 @@ const _AREA_SIZE = 4.0 # 4x4 cells
 var _blocks : Array[StaticBody2D]
 var _block_cells : Array = []
 var _puzzle_rect : Rect2
+
 
 func _init(
 		server : LibMozokServer,
@@ -129,8 +129,10 @@ func _get_cell(global_pos : Vector2) -> Vector2i:
 
 ## Finish the puzzle tutorial.
 func _on_big_heart_tut_done():
-	_server.pushAction(_world, "PTut_Finish", 
-			["pt_cell_00", "puzzleTutorial", "puzzleTutorial_GetHeart"], 0)
+	T.tut.PTut_Finish(0, _server,
+			T.tut.PTut_Finish_1_player_cell.pt_cell_00,
+			T.tut.PTut_Finish_2_main_tutorial.puzzleTutorial,
+			T.tut.PTut_Finish_3_tutorial.puzzleTutorial_GetHeart)
 
 
 ## React to new quest status event.
@@ -143,5 +145,7 @@ func _on_new_quest_status(_worldName, questName : String, status : int):
 			# failed quest to appear in the quest book. Normally, you should not 
 			# do it this way. Instead, create one quest with multiple goals. 
 			# This method is used here for illustrative purposes only.
-			_server.pushAction(_world, "PTut_Cancel", 
-					["pt_cell_00", "puzzleTutorial", "puzzleTutorial_GetHeart"], 0)
+			T.tut.PTut_Cancel(0, _server,
+					T.tut.PTut_Cancel_1_player_cell.pt_cell_00,
+					T.tut.PTut_Cancel_2_main_tutorial.puzzleTutorial,
+					T.tut.PTut_Cancel_3_tutorial.puzzleTutorial_GetHeart)

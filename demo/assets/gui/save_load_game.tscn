@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://ieo5a52lpb6u"]
+
+[ext_resource type="Script" uid="uid://daxbw5f58cure" path="res://assets/gui/save_load_game.gd" id="1_3skaj"]
+[ext_resource type="Theme" uid="uid://cqnnwflfspwe1" path="res://assets/gui/other/quest_book_theme.tres" id="1_7x33j"]
+[ext_resource type="PackedScene" uid="uid://cpos0onod341e" path="res://assets/gui/choice_panel.tscn" id="2_gutxw"]
+
+[node name="SaveLoadGame" type="Control"]
+process_mode = 2
+z_index = 20
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3skaj")
+
+[node name="DarkBackground" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0639, 0.09, 0.09, 0.52549)
+metadata/_edit_lock_ = true
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+layout_mode = 2
+theme = ExtResource("1_7x33j")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save Game"
+horizontal_alignment = 1
+
+[node name="ChoicePanel" parent="CenterContainer/PanelContainer/VBoxContainer" instance=ExtResource("2_gutxw")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 2
+active = false
+fit_options = true
+options = Array[String](["[ empty ]", "[ empty ]", "[ empty ]", "[ empty ]", "[ empty ]", "[ empty ]", "[ empty ]", "[ empty ]", "[ empty ]", "Cancel"])
+
+[connection signal="back_pressed" from="CenterContainer/PanelContainer/VBoxContainer/ChoicePanel" to="." method="_on_choice_panel_back_pressed"]
+[connection signal="option_selected" from="CenterContainer/PanelContainer/VBoxContainer/ChoicePanel" to="." method="_on_choice_panel_option_selected"]

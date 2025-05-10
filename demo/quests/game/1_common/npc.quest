@@ -1,0 +1,45 @@
+# This file is a part of the LibMozok DEMO project, intended to demonstrate 
+# how the library can be integrated into a popular game engine. Also, it is a
+# good playground to test various features.
+
+# ======================== Non Playable Characters =========================== #
+# NPCs are actors the player can talk to.
+# They usually provide or react to information.
+
+version 1 0
+project npc
+
+type NPC : Locatable, Mindful
+
+# Indicates that player not yet spoke with an `NPC`.
+rel NotMet(NPC)
+
+# Indicates that player already spoke with an `NPC`.
+rel Met(NPC)
+
+
+# Talk to the NPC for the first time.
+action TalkTo:
+	place : Location
+	player : Player
+	npc : NPC
+	pre NotMet(npc)
+		At(player, place)
+		At(npc, place)
+	rem NotMet(npc)
+	add Met(npc)
+
+
+# Talk to the NPC and get some new fact from him.
+action GetFactFrom:
+	place : Location
+	player : Player
+	npc : NPC
+	fact : Fact
+	pre Met(npc)
+		Know(npc, fact)
+		Unaware(player, fact)
+		At(player, place)
+		At(npc, place)
+	rem Unaware(player, fact)
+	add Know(player, fact)

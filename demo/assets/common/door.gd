@@ -1,7 +1,6 @@
-## Door that can be opened by a key.
-
 class_name Door
 extends StaticBody2D
+## Door that can be opened by a key.
 
 ## Is this door can be opened by a key.
 @export var open_by_key = true
@@ -29,3 +28,12 @@ func open():
 	collision_layer = 0
 	animated_sprite.play("open")
 	_opened = true
+
+
+## Closes the door.
+func close():
+	if not _opened:
+		return
+	collision_layer = _inititial_collision_layer
+	animated_sprite.play("close")
+	_opened = false

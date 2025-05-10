@@ -1,0 +1,76 @@
+[gd_scene load_steps=9 format=3 uid="uid://bfsoi2dxih188"]
+
+[ext_resource type="Script" uid="uid://bdsaap7hm1o0w" path="res://assets/npc/guard/guard.gd" id="1_2co4w"]
+[ext_resource type="Texture2D" uid="uid://dxrqdd4ia0o5y" path="res://assets/npc/guard/imgs/guard-sheet.png" id="1_ay4c1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2co4w"]
+atlas = ExtResource("1_ay4c1")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ay4c1"]
+atlas = ExtResource("1_ay4c1")
+region = Rect2(0, 384, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6826"]
+atlas = ExtResource("1_ay4c1")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o335m"]
+atlas = ExtResource("1_ay4c1")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e6826"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2co4w")
+}],
+"loop": true,
+"name": &"wait-down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ay4c1")
+}],
+"loop": true,
+"name": &"wait-left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e6826")
+}],
+"loop": true,
+"name": &"wait-right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o335m")
+}],
+"loop": true,
+"name": &"wait-up",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2co4w"]
+
+[node name="Guard" type="CharacterBody2D"]
+y_sort_enabled = true
+collision_layer = 384
+collision_mask = 5
+script = ExtResource("1_2co4w")
+metadata/_custom_type_script = "uid://1jmiclvcahag"
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -21)
+sprite_frames = SubResource("SpriteFrames_e6826")
+animation = &"wait-down"
+autoplay = "wait-down"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2co4w")
+
+[node name="CursorPos" type="Node2D" parent="."]
+position = Vector2(0, -63)

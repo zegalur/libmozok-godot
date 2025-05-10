@@ -9,11 +9,11 @@ Please read the README.md file in the parent directory.
 
 # Export
 
-Make sure you export the `.txt` resources.
+Make sure you export the `.txt`, `.quest` and `.qsf` resources.
 
 # License
 
 LibMozok is subject to the MIT license. 
 All other assets created for this demo are under CC0.
 
-Created by Pavlo Savchuk, 2024.
+Created by Pavlo Savchuk, 2024-2025.

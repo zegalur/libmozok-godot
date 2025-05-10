@@ -1,7 +1,6 @@
-## Tutorial demo level.
-
 class_name TutorialMap
 extends Map
+## Tutorial demo level.
 
 # The name of the tutorial quest world.
 const W_TUT = "tut"
@@ -15,8 +14,14 @@ var _puzzle_tutorial : PuzzleTutorial
 # Portal Tutorial
 @onready var _portal = $"Env/Puzzle Island/PortalArea"
 
-func setup(server : LibMozokServer, player : Player):
-	super(server, player)
+
+func setup(
+		server : LibMozokServer, 
+		player : Player,
+		spawn_point : String,
+		state : GameState
+		) -> void:
+	super(server, player, spawn_point, state)
 	
 	_quest_server.connect("new_sub_quest", _on_new_subquest)
 	
@@ -36,6 +41,9 @@ func setup(server : LibMozokServer, player : Player):
 	
 	# Puzzle tutorial
 	_puzzle_tutorial = PuzzleTutorial.new(server, W_TUT, player, self)
+	
+	# Teleport tutorial
+	player.connect("teleport", _on_teleport)
 
 
 func _process(_delta):
@@ -53,8 +61,8 @@ func _on_new_subquest(
 		_portal.show()
 
 
-func _on_portal_area_2d_body_entered(body: Node2D) -> void:
-	if _portal.visible:
-		if body is Player:
-			_quest_server.pushAction(W_TUT, "MoveToPortal", 
-					["pt_cell_33", "portalTutorial"], 0)
+func _on_teleport(_teleport_name: String) -> void:
+	_portal.hide()
+	T.tut.MoveToPortal(0, _quest_server, 
+			T.tut.MoveToPortal_1_entrance_cell.pt_cell_33,
+			T.tut.MoveToPortal_2_tutorial.portalTutorial)

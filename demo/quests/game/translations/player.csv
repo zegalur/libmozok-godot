@@ -1,0 +1,4 @@
+keys,en
+,
+OBJ_player_,"Player"
+ACTION_MoveTo,"Move from the {1} to the {2}."

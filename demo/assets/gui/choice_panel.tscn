@@ -1,0 +1,129 @@
+[gd_scene load_steps=8 format=3 uid="uid://cpos0onod341e"]
+
+[ext_resource type="Theme" uid="uid://cqnnwflfspwe1" path="res://assets/gui/other/quest_book_theme.tres" id="1_8uf8h"]
+[ext_resource type="StyleBox" uid="uid://dea46pe64ri5r" path="res://assets/gui/other/choice_panel_active.tres" id="2_hc20m"]
+[ext_resource type="Texture2D" uid="uid://cviscbv8qxdo8" path="res://assets/gui/imgs/selection_arrow.svg" id="2_jrogl"]
+[ext_resource type="Script" uid="uid://de5lbcnyiid1c" path="res://assets/gui/choice_panel.gd" id="2_opu15"]
+
+[sub_resource type="Animation" id="Animation_opu15"]
+resource_name = "Idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icon/Sprite2D:offset")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(3, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hc20m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icon/Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hw5bu"]
+_data = {
+&"Idle": SubResource("Animation_opu15"),
+&"RESET": SubResource("Animation_hc20m")
+}
+
+[node name="ChoicePanel" type="PanelContainer"]
+custom_minimum_size = Vector2(200, 70)
+theme = ExtResource("1_8uf8h")
+theme_override_styles/panel = ExtResource("2_hc20m")
+script = ExtResource("2_opu15")
+
+[node name="OptionsTemplates" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="Space_1" type="Control" parent="OptionsTemplates"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Selected" type="HBoxContainer" parent="OptionsTemplates"]
+layout_mode = 2
+
+[node name="Icon" type="Control" parent="OptionsTemplates/Selected"]
+custom_minimum_size = Vector2(10, 20)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="OptionsTemplates/Selected/Icon"]
+z_index = 20
+position = Vector2(0, 10)
+texture = ExtResource("2_jrogl")
+
+[node name="Indx" type="Label" parent="OptionsTemplates/Selected"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.957031, 0.762848, 0.250987, 1)
+text = "1. "
+
+[node name="Text" type="Label" parent="OptionsTemplates/Selected"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.96, 0.92976, 0.7008, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -1
+text = "Option #1"
+autowrap_mode = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="OptionsTemplates/Selected"]
+libraries = {
+&"": SubResource("AnimationLibrary_hw5bu")
+}
+autoplay = "Idle"
+
+[node name="Unselected" type="HBoxContainer" parent="OptionsTemplates"]
+layout_mode = 2
+
+[node name="Icon" type="Control" parent="OptionsTemplates/Unselected"]
+custom_minimum_size = Vector2(10, 20)
+layout_mode = 2
+
+[node name="Indx" type="Label" parent="OptionsTemplates/Unselected"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.65, 0.65, 0.65, 1)
+text = "2. "
+
+[node name="Text" type="Label" parent="OptionsTemplates/Unselected"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.65, 0.65, 0.65, 1)
+theme_override_constants/line_spacing = -1
+text = "Unselected
+ Option"
+autowrap_mode = 3
+
+[node name="Space_2" type="Control" parent="OptionsTemplates"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="Options" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

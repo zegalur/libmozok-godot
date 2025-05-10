@@ -1,8 +1,7 @@
-## Quest panel from the in-game GUI.
-## Shows quest title, description, current status and current quest plan.
-
 class_name QuestPanel
 extends PanelContainer
+## Quest panel from the in-game GUI.
+## Shows quest title, description, current status and current quest plan.
 
 @onready var _title = $VBoxContainer/HBoxContainer/Title
 @onready var _details = $VBoxContainer/Details
@@ -27,6 +26,7 @@ var _action_args : Array
 func _ready():
 	_is_ready = true
 	_update_text()
+	on_new_quest_state()
 
 
 func set_quest_name(quest_name : String):
@@ -39,17 +39,29 @@ func set_quest_name(quest_name : String):
 func set_quest_plan(
 		actionList : PackedStringArray, 
 		actionArgsList : Array):
+	var anim = "active"
+	if actionList.size() != _action_list.size():
+		if actionList.size() > 0 and _action_list.size() > 0:
+			if actionList.size() < _action_list.size():
+				anim = "active_hotter"
+			else:
+				anim = "active_cooler"
+		
 	_action_list = actionList
 	_action_args = actionArgsList
 	_plan.modulate.a = 1.0
 	_update_text()
 	$AnimationPlayer.stop()
-	$AnimationPlayer.play("active")
+	$AnimationPlayer.play(anim)
 
 
 func set_quest_status(new_status : int):
 	_quest_status = new_status
-	if _quest_status != LibMozokServer.QUEST_STATUS_REACHABLE:
+	var hide_details_at = [
+			LibMozokServer.QUEST_STATUS_DONE,
+			LibMozokServer.QUEST_STATUS_UNREACHABLE
+			]
+	if _quest_status in hide_details_at:
 		_details.visible = false
 	_update_text()
 	$AnimationPlayer.stop()
@@ -84,6 +96,8 @@ func _update_text():
 		quest_icon = _done_icon
 	if _quest_status == LibMozokServer.QUEST_STATUS_UNREACHABLE:
 		quest_icon = _failed_icon
+	if _quest_status == LibMozokServer.QUEST_STATUS_UNKNOWN:
+		quest_icon = _unknown_icon
 	_quest_status_icon.texture = quest_icon
 	
 	_title.text = tr("TITLE_" + _quest_name)

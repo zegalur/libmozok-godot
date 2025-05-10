@@ -1,0 +1,4 @@
+keys,en
+,
+ACTION_TalkTo,"Talk to the {2}."
+ACTION_GetFactFrom,"Ask {2} about the {3}."

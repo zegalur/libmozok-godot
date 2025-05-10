@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://b5fwwohkqvgql"]
+
+[ext_resource type="Script" uid="uid://1jmiclvcahag" path="res://assets/npc/npc.gd" id="1_msgww"]
+[ext_resource type="Texture2D" uid="uid://dh7drnrmsviow" path="res://assets/other/signposts/img/wooden-signposts-portrait.png" id="2_8e62e"]
+[ext_resource type="Texture2D" uid="uid://7q6yublgc7qn" path="res://assets/other/signposts/img/wooden-signposts.png" id="3_2hs4r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fj25b"]
+radius = 33.0151
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hhm0s"]
+
+[node name="WoodenSignpost2" type="CharacterBody2D"]
+y_sort_enabled = true
+collision_layer = 256
+collision_mask = 5
+script = ExtResource("1_msgww")
+portrait = ExtResource("2_8e62e")
+npc_name = "Signpost"
+metadata/_custom_type_script = "uid://1jmiclvcahag"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture = ExtResource("3_2hs4r")
+offset = Vector2(2, -14)
+region_enabled = true
+region_rect = Rect2(64, 0, 64, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_fj25b")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CircleShape2D_hhm0s")
+
+[node name="CursorPos" type="Node2D" parent="."]
+position = Vector2(-4, -46)

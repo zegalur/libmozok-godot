@@ -1,0 +1,96 @@
+[gd_scene load_steps=2 format=3 uid="uid://cih4ogp6lp7w7"]
+
+[ext_resource type="Script" uid="uid://1wb5dhmt4aoi" path="res://addons/mozok_utils/utils_screen.gd" id="1_dbgri"]
+
+[node name="UtilsScreen" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dbgri")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+
+[node name="GenerateGDScript" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/GenerateGDScript"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GenerateGDScript/VBoxContainer"]
+layout_mode = 2
+text = "Generate GDScript"
+horizontal_alignment = 1
+
+[node name="OutputPathBox" type="HBoxContainer" parent="VBoxContainer/GenerateGDScript/VBoxContainer"]
+layout_mode = 2
+
+[node name="OutputPathLabel" type="Label" parent="VBoxContainer/GenerateGDScript/VBoxContainer/OutputPathBox"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+text = "Output File: "
+horizontal_alignment = 2
+
+[node name="OutputPath" type="LineEdit" parent="VBoxContainer/GenerateGDScript/VBoxContainer/OutputPathBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Resulting script full path"
+
+[node name="ClassNameBox" type="HBoxContainer" parent="VBoxContainer/GenerateGDScript/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GenerateGDScript/VBoxContainer/ClassNameBox"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+text = "Class Name: "
+horizontal_alignment = 2
+
+[node name="ClassName" type="LineEdit" parent="VBoxContainer/GenerateGDScript/VBoxContainer/ClassNameBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "The name of the resulting class (recommended `M`)"
+
+[node name="WorkingDirBox" type="HBoxContainer" parent="VBoxContainer/GenerateGDScript/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GenerateGDScript/VBoxContainer/WorkingDirBox"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+text = "Working Dir: "
+horizontal_alignment = 2
+
+[node name="WorkingDir" type="LineEdit" parent="VBoxContainer/GenerateGDScript/VBoxContainer/WorkingDirBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = ".qsf and .quest files working directory"
+
+[node name="QSFBox" type="HBoxContainer" parent="VBoxContainer/GenerateGDScript/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GenerateGDScript/VBoxContainer/QSFBox"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+text = "QSF: "
+horizontal_alignment = 2
+
+[node name="QSFName" type="LineEdit" parent="VBoxContainer/GenerateGDScript/VBoxContainer/QSFBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "The name of the main .qsf inside the working dir"
+
+[node name="GenerateGDScriptButton" type="Button" parent="VBoxContainer/GenerateGDScript/VBoxContainer"]
+layout_mode = 2
+text = "Generate GDScript"
+
+[connection signal="text_changed" from="VBoxContainer/GenerateGDScript/VBoxContainer/OutputPathBox/OutputPath" to="." method="_on_output_path_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/GenerateGDScript/VBoxContainer/ClassNameBox/ClassName" to="." method="_on_class_name_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/GenerateGDScript/VBoxContainer/WorkingDirBox/WorkingDir" to="." method="_on_working_dir_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/GenerateGDScript/VBoxContainer/QSFBox/QSFName" to="." method="_on_qsf_name_text_changed"]
+[connection signal="pressed" from="VBoxContainer/GenerateGDScript/VBoxContainer/GenerateGDScriptButton" to="." method="_on_generate_gd_script_button_pressed"]

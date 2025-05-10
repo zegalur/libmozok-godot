@@ -28,7 +28,7 @@ _data = {
 &"idle": SubResource("Animation_tvc6p")
 }
 
-[node name="BigHeart" type="Area2D"]
+[node name="BigHeart" type="Area2D" groups=["SaveLoad"]]
 script = ExtResource("1_uakym")
 
 [node name="Shadow" type="Sprite2D" parent="."]
@@ -46,6 +46,6 @@ shape = SubResource("CircleShape2D_1u3l2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_yhaq3")
+&"": SubResource("AnimationLibrary_yhaq3")
 }
 autoplay = "idle"

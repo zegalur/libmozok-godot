@@ -1,0 +1,19 @@
+# This file is a part of the LibMozok DEMO project, intended to demonstrate 
+# how the library can be integrated into a popular game engine. Also, it is a
+# good playground to test various features.
+
+# ========================= World Map Structure ============================== #
+# Overall connections between the separate game maps.
+
+version 1 0
+project world
+
+rlist InitWorld:
+	InitDwellingPlace()
+	Path2(dwelling_place_, forest_)
+	Path2(forest_, castle_)
+
+action InitWorld:
+	pre # none
+	rem # none
+	add InitWorld()
