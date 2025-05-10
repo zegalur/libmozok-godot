@@ -20,6 +20,10 @@ LibMozok generates a plan for a quest in real-time and detects when the quest be
     <summary>More...</summary>
     The same quest, but successfully solved this time:<br />
     <img src="docs/imgs/demo-02.gif" alt="DEMO-Gif-02" />
+    From the demo:
+    <img src="docs/imgs/dialogue-tst.gif" alt="DEMO-Gif-03" />
+    <img src="docs/imgs/chicken-pinball.gif" alt="DEMO-Gif-04" />
+    <img src="docs/imgs/heart-trial.gif" alt="DEMO-Gif-05" />
 </details>
 
 
