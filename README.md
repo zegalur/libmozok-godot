@@ -14,15 +14,17 @@ The game and its art style are inspired by the 2D Legend of Zelda games.
 LibMozok generates a plan for a quest in real-time and detects when the quest becomes unsolvable:<br />
 ![DEMO-Gif-01](docs/imgs/demo-01.gif)
 
-[YouTube](https://www.youtube.com/watch?v=g42drEw9XuY)
+[YouTube - Trailer](https://www.youtube.com/watch?v=PGk74Lz8u0I)<br />
+[YouTube - Tutorial (full demo)](https://www.youtube.com/watch?v=g42drEw9XuY)<br />
+[YouTube - New Game (full demo)](https://www.youtube.com/watch?v=CjTnomcOVsc)
 
 <details>
     <summary>More...</summary>
     The same quest, but successfully solved this time:<br />
     <img src="docs/imgs/demo-02.gif" alt="DEMO-Gif-02" />
-    From the demo:
-    <img src="docs/imgs/dialogue-tst.gif" alt="DEMO-Gif-03" />
-    <img src="docs/imgs/chicken-pinball.gif" alt="DEMO-Gif-04" />
+    From the demo:<br />
+    <img src="docs/imgs/dialogue-tst.gif" alt="DEMO-Gif-03" /><br />
+    <img src="docs/imgs/chicken-pinball.gif" alt="DEMO-Gif-04" /><br />
     <img src="docs/imgs/heart-trial.gif" alt="DEMO-Gif-05" />
 </details>
 
